@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portofolio Website</title>
-<<<<<<< HEAD
+  <link rel="shortcut icon" href="assets/image/Foto Berjas No Gaya.png" type="image/x-icon">
+  <!-- Bootraph Icon -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -31,25 +33,24 @@
       document.documentElement.classList.remove('dark')
     }
   </script>
-=======
-  <link href="/dist/output.css" rel="stylesheet">
->>>>>>> 4bcc7bf28b809c55788e252967ea6dfae8d5c56a
+
+  <!-- Swipper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="css/swipper.css">
 </head>
 
-<body>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-<<<<<<< HEAD
+<body class="dark:bg-gray-900">
 
   <!-- Header -->
   <!-- Navbar -->
 
-  <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+  <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-black-100">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <a href="https://flowbite.com/" class="flex items-center">
-        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo">
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+      <a href="#" class="flex items-center">
+        <img src="assets/image/Foto Berjas No Gaya.png" class="h-8 mr-3" alt="logo">
+        <span
+          class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white animate-bounce animate-infinite animate-ease-linear">Pratama
+          Jiwatmika</span>
       </a>
       <div class="flex  md:order-2">
         <button id="theme-toggle" type="button"
@@ -78,23 +79,23 @@
       </div>
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
         <ul
-          class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          class="flex items-center flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
           <li>
             <a href="#"
-              class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-              aria-current="page">Home</a>
+              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-blue-700 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center">Home</a>
+          </li>
+          <li>
+            <a href="#my-skill"
+              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-blue-700 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center">My
+              Skill</a>
           </li>
           <li>
             <a href="#"
-              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-blue-700 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center">Services</a>
           </li>
           <li>
             <a href="#"
-              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-blue-700 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center">Contact</a>
           </li>
         </ul>
       </div>
@@ -103,6 +104,381 @@
 
   <!-- END Navbar -->
   <!-- END Header -->
+
+  <!-- Main Content -->
+  <!-- Hero Section -->
+  <section class="bg-white dark:bg-gray-900 h-screen flex items-center">
+    <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+      <div class="mr-auto lg:place-self-center lg:col-span-7">
+        <h1
+          class=" mb-4 mt-8 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+          Hello, I am Pratama Jiwatmika</h1>
+        <h5 class=" mb-4 text-2xl tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+          I am a <span id="typewriter" class="text-blue-700"></span>
+        </h5>
+
+        <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">I really
+          love to develop software especially website and mobile apps. I start this from my hobby at high school.
+        </p>
+        <ul class="dark:text-white flex gap-4 font-medium text-black">
+          <li>
+            <div
+              class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+              <a href="https://instagram.com/jiwatmikapratama"><i class="bi bi-instagram h-8 w-8"></i></a>
+            </div>
+          </li>
+          <li>
+            <div
+              class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+              <a href="https://web.facebook.com/jiwatmikap/"><i class="bi bi-facebook h-8 w-8"></i></a>
+            </div>
+          </li>
+          <li>
+            <div
+              class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+              <a href="linkedin.com/in/i-putu-pratama-putra-jiwatmika"><i class="bi bi-linkedin h-8 w-8"></i></a>
+            </div>
+          </li>
+          <li>
+            <div
+              class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+              <a href="https://github.com/jiwatmikapratama"><i class="bi bi-github h-8 w-8"></i></a>
+            </div>
+          </li>
+          <li>
+            <div
+              class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+              <a href="https://x.com/jiwatmikap"><i class="bi bi-twitter h-8 w-8"></i></a>
+            </div>
+          </li>
+        </ul>
+        <a href="#my-project"
+          class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 mt-4">
+          My Projects
+          <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </a>
+        <a href="#my-skill"
+          class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 mt-4">
+          My Skills
+        </a>
+      </div>
+      <div
+        class="order-first mt-24 lg:mt-0 lg:col-span-5 lg:flex lg:order-last h-1/4 w-64 sm:1/2 sm:w-96 lg:w-auto lg:h-5/6">
+        <img src="assets/image/Foto Berjas No Gaya.png" alt="mockup"
+          class="object-cover hover:scale-110 transition duration-300 ease-in-out">
+      </div>
+    </div>
+  </section>
+  <!-- END Hero Section -->
+
+  <!-- My Skill -->
+  <section class="bg-white dark:bg-gray-900 h-screen grid" id="my-skill">
+    <div class="justify-self-center items-center mt-32 md:mt-56">
+      <h1 class=" mb-4 text-2xl font-extrabold tracking-tight leading-none md:text-3xl xl:text-5xl dark:text-white">
+        My <span class="text-blue-700">Skills</span>
+      </h1>
+    </div>
+    <div class="flex flex-col md:grid md:grid-cols-2 md:gap-4 md:justify-self-auto items-center md:mx-16">
+      <div class="container order-last md:order-first md:justify-items-center">
+        <!-- HTML -->
+        <div class="progess-indicator mx-12 my-6">
+          <div class="flex justify-between mb-1">
+            <span class="text-base font-medium text-orange-700 dark:text-orange-700">HTML</span>
+            <span class="text-sm font-medium text-orange-700 dark:text-orange-700">85%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+            <div class="bg-orange-600 h-2.5 rounded-full" style="width: 85%"></div>
+          </div>
+        </div>
+        <!-- END HTML -->
+        <!-- CSS -->
+        <div class="progess-indicator mx-12 my-6">
+          <div class="flex justify-between mb-1">
+            <span class="text-base font-medium text-blue-700 dark:text-blue">CSS</span>
+            <span class="text-sm font-medium text-blue-700 dark:text-blue">75%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 75%"></div>
+          </div>
+        </div>
+        <!-- END CSS -->
+        <!-- JS -->
+        <div class="progess-indicator mx-12 my-6">
+          <div class="flex justify-between mb-1">
+            <span class="text-base font-medium text-yellow-300 dark:text-yellow-300">Javascript</span>
+            <span class="text-sm font-medium text-yellow-300 dark:text-yellow-300">45%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+            <div class="bg-yellow-300 h-2.5 rounded-full" style="width: 45%"></div>
+          </div>
+        </div>
+        <!-- END JS -->
+        <!-- PHP -->
+        <div class="progess-indicator mx-12 my-6">
+          <div class="flex justify-between mb-1">
+            <span class="text-base font-medium text-purple-700 dark:text-purple">PHP</span>
+            <span class="text-sm font-medium text-purple-700 dark:text-purple">80%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+            <div class="bg-purple-600 h-2.5 rounded-full" style="width: 80%"></div>
+          </div>
+        </div>
+        <!-- END PHP -->
+        <!-- MySQL -->
+        <div class="progess-indicator mx-12 my-6">
+          <div class="flex justify-between mb-1">
+            <span class="text-base font-medium text-black-100 dark:text-gray-100">MySQL</span>
+            <span class="text-sm font-medium text-black-100 dark:text-gray-100">45%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-100">
+            <div class="bg-gray-600 h-2.5 rounded-full" style="width: 45%"></div>
+          </div>
+        </div>
+        <!-- END MySQL -->
+      </div>
+      <!-- Image -->
+      <div class="flex flex-col md:grid md:gap-4  justify-items-center mx-16">
+        <img src="assets/image/top-programming-languages.jpg" alt="" class="object-cover">
+      </div>
+      <!-- END Image -->
+    </div>
+  </section>
+  <!-- END My Skill -->
+
+  <!-- My Project -->
+  <section class="bg-white dark:bg-gray-900 h-screen grid mb-12" id="my-project">
+    <div class="flex justify-center items-center mt-32 md:mt-56">
+      <h1 class=" mb-4 text-2xl font-extrabold tracking-tight leading-none md:text-3xl xl:text-5xl dark:text-white">
+        My <span class="text-blue-700">Projects</span>
+      </h1>
+    </div>
+    <div class="grid grid-cols-1 grid-rows-1 gap-4 mt-12 justify-self-center">
+      <div class="swiper mySwiper relative">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Website E-Commerce
+                    dengan Laravel</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Website E-Commerce dengan laravel
+                  menampilkan mekanisme sederhana dari sebuah website E-Commerce seperti checkout, payment, cart, dan
+                  payment validation</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Qoutes Today</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Aplikasi Qoutes Today merupakan aplikasi
+                  yang dibangung dengan Flutter dan menggunakan API untuk mengambil data qoutes.</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Aplikasi ToDo</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Aplikasi ToDo merupakan aplikasi yang saya
+                  buat dengan menggunakan Flutter dan Firebase dengan fungsi CRUD task di dalamnya.</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Website Wisata Secret
+                    Land</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Website Wisata Secret Land merupakan
+                  website yang saya buat untuk mewadahi tempat wisata yang belum terkenal sehingga bisa digunakan untuk
+                  referensi wisata baru. Website ini dibuat dengan Laravel.</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Aplikasi Koperasi
+                  </h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Aplikasi Koperasi merupakan aplikasi yang
+                  saya buat dengan menggunakan Flutter. Pada aplikasi ini terdapat fitur authetikasi, transfer, dan
+                  menabung. Aplikasi ini dibuat dengan Flutter dan API.</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">ARA</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Aplikasi ARA merupakan aplikasi Antrian
+                  Pura yang dirancang dengan Flutter dan Firebase namun hanya sampai prototype saja.</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="swiper-pagination absolute bottom-0"></div>
+      </div>
+    </div>
+  </section>
+  <!-- END My Project -->
+  <!-- END Main Content -->
+
+  <!-- Footer -->
+  <footer
+    class="bottom-0 left-0 mt-48 md:mt-auto z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023<a href="https://flowbite.com/"
+        class="hover:underline">Pratama Jiwatmika™</a>. All Rights Reserved.
+    </span>
+
+    <ul
+      class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0 lg:order-last">
+      <li>
+        <a href="#" class="mr-4 hover:underline md:mr-6">About</a>
+      </li>
+      <li>
+        <a href="#my-skill" class="mr-4 hover:underline md:mr-6">My Skills</a>
+      </li>
+      <li>
+        <a href="#my-project" class="mr-4 hover:underline md:mr-6">My Projects</a>
+      </li>
+      <li>
+      </li>
+    </ul>
+    <ul class="dark:text-white flex gap-4 font-medium text-black mt-4 lg:mt-auto lg:flex">
+      <li>
+        <div
+          class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+          <a href="https://instagram.com/jiwatmikapratama"><i class="bi bi-instagram h-8 w-8"></i></a>
+        </div>
+      </li>
+      <li>
+        <div
+          class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+          <a href="https://web.facebook.com/jiwatmikap/"><i class="bi bi-facebook h-8 w-8"></i></a>
+        </div>
+      </li>
+      <li>
+        <div
+          class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+          <a href="linkedin.com/in/i-putu-pratama-putra-jiwatmika"><i class="bi bi-linkedin h-8 w-8"></i></a>
+        </div>
+      </li>
+      <li>
+        <div
+          class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+          <a href="https://github.com/jiwatmikapratama"><i class="bi bi-github h-8 w-8"></i></a>
+        </div>
+      </li>
+      <li>
+        <div
+          class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+          <a href="https://x.com/jiwatmikap"><i class="bi bi-twitter h-8 w-8"></i></a>
+        </div>
+      </li>
+    </ul>
+  </footer>
+  <!-- END Footer -->
 
 
   <!-- Flowbite -->
@@ -152,8 +528,61 @@
 
     });
   </script>
-=======
->>>>>>> 4bcc7bf28b809c55788e252967ea6dfae8d5c56a
+
+  <!-- Text Typing -->
+  <script>
+    const words = ["Web Developer", "App Developer"];
+    let i = 0;
+    let j = 0;
+    let currentWord = "";
+    let isDeleting = false;
+
+    function type() {
+      currentWord = words[i];
+      if (isDeleting) {
+        document.getElementById("typewriter").textContent = currentWord.substring(0, j - 1);
+        j--;
+        if (j == 0) {
+          isDeleting = false;
+          i++;
+          if (i == words.length) {
+            i = 0;
+          }
+        }
+      } else {
+        document.getElementById("typewriter").textContent = currentWord.substring(0, j + 1);
+        j++;
+        if (j == currentWord.length) {
+          isDeleting = true;
+        }
+      }
+      setTimeout(type, 200);
+    }
+
+    type();
+  </script>
+
+  <!-- Swipper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      watchSlidesProgress: true,
+      pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true,
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 3,
+
+        },
+        640: {
+          slidesPerView: 2,
+        }
+      }
+    });
+  </script>
+
 </body>
 
 </html>
