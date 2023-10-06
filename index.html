@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Portofolio Website</title>
+  <link rel="shortcut icon" href="assets/image/Foto Berjas No Gaya.png" type="image/x-icon">
   <!-- Bootraph Icon -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
@@ -32,9 +33,13 @@
       document.documentElement.classList.remove('dark')
     }
   </script>
+
+  <!-- Swipper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="css/swipper.css">
 </head>
 
-<body>
+<body class="dark:bg-gray-900">
 
   <!-- Header -->
   <!-- Navbar -->
@@ -119,35 +124,35 @@
           <li>
             <div
               class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
-              <a href=""><i class="bi bi-instagram h-8 w-8"></i></a>
+              <a href="https://instagram.com/jiwatmikapratama"><i class="bi bi-instagram h-8 w-8"></i></a>
             </div>
           </li>
           <li>
             <div
               class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
-              <a href=""><i class="bi bi-facebook h-8 w-8"></i></a>
+              <a href="https://web.facebook.com/jiwatmikap/"><i class="bi bi-facebook h-8 w-8"></i></a>
             </div>
           </li>
           <li>
             <div
               class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
-              <a href=""><i class="bi bi-linkedin h-8 w-8"></i></a>
+              <a href="linkedin.com/in/i-putu-pratama-putra-jiwatmika"><i class="bi bi-linkedin h-8 w-8"></i></a>
             </div>
           </li>
           <li>
             <div
               class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
-              <a href=""><i class="bi bi-github h-8 w-8"></i></a>
+              <a href="https://github.com/jiwatmikapratama"><i class="bi bi-github h-8 w-8"></i></a>
             </div>
           </li>
           <li>
             <div
               class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
-              <a href=""><i class="bi bi-twitter h-8 w-8"></i></a>
+              <a href="https://x.com/jiwatmikap"><i class="bi bi-twitter h-8 w-8"></i></a>
             </div>
           </li>
         </ul>
-        <a href="#"
+        <a href="#my-project"
           class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900 mt-4">
           My Projects
           <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -243,7 +248,237 @@
     </div>
   </section>
   <!-- END My Skill -->
+
+  <!-- My Project -->
+  <section class="bg-white dark:bg-gray-900 h-screen grid mb-12" id="my-project">
+    <div class="flex justify-center items-center mt-32 md:mt-56">
+      <h1 class=" mb-4 text-2xl font-extrabold tracking-tight leading-none md:text-3xl xl:text-5xl dark:text-white">
+        My <span class="text-blue-700">Projects</span>
+      </h1>
+    </div>
+    <div class="grid grid-cols-1 grid-rows-1 gap-4 mt-12 justify-self-center">
+      <div class="swiper mySwiper relative">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Website E-Commerce
+                    dengan Laravel</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Website E-Commerce dengan laravel
+                  menampilkan mekanisme sederhana dari sebuah website E-Commerce seperti checkout, payment, cart, dan
+                  payment validation</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Qoutes Today</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Aplikasi Qoutes Today merupakan aplikasi
+                  yang dibangung dengan Flutter dan menggunakan API untuk mengambil data qoutes.</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Aplikasi ToDo</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Aplikasi ToDo merupakan aplikasi yang saya
+                  buat dengan menggunakan Flutter dan Firebase dengan fungsi CRUD task di dalamnya.</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Website Wisata Secret
+                    Land</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Website Wisata Secret Land merupakan
+                  website yang saya buat untuk mewadahi tempat wisata yang belum terkenal sehingga bisa digunakan untuk
+                  referensi wisata baru. Website ini dibuat dengan Laravel.</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Aplikasi Koperasi
+                  </h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Aplikasi Koperasi merupakan aplikasi yang
+                  saya buat dengan menggunakan Flutter. Pada aplikasi ini terdapat fitur authetikasi, transfer, dan
+                  menabung. Aplikasi ini dibuat dengan Flutter dan API.</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-4">
+              <a href="#">
+                <img class="rounded-t-lg object-fit h-48 w-full" src="https://source.unsplash.com/random/?city,night"
+                  alt="" />
+              </a>
+              <div class="p-5">
+                <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">ARA</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Aplikasi ARA merupakan aplikasi Antrian
+                  Pura yang dirancang dengan Flutter dan Firebase namun hanya sampai prototype saja.</p>
+                <a href="#"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Read more
+                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="swiper-pagination absolute bottom-0"></div>
+      </div>
+    </div>
+  </section>
+  <!-- END My Project -->
   <!-- END Main Content -->
+
+  <!-- Footer -->
+  <footer
+    class="bottom-0 left-0 mt-48 md:mt-auto z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023<a href="https://flowbite.com/"
+        class="hover:underline">Pratama Jiwatmika™</a>. All Rights Reserved.
+    </span>
+
+    <ul
+      class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0 lg:order-last">
+      <li>
+        <a href="#" class="mr-4 hover:underline md:mr-6">About</a>
+      </li>
+      <li>
+        <a href="#my-skill" class="mr-4 hover:underline md:mr-6">My Skills</a>
+      </li>
+      <li>
+        <a href="#my-project" class="mr-4 hover:underline md:mr-6">My Projects</a>
+      </li>
+      <li>
+      </li>
+    </ul>
+    <ul class="dark:text-white flex gap-4 font-medium text-black mt-4 lg:mt-auto lg:flex">
+      <li>
+        <div
+          class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+          <a href="https://instagram.com/jiwatmikapratama"><i class="bi bi-instagram h-8 w-8"></i></a>
+        </div>
+      </li>
+      <li>
+        <div
+          class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+          <a href="https://web.facebook.com/jiwatmikap/"><i class="bi bi-facebook h-8 w-8"></i></a>
+        </div>
+      </li>
+      <li>
+        <div
+          class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+          <a href="linkedin.com/in/i-putu-pratama-putra-jiwatmika"><i class="bi bi-linkedin h-8 w-8"></i></a>
+        </div>
+      </li>
+      <li>
+        <div
+          class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+          <a href="https://github.com/jiwatmikapratama"><i class="bi bi-github h-8 w-8"></i></a>
+        </div>
+      </li>
+      <li>
+        <div
+          class="rounded-full h-10 w-10 border-solid border-2 border-blue-600 flex justify-center items-center hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
+          <a href="https://x.com/jiwatmikap"><i class="bi bi-twitter h-8 w-8"></i></a>
+        </div>
+      </li>
+    </ul>
+  </footer>
+  <!-- END Footer -->
 
 
   <!-- Flowbite -->
@@ -326,6 +561,28 @@
 
     type();
   </script>
+
+  <!-- Swipper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      watchSlidesProgress: true,
+      pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true,
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 3,
+
+        },
+        640: {
+          slidesPerView: 2,
+        }
+      }
+    });
+  </script>
+
 </body>
 
 </html>
