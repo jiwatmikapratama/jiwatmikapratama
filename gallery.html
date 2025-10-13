@@ -17,16 +17,10 @@
     .nav-link:hover::after { width:80%; }
     .nav-link.active { color:#10b981; background: rgba(16,185,129,.15); box-shadow:0 2px 8px rgba(16,185,129,.3); }
     .nav-link.active::after { width:80%; }
-    .carousel-container { position: relative; overflow: hidden; border-radius: 1rem 1rem 0 0; }
-    .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
-    .carousel-slide { min-width: 100%; height: 200px; display:flex; align-items:center; justify-content:center; background-size:cover; background-position:center; }
-    .carousel-nav { position:absolute; top:50%; transform: translateY(-50%); background: rgba(0,0,0,.5); color: white; width:40px; height:40px; border-radius:9999px; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:.8; }
-    .carousel-nav.prev { left:10px; }
-    .carousel-nav.next { right:10px; }
-    .carousel-indicators { position:absolute; bottom:12px; left:50%; transform: translateX(-50%); display:flex; gap:8px; }
-    .carousel-dot { width:8px; height:8px; border-radius:9999px; background: rgba(255,255,255,.6); }
-    .carousel-dot.active { background:white; transform: scale(1.1); }
+    /* Swiper will handle carousel visuals */
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 </head>
 <body class="bg-slate-900 text-slate-100">
   <nav class="fixed top-0 w-full z-50 navbar-blur border-b border-slate-800">
@@ -82,35 +76,7 @@
     <div id="galleryGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Nature -->
       <div class="gallery-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-category="nature" data-title="Nature Collection">
-        <div class="carousel-container">
-          <div class="carousel-track">
-            <div class="carousel-slide" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-              <div class="text-center text-white">
-                <i class="fas fa-mountain text-5xl mb-2"></i>
-                <div class="font-semibold">Mountain Sunrise</div>
-              </div>
-            </div>
-            <div class="carousel-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-              <div class="text-center text-white">
-                <i class="fas fa-tree text-5xl mb-2"></i>
-                <div class="font-semibold">Forest Path</div>
-              </div>
-            </div>
-            <div class="carousel-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-              <div class="text-center text-white">
-                <i class="fas fa-water text-5xl mb-2"></i>
-                <div class="font-semibold">Ocean Waves</div>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-nav prev"><i class="fas fa-chevron-left"></i></button>
-          <button class="carousel-nav next"><i class="fas fa-chevron-right"></i></button>
-          <div class="carousel-indicators">
-            <div class="carousel-dot active" data-slide="0"></div>
-            <div class="carousel-dot" data-slide="1"></div>
-            <div class="carousel-dot" data-slide="2"></div>
-          </div>
-        </div>
+        <!-- Swiper injected via JS -->
         <div class="p-6">
           <div class="text-lg font-bold">Nature Collection</div>
           <div class="text-slate-400 text-sm">Hutan tropis hingga pegunungan.</div>
@@ -119,28 +85,7 @@
 
       <!-- Architecture -->
       <div class="gallery-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-category="architecture" data-title="Architecture Showcase">
-        <div class="carousel-container">
-          <div class="carousel-track">
-            <div class="carousel-slide" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-              <div class="text-center text-white">
-                <i class="fas fa-building text-5xl mb-2"></i>
-                <div class="font-semibold">Modern Skyscraper</div>
-              </div>
-            </div>
-            <div class="carousel-slide" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
-              <div class="text-center text-gray-800">
-                <i class="fas fa-mosque text-5xl mb-2"></i>
-                <div class="font-semibold">Traditional Architecture</div>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-nav prev"><i class="fas fa-chevron-left"></i></button>
-          <button class="carousel-nav next"><i class="fas fa-chevron-right"></i></button>
-          <div class="carousel-indicators">
-            <div class="carousel-dot active" data-slide="0"></div>
-            <div class="carousel-dot" data-slide="1"></div>
-          </div>
-        </div>
+        <!-- Swiper injected via JS -->
         <div class="p-6">
           <div class="text-lg font-bold">Architecture Showcase</div>
           <div class="text-slate-400 text-sm">Geometri dan struktur yang menginspirasi.</div>
@@ -149,35 +94,7 @@
 
       <!-- Travel -->
       <div class="gallery-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-category="travel" data-title="Travel Adventures">
-        <div class="carousel-container">
-          <div class="carousel-track">
-            <div class="carousel-slide" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
-              <div class="text-center text-gray-800">
-                <i class="fas fa-plane text-5xl mb-2"></i>
-                <div class="font-semibold">Airport Journey</div>
-              </div>
-            </div>
-            <div class="carousel-slide" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
-              <div class="text-center text-white">
-                <i class="fas fa-camera text-5xl mb-2"></i>
-                <div class="font-semibold">Street Photography</div>
-              </div>
-            </div>
-            <div class="carousel-slide" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
-              <div class="text-center text-gray-800">
-                <i class="fas fa-heart text-5xl mb-2"></i>
-                <div class="font-semibold">Memorable Moments</div>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-nav prev"><i class="fas fa-chevron-left"></i></button>
-          <button class="carousel-nav next"><i class="fas fa-chevron-right"></i></button>
-          <div class="carousel-indicators">
-            <div class="carousel-dot active" data-slide="0"></div>
-            <div class="carousel-dot" data-slide="1"></div>
-            <div class="carousel-dot" data-slide="2"></div>
-          </div>
-        </div>
+        <!-- Swiper injected via JS -->
         <div class="p-6">
           <div class="text-lg font-bold">Travel Adventures</div>
           <div class="text-slate-400 text-sm">Destinasi eksotis dan pengalaman tak terlupakan.</div>
@@ -186,28 +103,7 @@
 
       <!-- Portrait -->
       <div class="gallery-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-category="portrait" data-title="Portrait Stories">
-        <div class="carousel-container">
-          <div class="carousel-track">
-            <div class="carousel-slide" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
-              <div class="text-center text-white">
-                <i class="fas fa-user text-5xl mb-2"></i>
-                <div class="font-semibold">Studio Light</div>
-              </div>
-            </div>
-            <div class="carousel-slide" style="background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%);">
-              <div class="text-center text-gray-800">
-                <i class="fas fa-user-circle text-5xl mb-2"></i>
-                <div class="font-semibold">Outdoor Vibes</div>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-nav prev"><i class="fas fa-chevron-left"></i></button>
-          <button class="carousel-nav next"><i class="fas fa-chevron-right"></i></button>
-          <div class="carousel-indicators">
-            <div class="carousel-dot active" data-slide="0"></div>
-            <div class="carousel-dot" data-slide="1"></div>
-          </div>
-        </div>
+        <!-- Swiper injected via JS -->
         <div class="p-6">
           <div class="text-lg font-bold">Portrait Stories</div>
           <div class="text-slate-400 text-sm">Ekspresi manusia dalam bingkai.</div>
@@ -217,6 +113,17 @@
 
     <div id="pagination" class="flex items-center justify-center gap-2 mt-8"></div>
   </main>
+
+  <footer class="mt-16 border-t border-slate-800 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-6 py-10 text-slate-400 text-sm flex flex-col md:flex-row items-center justify-between gap-3">
+      <div>© 2025 Alex Rivera. All rights reserved.</div>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-emerald-400"><i class="fa-solid fa-envelope"></i></a>
+        <a href="#" class="hover:text-emerald-400"><i class="fab fa-github"></i></a>
+        <a href="#" class="hover:text-emerald-400"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
 
   <script>
     function toggleMobileMenu() {
@@ -313,6 +220,68 @@
     if (allBtn) { allBtn.classList.add('border-emerald-400', 'text-emerald-400'); }
 
     render();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script>
+    // Replace old carousels with Swiper + GLightbox
+    (function() {
+      function slugify(text) { return (text || '').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+      const imagesByCategory = {
+        nature: [
+          {src:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=600&auto=format&fit=crop', alt:'Mountain sunrise'},
+          {src:'https://images.unsplash.com/photo-1501785888041-173b4e0b2597?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1501785888041-173b4e0b2597?q=80&w=600&auto=format&fit=crop', alt:'Forest path'},
+          {src:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop', alt:'Ocean waves'}
+        ],
+        architecture: [
+          {src:'https://images.unsplash.com/photo-1433838552652-f9a46b332c40?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1433838552652-f9a46b332c40?q=80&w=600&auto=format&fit=crop', alt:'Skyscraper'},
+          {src:'https://images.unsplash.com/photo-1466853817435-05b43fe45b39?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1466853817435-05b43fe45b39?q=80&w=600&auto=format&fit=crop', alt:'Modern building'},
+          {src:'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=600&auto=format&fit=crop', alt:'Classic architecture'}
+        ],
+        travel: [
+          {src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=600&auto=format&fit=crop', alt:'City travel'},
+          {src:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=600&auto=format&fit=crop', alt:'Street photography'},
+          {src:'https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=600&auto=format&fit=crop', alt:'Memorable moments'}
+        ],
+        portrait: [
+          {src:'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=600&auto=format&fit=crop', alt:'Studio light'},
+          {src:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=600&auto=format&fit=crop', alt:'Outdoor vibes'},
+          {src:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop', thumb:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop', alt:'Portrait story'}
+        ]
+      };
+      const cards = Array.from(document.querySelectorAll('#galleryGrid .gallery-card'));
+      cards.forEach((card, idx) => {
+        const cat = card.getAttribute('data-category') || 'nature';
+        const title = card.getAttribute('data-title') || `Gallery ${idx+1}`;
+        const slug = slugify(title);
+        const images = imagesByCategory[cat] || imagesByCategory['nature'];
+        const wrapper = document.createElement('div'); wrapper.className = 'relative rounded-xl overflow-hidden';
+        const swiperEl = document.createElement('div'); swiperEl.className = 'swiper gallery-swiper';
+        const inner = document.createElement('div'); inner.className = 'swiper-wrapper';
+        images.forEach(img => {
+          const slide = document.createElement('div'); slide.className = 'swiper-slide';
+          const a = document.createElement('a'); a.href = img.src; a.className='glightbox'; a.setAttribute('data-gallery', `gallery-${slug}`);
+          const image = document.createElement('img'); image.src = img.thumb; image.alt = img.alt; image.className='w-full h-56 md:h-64 object-cover';
+          a.appendChild(image); slide.appendChild(a); inner.appendChild(slide);
+        });
+        swiperEl.appendChild(inner);
+        const pag = document.createElement('div'); pag.className='swiper-pagination';
+        const prev = document.createElement('div'); prev.className='swiper-button-prev';
+        const next = document.createElement('div'); next.className='swiper-button-next';
+        swiperEl.appendChild(pag); swiperEl.appendChild(prev); swiperEl.appendChild(next);
+        wrapper.appendChild(swiperEl);
+        const firstChild = card.firstChild;
+        card.insertBefore(wrapper, firstChild);
+      });
+      document.querySelectorAll('.gallery-swiper').forEach(swiperEl => new Swiper(swiperEl, {
+        slidesPerView: 1,
+        loop: true,
+        spaceBetween: 8,
+        pagination: { el: swiperEl.querySelector('.swiper-pagination'), clickable: true },
+        navigation: { nextEl: swiperEl.querySelector('.swiper-button-next'), prevEl: swiperEl.querySelector('.swiper-button-prev') },
+      }));
+      GLightbox({ selector: '.gallery-card .glightbox', touchNavigation: true, loop: true });
+    })();
   </script>
 </body>
 </html>
