@@ -677,7 +677,7 @@
                     </div>
                 </div>
                 <div class="md:hidden">
-                    <button onclick="toggleMobileMenu()"
+                    <button onclick="toggleMobileMenu()" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation"
                         class="text-slate-300 hover:text-emerald-400 focus:outline-none">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
@@ -685,7 +685,7 @@
             </div>
         </div>
         <!-- Mobile menu -->
-        <div id="mobile-menu" class="md:hidden hidden navbar-blur border-t border-slate-800">
+        <div id="mobile-menu" class="md:hidden hidden navbar-blur border-t border-slate-800" aria-hidden="true">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="index.html"
                     class="text-slate-300 hover:text-emerald-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
@@ -2358,7 +2358,11 @@
         // Mobile menu toggle
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
+            const nowHidden = mobileMenu.classList.toggle('hidden');
+            const btn = document.querySelector('nav .md:hidden button');
+            if (btn) btn.setAttribute('aria-expanded', String(!nowHidden));
+            mobileMenu.setAttribute('aria-hidden', String(nowHidden));
+            document.body.classList.toggle('overflow-hidden', !nowHidden);
         }
 
         // Particles animation

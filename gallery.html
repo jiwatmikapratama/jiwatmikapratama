@@ -18,6 +18,11 @@
     .nav-link.active { color:#10b981; background: rgba(16,185,129,.15); box-shadow:0 2px 8px rgba(16,185,129,.3); }
     .nav-link.active::after { width:80%; }
     /* Swiper will handle carousel visuals */
+    @media (max-width: 768px) {
+      .swiper-button-prev, .swiper-button-next { display: none; }
+    }
+    .swiper-pagination-bullet { background: rgba(16,185,129,.5); }
+    .swiper-pagination-bullet-active { background:#10b981; }
   </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -39,13 +44,13 @@
           </div>
         </div>
         <div class="md:hidden">
-          <button onclick="toggleMobileMenu()" class="text-slate-300 hover:text-emerald-400 focus:outline-none">
+          <button onclick="toggleMobileMenu()" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation" class="text-slate-300 hover:text-emerald-400 focus:outline-none">
             <i class="fas fa-bars text-xl"></i>
           </button>
         </div>
       </div>
     </div>
-    <div id="mobile-menu" class="md:hidden hidden navbar-blur border-t border-slate-800">
+    <div id="mobile-menu" class="md:hidden hidden navbar-blur border-t border-slate-800" aria-hidden="true">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Home</a>
         <a href="edu-experience.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Education &amp; Experience</a>
@@ -128,7 +133,11 @@
   <script>
     function toggleMobileMenu() {
       const mobileMenu = document.getElementById('mobile-menu');
-      mobileMenu.classList.toggle('hidden');
+      const nowHidden = mobileMenu.classList.toggle('hidden');
+      const btn = document.querySelector('nav .md:hidden button');
+      if (btn) btn.setAttribute('aria-expanded', String(!nowHidden));
+      mobileMenu.setAttribute('aria-hidden', String(nowHidden));
+      document.body.classList.toggle('overflow-hidden', !nowHidden);
     }
 
     // Simple Carousel class reused
@@ -261,7 +270,7 @@
         images.forEach(img => {
           const slide = document.createElement('div'); slide.className = 'swiper-slide';
           const a = document.createElement('a'); a.href = img.src; a.className='glightbox'; a.setAttribute('data-gallery', `gallery-${slug}`);
-          const image = document.createElement('img'); image.src = img.thumb; image.alt = img.alt; image.className='w-full h-56 md:h-64 object-cover';
+          const image = document.createElement('img'); image.src = img.thumb; image.alt = img.alt; image.loading = 'lazy'; image.decoding = 'async'; image.className='w-full h-56 md:h-64 object-cover';
           a.appendChild(image); slide.appendChild(a); inner.appendChild(slide);
         });
         swiperEl.appendChild(inner);
@@ -276,9 +285,18 @@
       document.querySelectorAll('.gallery-swiper').forEach(swiperEl => new Swiper(swiperEl, {
         slidesPerView: 1,
         loop: true,
-        spaceBetween: 8,
-        pagination: { el: swiperEl.querySelector('.swiper-pagination'), clickable: true },
+        spaceBetween: 12,
+        grabCursor: true,
+        keyboard: { enabled: true },
+        a11y: { enabled: true },
+        watchOverflow: true,
+        pagination: { el: swiperEl.querySelector('.swiper-pagination'), clickable: true, dynamicBullets: true },
         navigation: { nextEl: swiperEl.querySelector('.swiper-button-next'), prevEl: swiperEl.querySelector('.swiper-button-prev') },
+        breakpoints: {
+          640: { spaceBetween: 12 },
+          768: { spaceBetween: 16 },
+          1024: { spaceBetween: 20 }
+        }
       }));
       GLightbox({ selector: '.gallery-card .glightbox', touchNavigation: true, loop: true });
     })();
