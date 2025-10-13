@@ -10,79 +10,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <style>
-    body {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .font-poppins {
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .navbar-blur {
-      backdrop-filter: blur(10px);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .nav-link {
-      position: relative;
-      transition: all .3s ease;
-      padding: 8px 16px;
-      border-radius: 8px;
-    }
-
-    .nav-link:hover {
-      color: #10b981;
-      background: rgba(16, 185, 129, .1);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(16, 185, 129, .2);
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #10b981, #06d6a0);
-      transition: width .3s ease;
-      border-radius: 1px;
-    }
-
-    .nav-link:hover::after {
-      width: 80%;
-    }
-
-    .nav-link.active {
-      color: #10b981;
-      background: rgba(16, 185, 129, .15);
-      box-shadow: 0 2px 8px rgba(16, 185, 129, .3);
-    }
-
-    .nav-link.active::after {
-      width: 80%;
-    }
-
-    /* Swiper will handle carousel visuals */
-    @media (max-width: 768px) {
-
-      .swiper-button-prev,
-      .swiper-button-next {
-        display: none;
-      }
-    }
-
-    .swiper-pagination-bullet {
-      background: rgba(16, 185, 129, .5);
-    }
-
-    .swiper-pagination-bullet-active {
-      background: #10b981;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 </head>
@@ -209,134 +137,7 @@
     </div>
   </footer>
 
-  <script>
-    function toggleMobileMenu() {
-      const mobileMenu = document.getElementById('mobile-menu');
-      const nowHidden = mobileMenu.classList.toggle('hidden');
-      const btn = document.querySelector('nav .md:hidden button');
-      if (btn) btn.setAttribute('aria-expanded', String(!nowHidden));
-      mobileMenu.setAttribute('aria-hidden', String(nowHidden));
-      document.body.classList.toggle('overflow-hidden', !nowHidden);
-    }
-
-    // Simple Carousel class reused
-    class Carousel {
-      constructor(container) {
-        this.container = container;
-        this.track = container.querySelector('.carousel-track');
-        this.slides = container.querySelectorAll('.carousel-slide');
-        this.prevBtn = container.querySelector('.carousel-nav.prev');
-        this.nextBtn = container.querySelector('.carousel-nav.next');
-        this.dots = container.querySelectorAll('.carousel-dot');
-        this.currentSlide = 0;
-        this.totalSlides = this.slides.length;
-        this.bind();
-      }
-      bind() {
-        if (this.prevBtn) this.prevBtn.addEventListener('click', e => {
-          e.stopPropagation();
-          this.prev();
-        });
-        if (this.nextBtn) this.nextBtn.addEventListener('click', e => {
-          e.stopPropagation();
-          this.next();
-        });
-        this.dots.forEach((dot, i) => dot.addEventListener('click', e => {
-          e.stopPropagation();
-          this.go(i);
-        }));
-      }
-      update() {
-        this.track.style.transform = `translateX(${-this.currentSlide * 100}%)`;
-        this.dots.forEach((d, i) => d.classList.toggle('active', i === this.currentSlide));
-      }
-      next() {
-        this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-        this.update();
-      }
-      prev() {
-        this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
-        this.update();
-      }
-      go(i) {
-        this.currentSlide = i;
-        this.update();
-      }
-    }
-
-    // Initialize all carousels present
-    document.querySelectorAll('.carousel-container').forEach(c => new Carousel(c));
-
-    // Search + filter + pagination
-    const searchInput = document.getElementById('searchInput');
-    const grid = document.getElementById('galleryGrid');
-    const cards = Array.from(grid.querySelectorAll('.gallery-card'));
-    const paginationEl = document.getElementById('pagination');
-    const filterBtns = Array.from(document.querySelectorAll('#filters .filter-btn'));
-
-    let activeFilter = 'all';
-    let currentPage = 1;
-    const itemsPerPage = 4;
-
-    function getFiltered() {
-      const q = (searchInput.value || '').trim().toLowerCase();
-      return cards.filter(card => {
-        const cat = card.dataset.category || '';
-        const title = (card.dataset.title || '').toLowerCase();
-        const text = card.innerText.toLowerCase();
-        const passFilter = activeFilter === 'all' || cat === activeFilter;
-        const passSearch = !q || title.includes(q) || text.includes(q);
-        return passFilter && passSearch;
-      });
-    }
-
-    function render() {
-      const filtered = getFiltered();
-      const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
-      if (currentPage > totalPages) currentPage = totalPages;
-
-      cards.forEach(c => c.classList.add('hidden'));
-      const start = (currentPage - 1) * itemsPerPage;
-      filtered.slice(start, start + itemsPerPage).forEach(c => c.classList.remove('hidden'));
-
-      paginationEl.innerHTML = '';
-      const makeBtn = (label, page, disabled, active) => {
-        const btn = document.createElement('button');
-        btn.textContent = label;
-        btn.className =
-          `px-3 py-2 rounded-lg text-sm ${disabled ? 'opacity-40 cursor-not-allowed' : 'bg-slate-800 border border-slate-700 text-slate-200 hover:border-emerald-500'} ${active ? 'ring-2 ring-emerald-500' : ''}`;
-        if (!disabled) btn.addEventListener('click', () => {
-          currentPage = page;
-          render();
-        });
-        return btn;
-      };
-      paginationEl.appendChild(makeBtn('Prev', Math.max(1, currentPage - 1), currentPage === 1, false));
-      for (let p = 1; p <= totalPages; p++) paginationEl.appendChild(makeBtn(String(p), p, false, p === currentPage));
-      paginationEl.appendChild(makeBtn('Next', Math.min(totalPages, currentPage + 1), currentPage === totalPages,
-        false));
-    }
-
-    searchInput.addEventListener('input', () => {
-      currentPage = 1;
-      render();
-    });
-    filterBtns.forEach(btn => btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('border-emerald-400', 'text-emerald-400'));
-      btn.classList.add('border-emerald-400', 'text-emerald-400');
-      activeFilter = btn.dataset.filter;
-      currentPage = 1;
-      render();
-    }));
-
-    // default active filter
-    const allBtn = filterBtns.find(b => b.dataset.filter === 'all');
-    if (allBtn) {
-      allBtn.classList.add('border-emerald-400', 'text-emerald-400');
-    }
-
-    render();
-  </script>
+  <script src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
   <script>
@@ -487,6 +288,8 @@
           }
         }
       }));
+      // Ensure arrows exist and init again for good measure
+      initGallerySwipers();
       GLightbox({
         selector: '.gallery-card .glightbox',
         touchNavigation: true,

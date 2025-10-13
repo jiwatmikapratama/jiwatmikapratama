@@ -10,79 +10,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <style>
-    body {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .font-poppins {
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .navbar-blur {
-      backdrop-filter: blur(10px);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .nav-link {
-      position: relative;
-      transition: all .3s ease;
-      padding: 8px 16px;
-      border-radius: 8px;
-    }
-
-    .nav-link:hover {
-      color: #10b981;
-      background: rgba(16, 185, 129, .1);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(16, 185, 129, .2);
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 2px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #10b981, #06d6a0);
-      transition: width .3s ease;
-      border-radius: 1px;
-    }
-
-    .nav-link:hover::after {
-      width: 80%;
-    }
-
-    .nav-link.active {
-      color: #10b981;
-      background: rgba(16, 185, 129, .15);
-      box-shadow: 0 2px 8px rgba(16, 185, 129, .3);
-    }
-
-    .nav-link.active::after {
-      width: 80%;
-    }
-
-    /* Mobile-friendly carousel controls */
-    @media (max-width: 768px) {
-
-      .swiper-button-prev,
-      .swiper-button-next {
-        display: none;
-      }
-    }
-
-    .swiper-pagination-bullet {
-      background: rgba(16, 185, 129, .5);
-    }
-
-    .swiper-pagination-bullet-active {
-      background: #10b981;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
 </head>
@@ -253,6 +181,10 @@
       </div>
     </div>
 
+    <div id="emptyProjects" class="empty-state hidden mt-6">
+      <i class="fas fa-circle-info mr-2"></i>Tidak ada data yang cocok
+    </div>
+
     <div id="pagination" class="flex items-center justify-center gap-2 mt-8"></div>
   </main>
 
@@ -283,6 +215,7 @@
     const cards = Array.from(grid.querySelectorAll('.project-card'));
     const paginationEl = document.getElementById('pagination');
     const resultCount = document.getElementById('resultCount');
+    const emptyEl = document.getElementById('emptyProjects');
 
     let currentPage = 1;
     const itemsPerPage = 6;
@@ -296,8 +229,14 @@
       const start = (currentPage - 1) * itemsPerPage;
       filtered.slice(start, start + itemsPerPage).forEach(card => card.classList.remove('hidden'));
 
-      resultCount.textContent = filtered.length === cards.length ? 'Menampilkan semua proyek' :
-        `Ditemukan ${filtered.length} proyek`;
+      if (filtered.length === 0) {
+        resultCount.textContent = 'Tidak ada data yang cocok';
+        emptyEl?.classList.remove('hidden');
+      } else {
+        emptyEl?.classList.add('hidden');
+        resultCount.textContent = filtered.length === cards.length ? 'Menampilkan semua proyek' :
+          `Ditemukan ${filtered.length} proyek`;
+      }
 
       paginationEl.innerHTML = '';
       const makeBtn = (label, page, disabled, active) => {
@@ -584,6 +523,7 @@
       });
     })();
   </script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>
