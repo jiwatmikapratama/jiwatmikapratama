@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeri - Alex Rivera</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    body { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    .font-poppins { font-family: 'Poppins', sans-serif; }
+    .navbar-blur { backdrop-filter: blur(10px); background: rgba(15,23,42,0.9); }
+    .nav-link { position: relative; transition: all .3s ease; padding: 8px 16px; border-radius: 8px; }
+    .nav-link:hover { color:#10b981; background: rgba(16,185,129,.1); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16,185,129,.2); }
+    .nav-link::after { content:''; position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:0; height:2px; background:linear-gradient(90deg,#10b981,#06d6a0); transition: width .3s ease; border-radius:1px; }
+    .nav-link:hover::after { width:80%; }
+    .nav-link.active { color:#10b981; background: rgba(16,185,129,.15); box-shadow:0 2px 8px rgba(16,185,129,.3); }
+    .nav-link.active::after { width:80%; }
+    .carousel-container { position: relative; overflow: hidden; border-radius: 1rem 1rem 0 0; }
+    .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+    .carousel-slide { min-width: 100%; height: 200px; display:flex; align-items:center; justify-content:center; background-size:cover; background-position:center; }
+    .carousel-nav { position:absolute; top:50%; transform: translateY(-50%); background: rgba(0,0,0,.5); color: white; width:40px; height:40px; border-radius:9999px; display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:.8; }
+    .carousel-nav.prev { left:10px; }
+    .carousel-nav.next { right:10px; }
+    .carousel-indicators { position:absolute; bottom:12px; left:50%; transform: translateX(-50%); display:flex; gap:8px; }
+    .carousel-dot { width:8px; height:8px; border-radius:9999px; background: rgba(255,255,255,.6); }
+    .carousel-dot.active { background:white; transform: scale(1.1); }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100">
+  <nav class="fixed top-0 w-full z-50 navbar-blur border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0">
+          <h1 class="text-xl font-bold text-emerald-400 font-poppins">{' <Alex />'}</h1>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="index.html" class="nav-link text-slate-300 font-medium">Home</a>
+            <a href="edu-experience.html" class="nav-link text-slate-300 font-medium">Education &amp; Experience</a>
+            <a href="projects.html" class="nav-link text-slate-300 font-medium">Projects</a>
+            <a href="achievements.html" class="nav-link text-slate-300 font-medium">Achievements</a>
+            <a href="gallery.html" class="nav-link active text-slate-300 font-medium">Gallery</a>
+          </div>
+        </div>
+        <div class="md:hidden">
+          <button onclick="toggleMobileMenu()" class="text-slate-300 hover:text-emerald-400 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden navbar-blur border-t border-slate-800">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Home</a>
+        <a href="edu-experience.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Education &amp; Experience</a>
+        <a href="projects.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Projects</a>
+        <a href="achievements.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Achievements</a>
+        <a href="gallery.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Gallery</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 max-w-7xl mx-auto px-6">
+    <div class="text-center mb-8">
+      <h2 class="text-4xl md:text-5xl font-bold text-emerald-400 font-poppins mb-3">Galeri</h2>
+      <p class="text-slate-400 text-lg">Kumpulan momen dan proyek visual</p>
+    </div>
+
+    <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-6">
+      <input id="searchInput" type="text" placeholder="Cari di galeri..." class="w-full md:w-1/2 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+      <div class="flex flex-wrap gap-2" id="filters">
+        <button class="filter-btn px-4 py-2 rounded-full border border-slate-600 text-slate-300" data-filter="all">All</button>
+        <button class="filter-btn px-4 py-2 rounded-full border border-slate-600 text-slate-300" data-filter="nature">Nature</button>
+        <button class="filter-btn px-4 py-2 rounded-full border border-slate-600 text-slate-300" data-filter="architecture">Architecture</button>
+        <button class="filter-btn px-4 py-2 rounded-full border border-slate-600 text-slate-300" data-filter="travel">Travel</button>
+        <button class="filter-btn px-4 py-2 rounded-full border border-slate-600 text-slate-300" data-filter="portrait">Portrait</button>
+      </div>
+    </div>
+
+    <div id="galleryGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Nature -->
+      <div class="gallery-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-category="nature" data-title="Nature Collection">
+        <div class="carousel-container">
+          <div class="carousel-track">
+            <div class="carousel-slide" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+              <div class="text-center text-white">
+                <i class="fas fa-mountain text-5xl mb-2"></i>
+                <div class="font-semibold">Mountain Sunrise</div>
+              </div>
+            </div>
+            <div class="carousel-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+              <div class="text-center text-white">
+                <i class="fas fa-tree text-5xl mb-2"></i>
+                <div class="font-semibold">Forest Path</div>
+              </div>
+            </div>
+            <div class="carousel-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+              <div class="text-center text-white">
+                <i class="fas fa-water text-5xl mb-2"></i>
+                <div class="font-semibold">Ocean Waves</div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-nav prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="carousel-nav next"><i class="fas fa-chevron-right"></i></button>
+          <div class="carousel-indicators">
+            <div class="carousel-dot active" data-slide="0"></div>
+            <div class="carousel-dot" data-slide="1"></div>
+            <div class="carousel-dot" data-slide="2"></div>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="text-lg font-bold">Nature Collection</div>
+          <div class="text-slate-400 text-sm">Hutan tropis hingga pegunungan.</div>
+        </div>
+      </div>
+
+      <!-- Architecture -->
+      <div class="gallery-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-category="architecture" data-title="Architecture Showcase">
+        <div class="carousel-container">
+          <div class="carousel-track">
+            <div class="carousel-slide" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+              <div class="text-center text-white">
+                <i class="fas fa-building text-5xl mb-2"></i>
+                <div class="font-semibold">Modern Skyscraper</div>
+              </div>
+            </div>
+            <div class="carousel-slide" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+              <div class="text-center text-gray-800">
+                <i class="fas fa-mosque text-5xl mb-2"></i>
+                <div class="font-semibold">Traditional Architecture</div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-nav prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="carousel-nav next"><i class="fas fa-chevron-right"></i></button>
+          <div class="carousel-indicators">
+            <div class="carousel-dot active" data-slide="0"></div>
+            <div class="carousel-dot" data-slide="1"></div>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="text-lg font-bold">Architecture Showcase</div>
+          <div class="text-slate-400 text-sm">Geometri dan struktur yang menginspirasi.</div>
+        </div>
+      </div>
+
+      <!-- Travel -->
+      <div class="gallery-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-category="travel" data-title="Travel Adventures">
+        <div class="carousel-container">
+          <div class="carousel-track">
+            <div class="carousel-slide" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+              <div class="text-center text-gray-800">
+                <i class="fas fa-plane text-5xl mb-2"></i>
+                <div class="font-semibold">Airport Journey</div>
+              </div>
+            </div>
+            <div class="carousel-slide" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+              <div class="text-center text-white">
+                <i class="fas fa-camera text-5xl mb-2"></i>
+                <div class="font-semibold">Street Photography</div>
+              </div>
+            </div>
+            <div class="carousel-slide" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+              <div class="text-center text-gray-800">
+                <i class="fas fa-heart text-5xl mb-2"></i>
+                <div class="font-semibold">Memorable Moments</div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-nav prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="carousel-nav next"><i class="fas fa-chevron-right"></i></button>
+          <div class="carousel-indicators">
+            <div class="carousel-dot active" data-slide="0"></div>
+            <div class="carousel-dot" data-slide="1"></div>
+            <div class="carousel-dot" data-slide="2"></div>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="text-lg font-bold">Travel Adventures</div>
+          <div class="text-slate-400 text-sm">Destinasi eksotis dan pengalaman tak terlupakan.</div>
+        </div>
+      </div>
+
+      <!-- Portrait -->
+      <div class="gallery-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-category="portrait" data-title="Portrait Stories">
+        <div class="carousel-container">
+          <div class="carousel-track">
+            <div class="carousel-slide" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
+              <div class="text-center text-white">
+                <i class="fas fa-user text-5xl mb-2"></i>
+                <div class="font-semibold">Studio Light</div>
+              </div>
+            </div>
+            <div class="carousel-slide" style="background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%);">
+              <div class="text-center text-gray-800">
+                <i class="fas fa-user-circle text-5xl mb-2"></i>
+                <div class="font-semibold">Outdoor Vibes</div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-nav prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="carousel-nav next"><i class="fas fa-chevron-right"></i></button>
+          <div class="carousel-indicators">
+            <div class="carousel-dot active" data-slide="0"></div>
+            <div class="carousel-dot" data-slide="1"></div>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="text-lg font-bold">Portrait Stories</div>
+          <div class="text-slate-400 text-sm">Ekspresi manusia dalam bingkai.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="pagination" class="flex items-center justify-center gap-2 mt-8"></div>
+  </main>
+
+  <script>
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    }
+
+    // Simple Carousel class reused
+    class Carousel {
+      constructor(container) {
+        this.container = container;
+        this.track = container.querySelector('.carousel-track');
+        this.slides = container.querySelectorAll('.carousel-slide');
+        this.prevBtn = container.querySelector('.carousel-nav.prev');
+        this.nextBtn = container.querySelector('.carousel-nav.next');
+        this.dots = container.querySelectorAll('.carousel-dot');
+        this.currentSlide = 0;
+        this.totalSlides = this.slides.length;
+        this.bind();
+      }
+      bind() {
+        if (this.prevBtn) this.prevBtn.addEventListener('click', e => { e.stopPropagation(); this.prev(); });
+        if (this.nextBtn) this.nextBtn.addEventListener('click', e => { e.stopPropagation(); this.next(); });
+        this.dots.forEach((dot, i) => dot.addEventListener('click', e => { e.stopPropagation(); this.go(i); }));
+      }
+      update() {
+        this.track.style.transform = `translateX(${-this.currentSlide * 100}%)`;
+        this.dots.forEach((d, i) => d.classList.toggle('active', i === this.currentSlide));
+      }
+      next() { this.currentSlide = (this.currentSlide + 1) % this.totalSlides; this.update(); }
+      prev() { this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides; this.update(); }
+      go(i) { this.currentSlide = i; this.update(); }
+    }
+
+    // Initialize all carousels present
+    document.querySelectorAll('.carousel-container').forEach(c => new Carousel(c));
+
+    // Search + filter + pagination
+    const searchInput = document.getElementById('searchInput');
+    const grid = document.getElementById('galleryGrid');
+    const cards = Array.from(grid.querySelectorAll('.gallery-card'));
+    const paginationEl = document.getElementById('pagination');
+    const filterBtns = Array.from(document.querySelectorAll('#filters .filter-btn'));
+
+    let activeFilter = 'all';
+    let currentPage = 1;
+    const itemsPerPage = 4;
+
+    function getFiltered() {
+      const q = (searchInput.value || '').trim().toLowerCase();
+      return cards.filter(card => {
+        const cat = card.dataset.category || '';
+        const title = (card.dataset.title || '').toLowerCase();
+        const text = card.innerText.toLowerCase();
+        const passFilter = activeFilter === 'all' || cat === activeFilter;
+        const passSearch = !q || title.includes(q) || text.includes(q);
+        return passFilter && passSearch;
+      });
+    }
+
+    function render() {
+      const filtered = getFiltered();
+      const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      cards.forEach(c => c.classList.add('hidden'));
+      const start = (currentPage - 1) * itemsPerPage;
+      filtered.slice(start, start + itemsPerPage).forEach(c => c.classList.remove('hidden'));
+
+      paginationEl.innerHTML = '';
+      const makeBtn = (label, page, disabled, active) => {
+        const btn = document.createElement('button');
+        btn.textContent = label;
+        btn.className = `px-3 py-2 rounded-lg text-sm ${disabled ? 'opacity-40 cursor-not-allowed' : 'bg-slate-800 border border-slate-700 text-slate-200 hover:border-emerald-500'} ${active ? 'ring-2 ring-emerald-500' : ''}`;
+        if (!disabled) btn.addEventListener('click', () => { currentPage = page; render(); });
+        return btn;
+      };
+      paginationEl.appendChild(makeBtn('Prev', Math.max(1, currentPage - 1), currentPage === 1, false));
+      for (let p = 1; p <= totalPages; p++) paginationEl.appendChild(makeBtn(String(p), p, false, p === currentPage));
+      paginationEl.appendChild(makeBtn('Next', Math.min(totalPages, currentPage + 1), currentPage === totalPages, false));
+    }
+
+    searchInput.addEventListener('input', () => { currentPage = 1; render(); });
+    filterBtns.forEach(btn => btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('border-emerald-400', 'text-emerald-400'));
+      btn.classList.add('border-emerald-400', 'text-emerald-400');
+      activeFilter = btn.dataset.filter;
+      currentPage = 1;
+      render();
+    }));
+
+    // default active filter
+    const allBtn = filterBtns.find(b => b.dataset.filter === 'all');
+    if (allBtn) { allBtn.classList.add('border-emerald-400', 'text-emerald-400'); }
+
+    render();
+  </script>
+</body>
+</html>
