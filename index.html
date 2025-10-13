@@ -1,159 +1,2479 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portofolio Website</title>
-<<<<<<< HEAD
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Rivera - Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {}
-      }
-    }
-  </script>
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
 
-  <!-- Flowbite -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        }
 
-  <!-- Dark Mode -->
-  <script>
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-        '(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  </script>
-=======
-  <link href="/dist/output.css" rel="stylesheet">
->>>>>>> 4bcc7bf28b809c55788e252967ea6dfae8d5c56a
+        .emerald-glow {
+            transition: all 0.3s ease;
+        }
+
+        .emerald-glow:hover {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), 0 0 40px rgba(16, 185, 129, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .navbar-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: particleFloat 8s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-10px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #10b981, #06d6a0);
+            transition: width 0.3s ease;
+            border-radius: 1px;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .nav-link.active {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .nav-link.active::after {
+            width: 80%;
+        }
+
+        /* Floating Code Symbols */
+        .float-symbol-1,
+        .float-symbol-2,
+        .float-symbol-3,
+        .float-symbol-4 {
+            animation: floatSymbol 4s ease-in-out infinite;
+        }
+
+        .float-symbol-2 {
+            animation-delay: 1s;
+        }
+
+        .float-symbol-3 {
+            animation-delay: 2s;
+        }
+
+        .float-symbol-4 {
+            animation-delay: 3s;
+        }
+
+        @keyframes floatSymbol {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+                filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+                opacity: 0.4;
+                filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.8));
+            }
+        }
+
+        /* Bubble Animations */
+        .bubble-1 {
+            top: 15%;
+            left: 10%;
+            animation: bubbleFloat1 8s ease-in-out infinite;
+        }
+
+        .bubble-2 {
+            top: 25%;
+            right: 15%;
+            animation: bubbleFloat2 6s ease-in-out infinite;
+        }
+
+        .bubble-3 {
+            top: 45%;
+            left: 5%;
+            animation: bubbleFloat3 10s ease-in-out infinite;
+        }
+
+        .bubble-4 {
+            top: 60%;
+            right: 20%;
+            animation: bubbleFloat4 7s ease-in-out infinite;
+        }
+
+        .bubble-5 {
+            bottom: 20%;
+            left: 15%;
+            animation: bubbleFloat5 9s ease-in-out infinite;
+        }
+
+        .bubble-6 {
+            bottom: 35%;
+            right: 10%;
+            animation: bubbleFloat6 5s ease-in-out infinite;
+        }
+
+        .bubble-7 {
+            top: 35%;
+            left: 25%;
+            animation: bubbleFloat7 4s ease-in-out infinite;
+        }
+
+        .bubble-8 {
+            top: 55%;
+            right: 35%;
+            animation: bubbleFloat8 6s ease-in-out infinite;
+        }
+
+        .bubble-9 {
+            bottom: 45%;
+            left: 30%;
+            animation: bubbleFloat9 7s ease-in-out infinite;
+        }
+
+        .bubble-10 {
+            top: 70%;
+            right: 25%;
+            animation: bubbleFloat10 5s ease-in-out infinite;
+        }
+
+        @keyframes bubbleFloat1 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.6;
+            }
+
+            33% {
+                transform: translateY(-15px) translateX(10px) scale(1.1);
+                opacity: 0.8;
+            }
+
+            66% {
+                transform: translateY(-5px) translateX(-8px) scale(0.9);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes bubbleFloat2 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translateY(-20px) translateX(-12px) scale(1.2);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes bubbleFloat3 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.4;
+            }
+
+            25% {
+                transform: translateY(-10px) translateX(15px) scale(1.1);
+                opacity: 0.7;
+            }
+
+            75% {
+                transform: translateY(-25px) translateX(-10px) scale(0.8);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes bubbleFloat4 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateY(-18px) translateX(8px) scale(1.3);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes bubbleFloat5 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: translateY(-12px) translateX(-15px) scale(1.1);
+                opacity: 0.8;
+            }
+
+            80% {
+                transform: translateY(-8px) translateX(12px) scale(0.9);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes bubbleFloat6 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateY(-22px) translateX(-5px) scale(1.2);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes bubbleFloat7 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translateY(-8px) translateX(6px) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bubbleFloat8 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateY(-14px) translateX(-8px) scale(1.2);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes bubbleFloat9 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateY(-10px) translateX(10px) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes bubbleFloat10 {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.9;
+            }
+
+            50% {
+                transform: translateY(-16px) translateX(-6px) scale(1.3);
+                opacity: 1;
+            }
+        }
+
+        /* Avatar Animations */
+        .avatar-float {
+            animation: avatarFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes avatarFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+        }
+
+        .avatar-glow {
+            filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.3));
+            animation: avatarGlowPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes avatarGlowPulse {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 30px rgba(16, 185, 129, 0.6));
+            }
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.1);
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem 1rem 0 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 200px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.prev {
+            left: 10px;
+        }
+
+        .carousel-nav.next {
+            right: 10px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .carousel-counter {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .gallery-card:hover .carousel-nav {
+            opacity: 1;
+        }
+
+        .gallery-card {
+            touch-action: pan-y;
+        }
+
+        /* Equal Height Cards */
+        .equal-height-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .equal-height-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body {
+            flex: 1;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+
+        /* Achievement Cards Equal Height */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .achievement-card .bg-slate-800\/50 {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .achievement-card .p-6 {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .achievement-card .p-6>div:last-child {
+            margin-top: auto;
+        }
+
+        /* Gallery Cards Equal Height */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .gallery-card .bg-slate-800\/50 {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-card .carousel-container {
+            flex-shrink: 0;
+        }
+
+        .gallery-card .p-6 {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-card .p-6>div:last-child {
+            margin-top: auto;
+        }
+
+        /* Social Media Links Responsive */
+        @media (max-width: 768px) {
+            .equal-height-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Back to Top Button Styles */
+        #backToTop {
+            transition: all 0.3s ease;
+        }
+
+        #backToTop:hover {
+            transform: translateY(-2px) scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            #backToTop {
+                bottom: 1.5rem;
+                right: 1rem;
+                padding: 0.75rem;
+            }
+        }
+    </style>
 </head>
 
-<body>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-<<<<<<< HEAD
+<body class="bg-slate-900 text-slate-100">
+    <!-- Back to Top Button -->
+    <button id="backToTop"
+        class="fixed bottom-8 right-6 z-40 bg-emerald-600 hover:bg-emerald-700 text-white p-4 rounded-full shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-110 transform opacity-0 invisible">
+        <i class="fas fa-arrow-up text-lg"></i>
+    </button>
 
-  <!-- Header -->
-  <!-- Navbar -->
-
-  <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <a href="https://flowbite.com/" class="flex items-center">
-        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo">
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-      </a>
-      <div class="flex  md:order-2">
-        <button id="theme-toggle" type="button"
-          class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
-          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-          </svg>
-          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-              fill-rule="evenodd" clip-rule="evenodd"></path>
-          </svg>
-        </button>
-
-        <button data-collapse-toggle="navbar-sticky" type="button"
-          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-sticky" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M1 1h15M1 7h15M1 13h15" />
-          </svg>
-        </button>
-      </div>
-      <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-        <ul
-          class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-          <li>
-            <a href="#"
-              class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-              aria-current="page">Home</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- END Navbar -->
-  <!-- END Header -->
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 navbar-blur border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-emerald-400 font-poppins">{'
+                        <Alex />'}</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="nav-link active text-slate-300 font-medium">Home</a>
+                        <a href="#" class="nav-link text-slate-300 font-medium">Experience</a>
+                        <a href="#" class="nav-link text-slate-300 font-medium">Skills</a>
+                        <a href="#" class="nav-link text-slate-300 font-medium">Projects</a>
+                        <a href="#" class="nav-link text-slate-300 font-medium">Achievements</a>
+                        <a href="#" class="nav-link text-slate-300 font-medium">Gallery</a>
+                        <a href="#" class="nav-link text-slate-300 font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()"
+                        class="text-slate-300 hover:text-emerald-400 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden navbar-blur border-t border-slate-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#"
+                    class="text-slate-300 hover:text-emerald-400 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#"
+                    class="text-slate-300 hover:text-emerald-400 block px-3 py-2 rounded-md text-base font-medium">Experience</a>
+                <a href="#"
+                    class="text-slate-300 hover:text-emerald-400 block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="#"
+                    class="text-slate-300 hover:text-emerald-400 block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#"
+                    class="text-slate-300 hover:text-emerald-400 block px-3 py-2 rounded-md text-base font-medium">Achievements</a>
+                <a href="#"
+                    class="text-slate-300 hover:text-emerald-400 block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
+                <a href="#"
+                    class="text-slate-300 hover:text-emerald-400 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
 
 
-  <!-- Flowbite -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 
-  <!-- Dark Mode -->
-  <script>
-    var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-    var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    <!-- Hero Section -->
+    <section class="gradient-bg min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
+        <div class="particles" id="particles-container">
+            <!-- Particles will be generated by JavaScript -->
+        </div>
 
-    // Change the icons inside the button based on previous settings
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-        '(prefers-color-scheme: dark)').matches)) {
-      themeToggleLightIcon.classList.remove('hidden');
-    } else {
-      themeToggleDarkIcon.classList.remove('hidden');
-    }
+        <div class="max-w-7xl mx-auto px-6 py-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Side - Content -->
+                <div class="text-left">
+                    <!-- Status Badge -->
+                    <div
+                        class="inline-flex items-center bg-emerald-900/30 border border-emerald-500/30 rounded-full px-4 py-2 mb-6 fade-in">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full mr-2 animate-pulse"></div>
+                        <span class="text-emerald-300 text-sm font-medium">Tersedia untuk proyek baru</span>
+                    </div>
 
-    var themeToggleBtn = document.getElementById('theme-toggle');
+                    <!-- Main Headline -->
+                    <h1 class="text-5xl lg:text-7xl font-bold mb-6 fade-in font-poppins leading-tight"
+                        style="animation-delay: 0.2s">
+                        Membangun
+                        <span class="text-emerald-400 relative inline-block">
+                            Masa Depan
+                            <svg class="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 200 12" fill="none">
+                                <path d="M2 10C50 2 100 2 198 10" stroke="#10b981" stroke-width="3"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </span>
+                        <br>Digital
+                    </h1>
 
-    themeToggleBtn.addEventListener('click', function () {
+                    <!-- Description -->
+                    <p class="text-xl text-slate-300 mb-8 leading-relaxed fade-in max-w-2xl"
+                        style="animation-delay: 0.4s">
+                        Full-stack developer yang mengubah ide menjadi aplikasi web yang powerful dan user-friendly.
+                        Specialized dalam React, Node.js, dan teknologi modern yang membuat perbedaan nyata.
+                    </p>
 
-      // toggle icons inside button
-      themeToggleDarkIcon.classList.toggle('hidden');
-      themeToggleLightIcon.classList.toggle('hidden');
+                    <!-- Social Proof -->
+                    <div class="flex items-center gap-6 mb-8 fade-in" style="animation-delay: 0.6s">
+                        <div class="flex items-center">
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 border-2 border-slate-900 flex items-center justify-center">
+                                    <i class="fas fa-code text-white text-xs"></i>
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-teal-500 border-2 border-slate-900 flex items-center justify-center">
+                                    <i class="fas fa-rocket text-white text-xs"></i>
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-red-500 border-2 border-slate-900 flex items-center justify-center">
+                                    <i class="fas fa-star text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <span class="ml-3 text-slate-300 font-medium">50+ Proyek Selesai</span>
+                        </div>
+                    </div>
 
-      // if set via local storage previously
-      if (localStorage.getItem('color-theme')) {
-        if (localStorage.getItem('color-theme') === 'light') {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('color-theme', 'dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('color-theme', 'light');
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 fade-in" style="animation-delay: 0.8s">
+                        <button
+                            class="emerald-glow bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-semibold inline-flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-emerald-500/25">
+                            <i class="fas fa-rocket mr-2"></i>Lihat Portfolio
+                        </button>
+                        <button
+                            class="emerald-glow border-2 border-emerald-500 hover:bg-emerald-500 text-emerald-400 hover:text-white px-8 py-4 rounded-xl font-semibold inline-flex items-center justify-center transition-all duration-300">
+                            <i class="fas fa-user mr-2"></i>Tentang Saya
+                        </button>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="flex items-center gap-4 fade-in mt-8" style="animation-delay: 1s">
+                        <span class="text-slate-400 font-medium">Follow me:</span>
+                        <div class="flex space-x-3">
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                                class="social-link group bg-slate-800/80 backdrop-blur-sm p-3 rounded-full border border-slate-700/50 hover:border-pink-400/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-400/25">
+                                <i
+                                    class="fab fa-instagram text-pink-400 text-lg group-hover:scale-110 transition-transform duration-300"></i>
+                            </a>
+                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                                class="social-link group bg-slate-800/80 backdrop-blur-sm p-3 rounded-full border border-slate-700/50 hover:border-blue-400/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-400/25">
+                                <i
+                                    class="fab fa-twitter text-blue-400 text-lg group-hover:scale-110 transition-transform duration-300"></i>
+                            </a>
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                                class="social-link group bg-slate-800/80 backdrop-blur-sm p-3 rounded-full border border-slate-700/50 hover:border-gray-400/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-gray-400/25">
+                                <i
+                                    class="fab fa-github text-gray-400 text-lg group-hover:scale-110 transition-transform duration-300"></i>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+                                class="social-link group bg-slate-800/80 backdrop-blur-sm p-3 rounded-full border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25">
+                                <i
+                                    class="fab fa-linkedin text-blue-500 text-lg group-hover:scale-110 transition-transform duration-300"></i>
+                            </a>
+                            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+                                class="social-link group bg-slate-800/80 backdrop-blur-sm p-3 rounded-full border border-slate-700/50 hover:border-blue-600/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-600/25">
+                                <i
+                                    class="fab fa-facebook text-blue-600 text-lg group-hover:scale-110 transition-transform duration-300"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Professional Avatar -->
+                <div class="text-center fade-in floating-animation relative" style="animation-delay: 1s">
+                    <div class="relative w-96 h-96 mx-auto">
+                        <svg viewBox="0 0 400 400" class="w-full h-full">
+                            <defs>
+                                <linearGradient id="avatarBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#1e293b" />
+                                    <stop offset="50%" style="stop-color:#0f172a" />
+                                    <stop offset="100%" style="stop-color:#1e293b" />
+                                </linearGradient>
+                                <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#374151" />
+                                    <stop offset="100%" style="stop-color:#1f2937" />
+                                </linearGradient>
+                                <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#fbbf24" />
+                                    <stop offset="100%" style="stop-color:#f59e0b" />
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur" />
+                                        <feMergeNode in="SourceGraphic" />
+                                    </feMerge>
+                                </filter>
+                            </defs>
+
+                            <!-- Background Circle -->
+                            <circle cx="200" cy="200" r="180" fill="url(#avatarBg)" opacity="0.3" />
+
+                            <!-- Body/Shirt -->
+                            <ellipse cx="200" cy="350" rx="80" ry="50" fill="url(#shirtGrad)" />
+
+                            <!-- Neck -->
+                            <rect x="185" y="280" width="30" height="40" rx="15" fill="url(#skinGrad)" />
+
+                            <!-- Head (slightly turned left) -->
+                            <ellipse cx="195" cy="200" rx="70" ry="75" fill="url(#skinGrad)" />
+
+                            <!-- Hair -->
+                            <path d="M 135 160 Q 195 120 255 160 Q 245 140 195 130 Q 145 140 135 160" fill="#1f2937" />
+
+                            <!-- Eyes (looking slightly left) -->
+                            <ellipse cx="175" cy="190" rx="8" ry="6" fill="white" />
+                            <ellipse cx="215" cy="190" rx="8" ry="6" fill="white" />
+                            <circle cx="173" cy="190" r="4" fill="#1f2937" />
+                            <circle cx="213" cy="190" r="4" fill="#1f2937" />
+                            <circle cx="172" cy="188" r="1.5" fill="white" />
+                            <circle cx="212" cy="188" r="1.5" fill="white" />
+
+                            <!-- Eyebrows -->
+                            <path d="M 165 175 Q 175 170 185 175" stroke="#1f2937" stroke-width="3" fill="none"
+                                stroke-linecap="round" />
+                            <path d="M 205 175 Q 215 170 225 175" stroke="#1f2937" stroke-width="3" fill="none"
+                                stroke-linecap="round" />
+
+                            <!-- Nose -->
+                            <ellipse cx="195" cy="205" rx="3" ry="8" fill="#f59e0b" opacity="0.6" />
+
+                            <!-- Mouth (friendly smile) -->
+                            <path d="M 185 220 Q 195 230 205 220" stroke="#1f2937" stroke-width="2" fill="none"
+                                stroke-linecap="round" />
+
+                            <!-- Glasses (tech look) -->
+                            <circle cx="175" cy="190" r="25" fill="none" stroke="#10b981" stroke-width="2"
+                                opacity="0.8" />
+                            <circle cx="215" cy="190" r="25" fill="none" stroke="#10b981" stroke-width="2"
+                                opacity="0.8" />
+                            <line x1="200" y1="190" x2="190" y2="190" stroke="#10b981" stroke-width="2" opacity="0.8" />
+
+                            <!-- Laptop in hands -->
+                            <rect x="155" y="300" width="80" height="50" rx="4" fill="#374151" />
+                            <rect x="160" y="305" width="70" height="40" rx="2" fill="#10b981" opacity="0.8" />
+
+                            <!-- Code on laptop screen -->
+                            <rect x="165" y="310" width="30" height="2" rx="1" fill="white" opacity="0.9" />
+                            <rect x="165" y="315" width="40" height="2" rx="1" fill="white" opacity="0.7" />
+                            <rect x="165" y="320" width="25" height="2" rx="1" fill="white" opacity="0.9" />
+                            <rect x="165" y="325" width="50" height="2" rx="1" fill="white" opacity="0.8" />
+
+                            <!-- Floating Code Symbols with Glow -->
+                            <text class="float-symbol-1" x="90" y="150" fill="#10b981" font-size="20" opacity="0.7"
+                                filter="url(#glow)">&lt;/&gt;</text>
+                            <text class="float-symbol-2" x="310" y="120" fill="#3b82f6" font-size="16" opacity="0.7"
+                                filter="url(#glow)">{}</text>
+                            <text class="float-symbol-3" x="70" y="250" fill="#f59e0b" font-size="18" opacity="0.7"
+                                filter="url(#glow)">( )</text>
+                            <text class="float-symbol-4" x="330" y="280" fill="#ef4444" font-size="14" opacity="0.7"
+                                filter="url(#glow)">[]</text>
+
+                            <!-- Additional tech elements -->
+                            <circle cx="320" cy="180" r="3" fill="#10b981" opacity="0.6">
+                                <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="70" cy="200" r="2" fill="#3b82f6" opacity="0.6">
+                                <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="310" cy="300" r="2.5" fill="#f59e0b" opacity="0.6">
+                                <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                        </svg>
+                    </div>
+
+                    <!-- Floating Bubbles -->
+                    <div class="absolute inset-0 pointer-events-none">
+                        <!-- Large Bubbles -->
+                        <div
+                            class="bubble-1 absolute w-16 h-16 rounded-full bg-gradient-to-r from-emerald-400/20 to-cyan-400/20 backdrop-blur-sm border border-emerald-400/30">
+                        </div>
+                        <div
+                            class="bubble-2 absolute w-12 h-12 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 backdrop-blur-sm border border-blue-400/30">
+                        </div>
+                        <div
+                            class="bubble-3 absolute w-20 h-20 rounded-full bg-gradient-to-r from-purple-400/20 to-pink-400/20 backdrop-blur-sm border border-purple-400/30">
+                        </div>
+                        <div
+                            class="bubble-4 absolute w-8 h-8 rounded-full bg-gradient-to-r from-cyan-400/20 to-emerald-400/20 backdrop-blur-sm border border-cyan-400/30">
+                        </div>
+                        <div
+                            class="bubble-5 absolute w-14 h-14 rounded-full bg-gradient-to-r from-pink-400/20 to-rose-400/20 backdrop-blur-sm border border-pink-400/30">
+                        </div>
+                        <div
+                            class="bubble-6 absolute w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400/20 to-orange-400/20 backdrop-blur-sm border border-yellow-400/30">
+                        </div>
+
+                        <!-- Small Bubbles -->
+                        <div class="bubble-7 absolute w-6 h-6 rounded-full bg-emerald-400/30 backdrop-blur-sm"></div>
+                        <div class="bubble-8 absolute w-4 h-4 rounded-full bg-blue-400/30 backdrop-blur-sm"></div>
+                        <div class="bubble-9 absolute w-5 h-5 rounded-full bg-purple-400/30 backdrop-blur-sm"></div>
+                        <div class="bubble-10 absolute w-3 h-3 rounded-full bg-cyan-400/30 backdrop-blur-sm"></div>
+                    </div>
+
+                    <!-- Tech Stack Icons -->
+                    <div class="absolute inset-0 pointer-events-none">
+                        <div class="absolute top-10 left-10 bg-yellow-500 p-3 rounded-lg shadow-lg floating-animation"
+                            style="animation-delay: 1s;">
+                            <i class="fab fa-js-square text-2xl text-white"></i>
+                        </div>
+                        <div class="absolute top-20 right-10 bg-blue-500 p-3 rounded-lg shadow-lg floating-animation"
+                            style="animation-delay: 1.5s;">
+                            <i class="fab fa-react text-2xl text-white"></i>
+                        </div>
+                        <div class="absolute bottom-20 left-16 bg-green-500 p-3 rounded-lg shadow-lg floating-animation"
+                            style="animation-delay: 2s;">
+                            <i class="fab fa-node-js text-2xl text-white"></i>
+                        </div>
+                        <div class="absolute bottom-10 right-16 bg-orange-500 p-3 rounded-lg shadow-lg floating-animation"
+                            style="animation-delay: 2.5s;">
+                            <i class="fas fa-database text-2xl text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-slate-400 animate-bounce">
+            <i class="fas fa-chevron-down text-xl"></i>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section class="bg-slate-900 py-20 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-emerald-400 mb-4 font-poppins">Tentang Saya</h2>
+                <p class="text-xl text-slate-400">Mengenal pribadi di balik kode.</p>
+            </div>
+
+            <!-- Main Content -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center mb-20">
+                <!-- Left Column - Text Content -->
+                <div class="space-y-6">
+                    <h3 class="text-3xl font-bold text-emerald-400 mb-6 font-poppins">Perjalanan Sejauh Ini</h3>
+
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        Sebagai full-stack developer dengan pengalaman lebih dari 5 tahun, saya telah menjalani
+                        perjalanan yang penuh dengan pembelajaran dan inovasi. Dimulai dari rasa penasaran terhadap
+                        teknologi, kini saya fokus pada pengembangan aplikasi web yang tidak hanya fungsional, tetapi
+                        juga memberikan pengalaman pengguna yang luar biasa.
+                    </p>
+
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        Passion saya terletak pada penulisan kode yang bersih dan sistem yang scalable. Setiap proyek
+                        adalah kesempatan untuk menciptakan solusi yang elegant dan efisien. Saya percaya bahwa
+                        teknologi terbaik adalah yang dapat memecahkan masalah nyata dengan cara yang sederhana namun
+                        powerful.
+                    </p>
+
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        Continuous learning adalah filosofi hidup saya. Dunia teknologi yang terus berkembang menuntut
+                        saya untuk selalu update dengan tren terbaru, framework modern, dan best practices. Dari React
+                        hingga Node.js, dari database design hingga cloud architecture - setiap hari adalah kesempatan
+                        untuk tumbuh.
+                    </p>
+
+                    <!-- Professional Badges -->
+                    <div class="pt-6">
+                        <h4 class="text-lg font-semibold text-emerald-400 mb-4">Current Roles & Expertise</h4>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <!-- Primary Role -->
+                            <div class="group relative">
+                                <div
+                                    class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 hover:scale-105 flex items-center">
+                                    <i class="fas fa-code mr-2"></i>
+                                    Senior Full-Stack Developer
+                                </div>
+                                <div
+                                    class="absolute -top-2 -right-2 w-4 h-4 bg-green-400 rounded-full border-2 border-slate-900 animate-pulse">
+                                </div>
+                            </div>
+
+                            <!-- Secondary Roles -->
+                            <div
+                                class="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105 flex items-center">
+                                <i class="fas fa-cloud mr-2"></i>
+                                Cloud Architect
+                            </div>
+
+                            <div
+                                class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-orange-500/25 transition-all duration-300 hover:scale-105 flex items-center">
+                                <i class="fas fa-cogs mr-2"></i>
+                                DevOps Engineer
+                            </div>
+
+                            <div
+                                class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 flex items-center">
+                                <i class="fas fa-user-graduate mr-2"></i>
+                                Tech Mentor
+                            </div>
+
+                            <div
+                                class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-105 flex items-center">
+                                <i class="fas fa-microphone mr-2"></i>
+                                Tech Speaker
+                            </div>
+
+                            <div
+                                class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-green-500/25 transition-all duration-300 hover:scale-105 flex items-center">
+                                <i class="fab fa-github mr-2"></i>
+                                Open Source Contributor
+                            </div>
+                        </div>
+
+                        <!-- Experience Stats -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            <div class="text-center p-3 bg-slate-800/30 rounded-lg border border-slate-700/50">
+                                <div class="text-2xl font-bold text-emerald-400">5+</div>
+                                <div class="text-sm text-slate-400">Years Experience</div>
+                            </div>
+                            <div class="text-center p-3 bg-slate-800/30 rounded-lg border border-slate-700/50">
+                                <div class="text-2xl font-bold text-blue-400">50+</div>
+                                <div class="text-sm text-slate-400">Projects Completed</div>
+                            </div>
+                            <div class="text-center p-3 bg-slate-800/30 rounded-lg border border-slate-700/50">
+                                <div class="text-2xl font-bold text-purple-400">15+</div>
+                                <div class="text-sm text-slate-400">Technologies</div>
+                            </div>
+                            <div class="text-center p-3 bg-slate-800/30 rounded-lg border border-slate-700/50">
+                                <div class="text-2xl font-bold text-orange-400">100+</div>
+                                <div class="text-sm text-slate-400">Happy Clients</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4 pt-4">
+                        <div class="w-12 h-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full"></div>
+                        <span class="text-emerald-400 font-semibold">Always Learning, Always Growing</span>
+                    </div>
+                </div>
+
+                <!-- Right Column - Animated Avatar -->
+                <div class="flex justify-center">
+                    <div class="relative">
+                        <!-- Glowing Background -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-emerald-400/20 to-cyan-400/20 rounded-3xl blur-xl animate-pulse">
+                        </div>
+
+                        <!-- Avatar Card -->
+                        <div
+                            class="relative bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-3xl border border-emerald-400/30 shadow-2xl avatar-float">
+                            <div class="w-80 h-80 mx-auto relative">
+                                <svg viewBox="0 0 320 320" class="w-full h-full avatar-glow">
+                                    <defs>
+                                        <linearGradient id="avatarGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#10b981" />
+                                            <stop offset="50%" style="stop-color:#06d6a0" />
+                                            <stop offset="100%" style="stop-color:#0891b2" />
+                                        </linearGradient>
+                                        <linearGradient id="skinTone" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#fbbf24" />
+                                            <stop offset="100%" style="stop-color:#f59e0b" />
+                                        </linearGradient>
+                                        <filter id="softGlow">
+                                            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                                            <feMerge>
+                                                <feMergeNode in="coloredBlur" />
+                                                <feMergeNode in="SourceGraphic" />
+                                            </feMerge>
+                                        </filter>
+                                    </defs>
+
+                                    <!-- Background Circle with Glow -->
+                                    <circle cx="160" cy="160" r="140" fill="url(#avatarGlow)" opacity="0.1"
+                                        filter="url(#softGlow)" />
+
+                                    <!-- Body -->
+                                    <ellipse cx="160" cy="280" rx="60" ry="40" fill="#374151" />
+
+                                    <!-- Neck -->
+                                    <rect x="148" y="220" width="24" height="32" rx="12" fill="url(#skinTone)" />
+
+                                    <!-- Head -->
+                                    <circle cx="160" cy="160" r="55" fill="url(#skinTone)" />
+
+                                    <!-- Hair -->
+                                    <path d="M 115 130 Q 160 100 205 130 Q 195 110 160 105 Q 125 110 115 130"
+                                        fill="#1f2937" />
+                                    <path d="M 120 140 Q 140 125 160 130 Q 180 125 200 140" fill="#1f2937" />
+
+                                    <!-- Eyes -->
+                                    <ellipse cx="145" cy="150" rx="6" ry="5" fill="white" />
+                                    <ellipse cx="175" cy="150" rx="6" ry="5" fill="white" />
+                                    <circle cx="145" cy="150" r="3" fill="#1f2937" />
+                                    <circle cx="175" cy="150" r="3" fill="#1f2937" />
+                                    <circle cx="144" cy="148" r="1" fill="white" />
+                                    <circle cx="174" cy="148" r="1" fill="white" />
+
+                                    <!-- Eyebrows -->
+                                    <path d="M 135 140 Q 145 135 155 140" stroke="#1f2937" stroke-width="2" fill="none"
+                                        stroke-linecap="round" />
+                                    <path d="M 165 140 Q 175 135 185 140" stroke="#1f2937" stroke-width="2" fill="none"
+                                        stroke-linecap="round" />
+
+                                    <!-- Nose -->
+                                    <ellipse cx="160" cy="165" rx="2" ry="6" fill="#f59e0b" opacity="0.7" />
+
+                                    <!-- Mouth -->
+                                    <path d="M 150 180 Q 160 190 170 180" stroke="#1f2937" stroke-width="2" fill="none"
+                                        stroke-linecap="round" />
+
+                                    <!-- Glasses -->
+                                    <circle cx="145" cy="150" r="20" fill="none" stroke="#10b981" stroke-width="2"
+                                        opacity="0.9" />
+                                    <circle cx="175" cy="150" r="20" fill="none" stroke="#10b981" stroke-width="2"
+                                        opacity="0.9" />
+                                    <line x1="165" y1="150" x2="155" y2="150" stroke="#10b981" stroke-width="2"
+                                        opacity="0.9" />
+
+                                    <!-- Hoodie -->
+                                    <path d="M 100 250 Q 160 240 220 250 L 210 290 Q 160 285 110 290 Z"
+                                        fill="#374151" />
+                                    <circle cx="160" cy="260" r="3" fill="#10b981" />
+
+                                    <!-- Floating Elements -->
+                                    <circle cx="80" cy="100" r="2" fill="#10b981" opacity="0.8">
+                                        <animate attributeName="cy" values="100;90;100" dur="3s"
+                                            repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="240" cy="120" r="1.5" fill="#06d6a0" opacity="0.8">
+                                        <animate attributeName="cy" values="120;110;120" dur="2s"
+                                            repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="70" cy="200" r="1" fill="#0891b2" opacity="0.8">
+                                        <animate attributeName="cy" values="200;190;200" dur="2.5s"
+                                            repeatCount="indefinite" />
+                                    </circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Cards -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="info-card bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 hover:border-emerald-400/50 transition-all duration-300 group">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">💚</div>
+                        <h4 class="text-xl font-bold text-emerald-400 mb-3 font-poppins">Yang Saya Suka</h4>
+                        <p class="text-slate-300 leading-relaxed">
+                            Menciptakan hal-hal yang bermakna dan memecahkan masalah kompleks dengan solusi yang
+                            elegant. Setiap line code adalah kesempatan untuk membuat perbedaan.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="info-card bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 hover:border-emerald-400/50 transition-all duration-300 group">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">☕</div>
+                        <h4 class="text-xl font-bold text-emerald-400 mb-3 font-poppins">Bahan Bakar</h4>
+                        <p class="text-slate-300 leading-relaxed">
+                            Kopi yang sempurna, musik yang menginspirasi, dan passion untuk menulis kode yang bersih.
+                            Kombinasi yang menghasilkan produktivitas maksimal.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="info-card bg-slate-800/50 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 hover:border-emerald-400/50 transition-all duration-300 group">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">🚀</div>
+                        <h4 class="text-xl font-bold text-emerald-400 mb-3 font-poppins">Tujuan</h4>
+                        <p class="text-slate-300 leading-relaxed">
+                            Menciptakan software yang berdampak nyata dan membantu orang lain berkembang. Teknologi
+                            adalah alat untuk membuat dunia menjadi lebih baik.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="bg-slate-900 py-20 relative overflow-hidden">
+        <!-- Background Particles -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-20 left-10 w-2 h-2 bg-emerald-400 rounded-full opacity-60 animate-pulse"></div>
+            <div class="absolute top-40 right-20 w-1 h-1 bg-cyan-400 rounded-full opacity-80 animate-ping"></div>
+            <div class="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-emerald-300 rounded-full opacity-70 animate-pulse"
+                style="animation-delay: 1s;"></div>
+            <div class="absolute top-60 right-1/3 w-1 h-1 bg-teal-400 rounded-full opacity-60 animate-ping"
+                style="animation-delay: 2s;"></div>
+            <div class="absolute bottom-20 right-10 w-2 h-2 bg-emerald-500 rounded-full opacity-50 animate-pulse"
+                style="animation-delay: 0.5s;"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-emerald-400 mb-4 font-poppins">Pendidikan</h2>
+                <p class="text-xl text-slate-400">Fondasi akademis dan pembelajaran berkelanjutan</p>
+            </div>
+
+            <!-- Timeline Container -->
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div
+                    class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-400 via-cyan-400 to-emerald-400 opacity-60">
+                </div>
+
+                <!-- Education Cards -->
+                <div class="space-y-12">
+                    <!-- Card 1 - Bachelor's Degree -->
+                    <div class="relative flex items-start">
+                        <!-- Timeline Dot -->
+                        <div
+                            class="absolute left-6 w-4 h-4 bg-emerald-400 rounded-full border-4 border-slate-900 shadow-lg shadow-emerald-400/50 z-10">
+                            <div class="absolute inset-0 bg-emerald-400 rounded-full animate-ping opacity-75"></div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="ml-16 w-full">
+                            <div
+                                class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 hover:border-emerald-400/50 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-400/10 group">
+                                <!-- Header -->
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <div>
+                                        <h3
+                                            class="text-2xl font-bold text-emerald-400 mb-2 group-hover:text-emerald-300 transition-colors">
+                                            S1 Teknik Informatika</h3>
+                                        <h4 class="text-xl font-semibold text-white mb-2">Universitas Teknologi
+                                            Indonesia</h4>
+                                    </div>
+                                    <div class="text-emerald-400 font-semibold text-lg">2015 – 2019</div>
+                                </div>
+
+                                <!-- Description -->
+                                <p class="text-slate-300 leading-relaxed mb-6">
+                                    Menyelesaikan program studi Teknik Informatika dengan fokus pada pengembangan
+                                    perangkat lunak dan sistem informasi.
+                                    Mempelajari fundamental programming, algoritma, struktur data, dan metodologi
+                                    pengembangan software modern.
+                                    Aktif dalam berbagai proyek akademis dan organisasi mahasiswa.
+                                </p>
+
+                                <!-- Achievements -->
+                                <div class="mb-6">
+                                    <h5 class="text-emerald-400 font-semibold mb-3">Pencapaian:</h5>
+                                    <ul class="space-y-2 text-slate-300">
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                                            Lulus dengan IPK 3.75 (Cum Laude)
+                                        </li>
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                                            Juara 2 Kompetisi Programming Nasional 2018
+                                        </li>
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                                            Ketua Himpunan Mahasiswa Informatika 2017-2018
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Skills Tags -->
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-medium rounded-full">Java</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-medium rounded-full">Python</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-medium rounded-full">Database</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-medium rounded-full">Machine
+                                        Learning</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-medium rounded-full">Web
+                                        Development</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 - Certification -->
+                    <div class="relative flex items-start">
+                        <!-- Timeline Dot -->
+                        <div
+                            class="absolute left-6 w-4 h-4 bg-cyan-400 rounded-full border-4 border-slate-900 shadow-lg shadow-cyan-400/50 z-10">
+                            <div class="absolute inset-0 bg-cyan-400 rounded-full animate-ping opacity-75"></div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="ml-16 w-full">
+                            <div
+                                class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 hover:border-cyan-400/50 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-400/10 group">
+                                <!-- Header -->
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <div>
+                                        <h3
+                                            class="text-2xl font-bold text-cyan-400 mb-2 group-hover:text-cyan-300 transition-colors">
+                                            AWS Certified Solutions Architect</h3>
+                                        <h4 class="text-xl font-semibold text-white mb-2">Amazon Web Services</h4>
+                                    </div>
+                                    <div class="text-cyan-400 font-semibold text-lg">2020</div>
+                                </div>
+
+                                <!-- Description -->
+                                <p class="text-slate-300 leading-relaxed mb-6">
+                                    Memperoleh sertifikasi AWS Solutions Architect Associate yang memvalidasi kemampuan
+                                    dalam merancang dan
+                                    mengimplementasikan sistem terdistribusi yang scalable di platform AWS. Menguasai
+                                    berbagai layanan cloud
+                                    computing dan best practices untuk arsitektur modern.
+                                </p>
+
+                                <!-- Achievements -->
+                                <div class="mb-6">
+                                    <h5 class="text-cyan-400 font-semibold mb-3">Pencapaian:</h5>
+                                    <ul class="space-y-2 text-slate-300">
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
+                                            Lulus dengan skor 850/1000
+                                        </li>
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
+                                            Menguasai 20+ layanan AWS core
+                                        </li>
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-cyan-400 rounded-full mr-3"></div>
+                                            Implementasi 5+ proyek cloud architecture
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Skills Tags -->
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-medium rounded-full">AWS</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-medium rounded-full">Cloud
+                                        Architecture</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-medium rounded-full">DevOps</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-medium rounded-full">Microservices</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 - Bootcamp -->
+                    <div class="relative flex items-start">
+                        <!-- Timeline Dot -->
+                        <div
+                            class="absolute left-6 w-4 h-4 bg-emerald-400 rounded-full border-4 border-slate-900 shadow-lg shadow-emerald-400/50 z-10">
+                            <div class="absolute inset-0 bg-emerald-400 rounded-full animate-ping opacity-75"></div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="ml-16 w-full">
+                            <div
+                                class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 hover:border-emerald-400/50 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-400/10 group">
+                                <!-- Header -->
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <div>
+                                        <h3
+                                            class="text-2xl font-bold text-emerald-400 mb-2 group-hover:text-emerald-300 transition-colors">
+                                            Full Stack JavaScript Bootcamp</h3>
+                                        <h4 class="text-xl font-semibold text-white mb-2">Hacktiv8 Indonesia</h4>
+                                    </div>
+                                    <div class="text-emerald-400 font-semibold text-lg">2019</div>
+                                </div>
+
+                                <!-- Description -->
+                                <p class="text-slate-300 leading-relaxed mb-6">
+                                    Program intensif 12 minggu yang fokus pada pengembangan aplikasi web modern
+                                    menggunakan JavaScript ecosystem.
+                                    Mempelajari MERN stack (MongoDB, Express.js, React, Node.js) dan metodologi agile
+                                    development.
+                                    Menyelesaikan 3 proyek besar dengan tim multidisiplin.
+                                </p>
+
+                                <!-- Achievements -->
+                                <div class="mb-6">
+                                    <h5 class="text-emerald-400 font-semibold mb-3">Pencapaian:</h5>
+                                    <ul class="space-y-2 text-slate-300">
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                                            Graduate terbaik dengan nilai A+ di semua modul
+                                        </li>
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                                            Team Leader untuk final project
+                                        </li>
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                                            Langsung diterima kerja sebelum lulus
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Skills Tags -->
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-medium rounded-full">React</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-medium rounded-full">Node.js</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-medium rounded-full">MongoDB</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-medium rounded-full">Express.js</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-medium rounded-full">Agile</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 - Online Learning -->
+                    <div class="relative flex items-start">
+                        <!-- Timeline Dot -->
+                        <div
+                            class="absolute left-6 w-4 h-4 bg-teal-400 rounded-full border-4 border-slate-900 shadow-lg shadow-teal-400/50 z-10">
+                            <div class="absolute inset-0 bg-teal-400 rounded-full animate-ping opacity-75"></div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="ml-16 w-full">
+                            <div
+                                class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/50 hover:border-teal-400/50 transition-all duration-300 hover:shadow-2xl hover:shadow-teal-400/10 group">
+                                <!-- Header -->
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                    <div>
+                                        <h3
+                                            class="text-2xl font-bold text-teal-400 mb-2 group-hover:text-teal-300 transition-colors">
+                                            Continuous Learning</h3>
+                                        <h4 class="text-xl font-semibold text-white mb-2">Various Online Platforms</h4>
+                                    </div>
+                                    <div class="text-teal-400 font-semibold text-lg">2019 – Present</div>
+                                </div>
+
+                                <!-- Description -->
+                                <p class="text-slate-300 leading-relaxed mb-6">
+                                    Komitmen untuk terus belajar dan mengikuti perkembangan teknologi terbaru melalui
+                                    berbagai platform online.
+                                    Menyelesaikan puluhan kursus dan sertifikasi dari Coursera, Udemy, Pluralsight, dan
+                                    platform lainnya.
+                                    Fokus pada emerging technologies dan industry best practices.
+                                </p>
+
+                                <!-- Achievements -->
+                                <div class="mb-6">
+                                    <h5 class="text-teal-400 font-semibold mb-3">Pencapaian:</h5>
+                                    <ul class="space-y-2 text-slate-300">
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+                                            50+ sertifikasi online completed
+                                        </li>
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+                                            Active contributor di tech communities
+                                        </li>
+                                        <li class="flex items-center">
+                                            <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+                                            Mentor untuk junior developers
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Skills Tags -->
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-sm font-medium rounded-full">Docker</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-sm font-medium rounded-full">Kubernetes</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-sm font-medium rounded-full">GraphQL</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-sm font-medium rounded-full">TypeScript</span>
+                                    <span
+                                        class="px-3 py-1 bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-sm font-medium rounded-full">Next.js</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Achievements Section -->
+    <section class="bg-slate-900 py-20 relative overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div
+                class="absolute top-10 left-1/4 w-32 h-32 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl">
+            </div>
+            <div
+                class="absolute bottom-20 right-1/4 w-40 h-40 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-full blur-3xl">
+            </div>
+            <div
+                class="absolute top-1/2 left-10 w-24 h-24 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-full blur-2xl">
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-emerald-400 mb-4 font-poppins">Pencapaian Terbaru</h2>
+                <p class="text-xl text-slate-400">Beberapa milestone yang saya banggakan</p>
+            </div>
+
+            <!-- Achievements Grid -->
+            <div class="achievement-grid mb-12">
+                <!-- Achievement 1 - Best Developer Award -->
+                <div
+                    class="achievement-card group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20">
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-yellow-400/50 transition-all duration-300">
+                        <!-- Top Half - Gradient Background with Icon -->
+                        <div
+                            class="h-32 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 flex items-center justify-center relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-yellow-400/80 via-orange-500/80 to-red-500/80">
+                            </div>
+                            <div
+                                class="relative z-10 text-white text-4xl group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <!-- Floating particles -->
+                            <div class="absolute top-2 left-4 w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>
+                            <div class="absolute bottom-4 right-6 w-1 h-1 bg-white/80 rounded-full animate-ping"></div>
+                        </div>
+
+                        <!-- Bottom Half - Content -->
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3
+                                    class="text-xl font-bold text-yellow-400 group-hover:text-yellow-300 transition-colors">
+                                    Best Developer Award</h3>
+                                <span class="text-emerald-400 font-semibold text-sm">2023</span>
+                            </div>
+                            <h4 class="text-white font-medium mb-3">Tech Innovation Summit</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Meraih penghargaan sebagai developer terbaik dalam kategori Full-Stack Development.
+                                Dinilai berdasarkan kualitas kode, inovasi, dan kontribusi terhadap komunitas tech.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievement 2 - Hackathon Winner -->
+                <div
+                    class="achievement-card group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20">
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-purple-400/50 transition-all duration-300">
+                        <!-- Top Half -->
+                        <div
+                            class="h-32 bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 flex items-center justify-center relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-purple-500/80 via-pink-500/80 to-rose-500/80">
+                            </div>
+                            <div
+                                class="relative z-10 text-white text-4xl group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div class="absolute top-3 right-3 w-1.5 h-1.5 bg-white/70 rounded-full animate-pulse">
+                            </div>
+                            <div class="absolute bottom-2 left-3 w-1 h-1 bg-white/90 rounded-full animate-ping"></div>
+                        </div>
+
+                        <!-- Bottom Half -->
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3
+                                    class="text-xl font-bold text-purple-400 group-hover:text-purple-300 transition-colors">
+                                    Hackathon Winner</h3>
+                                <span class="text-emerald-400 font-semibold text-sm">2022</span>
+                            </div>
+                            <h4 class="text-white font-medium mb-3">Jakarta Tech Week</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Juara 1 dalam kompetisi hackathon 48 jam dengan tema "Smart City Solutions".
+                                Mengembangkan aplikasi IoT untuk monitoring kualitas udara real-time.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievement 3 - Open Source Contributor -->
+                <div
+                    class="achievement-card group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20">
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-emerald-400/50 transition-all duration-300">
+                        <!-- Top Half -->
+                        <div
+                            class="h-32 bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-emerald-500/80 via-teal-500/80 to-cyan-500/80">
+                            </div>
+                            <div
+                                class="relative z-10 text-white text-4xl group-hover:scale-110 transition-transform duration-300">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="absolute top-4 left-2 w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>
+                            <div class="absolute bottom-3 right-4 w-1 h-1 bg-white/80 rounded-full animate-ping"></div>
+                        </div>
+
+                        <!-- Bottom Half -->
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3
+                                    class="text-xl font-bold text-emerald-400 group-hover:text-emerald-300 transition-colors">
+                                    Open Source Contributor</h3>
+                                <span class="text-emerald-400 font-semibold text-sm">2021–2024</span>
+                            </div>
+                            <h4 class="text-white font-medium mb-3">GitHub Community</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Aktif berkontribusi pada 15+ proyek open source dengan 500+ commits.
+                                Maintainer untuk 3 library JavaScript yang digunakan oleh 10K+ developers.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievement 4 - Tech Speaker -->
+                <div
+                    class="achievement-card group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/20">
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-red-400/50 transition-all duration-300">
+                        <!-- Top Half -->
+                        <div
+                            class="h-32 bg-gradient-to-br from-red-500 via-orange-500 to-yellow-500 flex items-center justify-center relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-red-500/80 via-orange-500/80 to-yellow-500/80">
+                            </div>
+                            <div
+                                class="relative z-10 text-white text-4xl group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <div class="absolute top-2 right-2 w-1.5 h-1.5 bg-white/70 rounded-full animate-pulse">
+                            </div>
+                            <div class="absolute bottom-4 left-5 w-1 h-1 bg-white/90 rounded-full animate-ping"></div>
+                        </div>
+
+                        <!-- Bottom Half -->
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-bold text-red-400 group-hover:text-red-300 transition-colors">
+                                    Tech Speaker</h3>
+                                <span class="text-emerald-400 font-semibold text-sm">2022–2024</span>
+                            </div>
+                            <h4 class="text-white font-medium mb-3">Various Tech Events</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Pembicara di 12+ konferensi teknologi nasional dan internasional.
+                                Topik spesialisasi: Modern Web Development, Cloud Architecture, dan DevOps.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievement 5 - AWS Certified -->
+                <div
+                    class="achievement-card group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20">
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-yellow-400/50 transition-all duration-300">
+                        <!-- Top Half -->
+                        <div
+                            class="h-32 bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-500 flex items-center justify-center relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-yellow-400/80 via-amber-500/80 to-orange-500/80">
+                            </div>
+                            <div
+                                class="relative z-10 text-white text-4xl group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <div class="absolute top-3 left-3 w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>
+                            <div class="absolute bottom-2 right-2 w-1 h-1 bg-white/80 rounded-full animate-ping"></div>
+                        </div>
+
+                        <!-- Bottom Half -->
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3
+                                    class="text-xl font-bold text-yellow-400 group-hover:text-yellow-300 transition-colors">
+                                    AWS Certified</h3>
+                                <span class="text-emerald-400 font-semibold text-sm">2023</span>
+                            </div>
+                            <h4 class="text-white font-medium mb-3">Amazon Web Services</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Memperoleh sertifikasi AWS Solutions Architect Professional dan DevOps Engineer.
+                                Menguasai cloud infrastructure dan automation untuk enterprise applications.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievement 6 - Mentor Award -->
+                <div
+                    class="achievement-card group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20">
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-pink-400/50 transition-all duration-300">
+                        <!-- Top Half -->
+                        <div
+                            class="h-32 bg-gradient-to-br from-pink-500 via-rose-500 to-purple-500 flex items-center justify-center relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-pink-500/80 via-rose-500/80 to-purple-500/80">
+                            </div>
+                            <div
+                                class="relative z-10 text-white text-4xl group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="absolute top-4 right-4 w-1.5 h-1.5 bg-white/70 rounded-full animate-pulse">
+                            </div>
+                            <div class="absolute bottom-3 left-2 w-1 h-1 bg-white/90 rounded-full animate-ping"></div>
+                        </div>
+
+                        <!-- Bottom Half -->
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-bold text-pink-400 group-hover:text-pink-300 transition-colors">
+                                    Mentor Award</h3>
+                                <span class="text-emerald-400 font-semibold text-sm">2023</span>
+                            </div>
+                            <h4 class="text-white font-medium mb-3">Developer Community</h4>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Penghargaan sebagai mentor terbaik dalam program mentorship untuk junior developers.
+                                Telah membimbing 50+ developers dalam perjalanan karir mereka.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View All Button -->
+            <div class="text-center">
+                <button
+                    class="group bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-semibold inline-flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-emerald-500/25 hover:scale-105 transform">
+                    <i class="fas fa-trophy mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                    Lihat Semua Pencapaian
+                    <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform duration-300"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section with Carousel -->
+    <section class="bg-slate-900 py-20 relative overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div
+                class="absolute top-20 left-1/3 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-full blur-3xl">
+            </div>
+            <div
+                class="absolute bottom-32 right-1/3 w-48 h-48 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 rounded-full blur-3xl">
+            </div>
+            <div
+                class="absolute top-1/2 left-20 w-32 h-32 bg-gradient-to-r from-pink-500/10 to-orange-500/10 rounded-full blur-2xl">
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-5xl font-bold text-emerald-400 mb-4 font-poppins">Galeri dengan Carousel</h2>
+                <p class="text-xl text-slate-400 mb-8">Kumpulan momen dan proyek visual yang berkesan</p>
+
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <button
+                        class="filter-btn active px-6 py-3 rounded-full border-2 border-emerald-400 bg-emerald-400/20 text-emerald-400 font-semibold transition-all duration-300 hover:bg-emerald-400/30 hover:shadow-lg hover:shadow-emerald-400/25">
+                        All
+                    </button>
+                    <button
+                        class="filter-btn px-6 py-3 rounded-full border-2 border-slate-600 text-slate-400 font-semibold transition-all duration-300 hover:border-emerald-400 hover:text-emerald-400 hover:bg-emerald-400/10 hover:shadow-lg hover:shadow-emerald-400/25">
+                        Nature
+                    </button>
+                    <button
+                        class="filter-btn px-6 py-3 rounded-full border-2 border-slate-600 text-slate-400 font-semibold transition-all duration-300 hover:border-emerald-400 hover:text-emerald-400 hover:bg-emerald-400/10 hover:shadow-lg hover:shadow-emerald-400/25">
+                        Architecture
+                    </button>
+                    <button
+                        class="filter-btn px-6 py-3 rounded-full border-2 border-slate-600 text-slate-400 font-semibold transition-all duration-300 hover:border-emerald-400 hover:text-emerald-400 hover:bg-emerald-400/10 hover:shadow-lg hover:shadow-emerald-400/25">
+                        Travel
+                    </button>
+                    <button
+                        class="filter-btn px-6 py-3 rounded-full border-2 border-slate-600 text-slate-400 font-semibold transition-all duration-300 hover:border-emerald-400 hover:text-emerald-400 hover:bg-emerald-400/10 hover:shadow-lg hover:shadow-emerald-400/25">
+                        Portrait
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid">
+                <!-- Gallery Card 1 - Nature Collection -->
+                <div class="gallery-card group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
+                    data-category="nature">
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-purple-400/50 transition-all duration-300">
+                        <!-- Carousel Container -->
+                        <div class="carousel-container" data-carousel="nature">
+                            <!-- Image Counter -->
+                            <div class="carousel-counter">
+                                <span class="current-slide">1</span>/<span class="total-slides">4</span>
+                            </div>
+
+                            <!-- Carousel Track -->
+                            <div class="carousel-track">
+                                <!-- Slide 1 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <div class="text-center text-white">
+                                        <i class="fas fa-mountain text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Mountain Sunrise</h3>
+                                        <p class="text-sm opacity-80">Gunung Bromo, Jawa Timur</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 2 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <div class="text-center text-white">
+                                        <i class="fas fa-tree text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Forest Path</h3>
+                                        <p class="text-sm opacity-80">Hutan Pinus, Bandung</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 3 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <div class="text-center text-white">
+                                        <i class="fas fa-water text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Ocean Waves</h3>
+                                        <p class="text-sm opacity-80">Pantai Kuta, Bali</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 4 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                    <div class="text-center text-white">
+                                        <i class="fas fa-leaf text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Tropical Garden</h3>
+                                        <p class="text-sm opacity-80">Kebun Raya Bogor</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Navigation Buttons -->
+                            <button class="carousel-nav prev" data-direction="prev">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-nav next" data-direction="next">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+
+                            <!-- Indicators -->
+                            <div class="carousel-indicators">
+                                <div class="carousel-dot active" data-slide="0"></div>
+                                <div class="carousel-dot" data-slide="1"></div>
+                                <div class="carousel-dot" data-slide="2"></div>
+                                <div class="carousel-dot" data-slide="3"></div>
+                            </div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-6">
+                            <h3
+                                class="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+                                Nature Collection</h3>
+                            <p class="text-slate-400 leading-relaxed mb-4">
+                                Eksplorasi keindahan alam melalui lensa kamera. Dari hutan tropis hingga pegunungan yang
+                                memukau.
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 text-sm">4 Photos</span>
+                                <button
+                                    class="text-emerald-400 hover:text-emerald-300 font-semibold text-sm transition-colors hover:underline">
+                                    Lihat Semua <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Card 2 - Architecture Showcase -->
+                <div class="gallery-card group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/20"
+                    data-category="architecture">
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-emerald-400/50 transition-all duration-300">
+                        <!-- Carousel Container -->
+                        <div class="carousel-container" data-carousel="architecture">
+                            <!-- Image Counter -->
+                            <div class="carousel-counter">
+                                <span class="current-slide">1</span>/<span class="total-slides">3</span>
+                            </div>
+
+                            <!-- Carousel Track -->
+                            <div class="carousel-track">
+                                <!-- Slide 1 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                    <div class="text-center text-white">
+                                        <i class="fas fa-building text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Modern Skyscraper</h3>
+                                        <p class="text-sm opacity-80">Jakarta Business District</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 2 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                    <div class="text-center text-gray-800">
+                                        <i class="fas fa-mosque text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Traditional Architecture</h3>
+                                        <p class="text-sm opacity-80">Masjid Istiqlal, Jakarta</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 3 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                                    <div class="text-center text-gray-800">
+                                        <i class="fas fa-bridge text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Bridge Design</h3>
+                                        <p class="text-sm opacity-80">Jembatan Suramadu</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Navigation Buttons -->
+                            <button class="carousel-nav prev" data-direction="prev">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-nav next" data-direction="next">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+
+                            <!-- Indicators -->
+                            <div class="carousel-indicators">
+                                <div class="carousel-dot active" data-slide="0"></div>
+                                <div class="carousel-dot" data-slide="1"></div>
+                                <div class="carousel-dot" data-slide="2"></div>
+                            </div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-6">
+                            <h3
+                                class="text-2xl font-bold text-white mb-3 group-hover:text-emerald-300 transition-colors">
+                                Architecture Showcase</h3>
+                            <p class="text-slate-400 leading-relaxed mb-4">
+                                Dokumentasi arsitektur modern dan klasik. Geometri, cahaya, dan struktur yang
+                                menginspirasi.
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 text-sm">3 Photos</span>
+                                <button
+                                    class="text-emerald-400 hover:text-emerald-300 font-semibold text-sm transition-colors hover:underline">
+                                    Lihat Semua <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Card 3 - Travel Adventures -->
+                <div class="gallery-card group cursor-pointer transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/20"
+                    data-category="travel">
+                    <div
+                        class="bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-pink-400/50 transition-all duration-300">
+                        <!-- Carousel Container -->
+                        <div class="carousel-container" data-carousel="travel">
+                            <!-- Image Counter -->
+                            <div class="carousel-counter">
+                                <span class="current-slide">1</span>/<span class="total-slides">5</span>
+                            </div>
+
+                            <!-- Carousel Track -->
+                            <div class="carousel-track">
+                                <!-- Slide 1 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                                    <div class="text-center text-gray-800">
+                                        <i class="fas fa-plane text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Airport Journey</h3>
+                                        <p class="text-sm opacity-80">Soekarno-Hatta International</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 2 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                                    <div class="text-center text-white">
+                                        <i class="fas fa-camera text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Street Photography</h3>
+                                        <p class="text-sm opacity-80">Malioboro Street, Yogyakarta</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 3 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);">
+                                    <div class="text-center text-gray-800">
+                                        <i class="fas fa-utensils text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Local Cuisine</h3>
+                                        <p class="text-sm opacity-80">Gudeg Yu Djum, Yogyakarta</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 4 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #ff9a56 0%, #ffad56 100%);">
+                                    <div class="text-center text-white">
+                                        <i class="fas fa-map text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Adventure Map</h3>
+                                        <p class="text-sm opacity-80">Exploring Hidden Gems</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 5 -->
+                                <div class="carousel-slide"
+                                    style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+                                    <div class="text-center text-gray-800">
+                                        <i class="fas fa-heart text-6xl mb-4 opacity-80"></i>
+                                        <h3 class="text-xl font-bold">Memorable Moments</h3>
+                                        <p class="text-sm opacity-80">Sunset at Tanah Lot</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Navigation Buttons -->
+                            <button class="carousel-nav prev" data-direction="prev">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="carousel-nav next" data-direction="next">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+
+                            <!-- Indicators -->
+                            <div class="carousel-indicators">
+                                <div class="carousel-dot active" data-slide="0"></div>
+                                <div class="carousel-dot" data-slide="1"></div>
+                                <div class="carousel-dot" data-slide="2"></div>
+                                <div class="carousel-dot" data-slide="3"></div>
+                                <div class="carousel-dot" data-slide="4"></div>
+                            </div>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors">
+                                Travel Adventures</h3>
+                            <p class="text-slate-400 leading-relaxed mb-4">
+                                Perjalanan ke berbagai destinasi eksotis. Budaya, kuliner, dan pengalaman tak
+                                terlupakan.
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-500 text-sm">5 Photos</span>
+                                <button
+                                    class="text-emerald-400 hover:text-emerald-300 font-semibold text-sm transition-colors hover:underline">
+                                    Lihat Semua <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button
+                    class="group bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white px-8 py-4 rounded-xl font-semibold inline-flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-emerald-500/25 hover:scale-105 transform">
+                    <i class="fas fa-images mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                    Load More Gallery
+                    <i class="fas fa-arrow-down ml-3 group-hover:translate-y-1 transition-transform duration-300"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Back to Top Button functionality
+        const backToTopButton = document.getElementById('backToTop');
+
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopButton.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        // Smooth scroll to top when clicked
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Carousel functionality
+        class Carousel {
+            constructor(container) {
+                this.container = container;
+                this.track = container.querySelector('.carousel-track');
+                this.slides = container.querySelectorAll('.carousel-slide');
+                this.prevBtn = container.querySelector('.carousel-nav.prev');
+                this.nextBtn = container.querySelector('.carousel-nav.next');
+                this.dots = container.querySelectorAll('.carousel-dot');
+                this.currentSlideSpan = container.querySelector('.current-slide');
+                this.totalSlidesSpan = container.querySelector('.total-slides');
+
+                this.currentSlide = 0;
+                this.totalSlides = this.slides.length;
+                this.autoPlayInterval = null;
+                this.isAutoPlaying = false;
+
+                this.init();
+            }
+
+            init() {
+                // Set total slides
+                this.totalSlidesSpan.textContent = this.totalSlides;
+
+                // Add event listeners
+                this.prevBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.prevSlide();
+                });
+
+                this.nextBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.nextSlide();
+                });
+
+                // Dot navigation
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.goToSlide(index);
+                    });
+                });
+
+                // Auto-play on hover
+                this.container.addEventListener('mouseenter', () => {
+                    this.startAutoPlay();
+                });
+
+                this.container.addEventListener('mouseleave', () => {
+                    this.stopAutoPlay();
+                });
+
+                // Touch/swipe support
+                this.addTouchSupport();
+
+                // Keyboard navigation
+                this.container.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        this.prevSlide();
+                    } else if (e.key === 'ArrowRight') {
+                        e.preventDefault();
+                        this.nextSlide();
+                    }
+                });
+
+                // Make container focusable for keyboard navigation
+                this.container.setAttribute('tabindex', '0');
+            }
+
+            addTouchSupport() {
+                let startX = 0;
+                let currentX = 0;
+                let isDragging = false;
+
+                this.track.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isDragging = true;
+                    this.stopAutoPlay();
+                });
+
+                this.track.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    currentX = e.touches[0].clientX;
+                    e.preventDefault();
+                });
+
+                this.track.addEventListener('touchend', (e) => {
+                    if (!isDragging) return;
+                    isDragging = false;
+
+                    const diffX = startX - currentX;
+                    const threshold = 50;
+
+                    if (Math.abs(diffX) > threshold) {
+                        if (diffX > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.prevSlide();
+                        }
+                    }
+                });
+            }
+
+            startAutoPlay() {
+                if (this.isAutoPlaying) return;
+                this.isAutoPlaying = true;
+                this.autoPlayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 3000);
+            }
+
+            stopAutoPlay() {
+                if (!this.isAutoPlaying) return;
+                this.isAutoPlaying = false;
+                clearInterval(this.autoPlayInterval);
+            }
+
+            updateSlide() {
+                const translateX = -this.currentSlide * 100;
+                this.track.style.transform = `translateX(${translateX}%)`;
+
+                // Update counter
+                this.currentSlideSpan.textContent = this.currentSlide + 1;
+
+                // Update dots
+                this.dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+                this.updateSlide();
+            }
+
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.updateSlide();
+            }
+
+            goToSlide(index) {
+                this.currentSlide = index;
+                this.updateSlide();
+            }
         }
 
-        // if NOT set via local storage previously
-      } else {
-        if (document.documentElement.classList.contains('dark')) {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('color-theme', 'light');
-        } else {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('color-theme', 'dark');
-        }
-      }
+        // Initialize all carousels
+        document.addEventListener('DOMContentLoaded', () => {
+            const carouselContainers = document.querySelectorAll('.carousel-container');
+            carouselContainers.forEach(container => {
+                new Carousel(container);
+            });
+        });
 
-    });
-  </script>
-=======
->>>>>>> 4bcc7bf28b809c55788e252967ea6dfae8d5c56a
+        // Gallery filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryCards = document.querySelectorAll('.gallery-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active', 'border-emerald-400', 'bg-emerald-400/20',
+                        'text-emerald-400');
+                    btn.classList.add('border-slate-600', 'text-slate-400');
+                });
+
+                // Add active class to clicked button
+                button.classList.add('active', 'border-emerald-400', 'bg-emerald-400/20',
+                    'text-emerald-400');
+                button.classList.remove('border-slate-600', 'text-slate-400');
+
+                // Get filter category
+                const filterCategory = button.textContent.toLowerCase().trim();
+
+                // Filter gallery cards
+                galleryCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+
+                    if (filterCategory === 'all' || cardCategory === filterCategory) {
+                        card.style.display = 'block';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+
+                        // Animate in
+                        setTimeout(() => {
+                            card.style.transition = 'all 0.5s ease';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.transition = 'all 0.3s ease';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(-20px)';
+
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Particles animation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles-container');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles
+        createParticles();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.info-card, .achievement-card, .gallery-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        // Performance optimization: Lazy load images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
+    <script>
+        (function () {
+            function c() {
+                var b = a.contentDocument || a.contentWindow.document;
+                if (b) {
+                    var d = b.createElement('script');
+                    d.innerHTML =
+                        "window.__CF$cv$params={r:'98db6d56f41a4ad6',t:'MTc2MDMyMjc1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                    b.getElementsByTagName('head')[0].appendChild(d)
+                }
+            }
+            if (document.body) {
+                var a = document.createElement('iframe');
+                a.height = 1;
+                a.width = 1;
+                a.style.position = 'absolute';
+                a.style.top = 0;
+                a.style.left = 0;
+                a.style.border = 'none';
+                a.style.visibility = 'hidden';
+                document.body.appendChild(a);
+                if ('loading' !== document.readyState) c();
+                else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+                else {
+                    var e = document.onreadystatechange || function () {};
+                    document.onreadystatechange = function (b) {
+                        e(b);
+                        'loading' !== document.readyState && (document.onreadystatechange = e, c())
+                    }
+                }
+            }
+        })();
+    </script>
 </body>
 
 </html>
