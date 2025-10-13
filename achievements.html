@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pencapaian - Alex Rivera</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    body { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    .font-poppins { font-family: 'Poppins', sans-serif; }
+    .navbar-blur { backdrop-filter: blur(10px); background: rgba(15,23,42,0.9); }
+    .nav-link { position: relative; transition: all .3s ease; padding: 8px 16px; border-radius: 8px; }
+    .nav-link:hover { color:#10b981; background: rgba(16,185,129,.1); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16,185,129,.2); }
+    .nav-link::after { content:''; position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:0; height:2px; background:linear-gradient(90deg,#10b981,#06d6a0); transition: width .3s ease; border-radius:1px; }
+    .nav-link:hover::after { width:80%; }
+    .nav-link.active { color:#10b981; background: rgba(16,185,129,.15); box-shadow:0 2px 8px rgba(16,185,129,.3); }
+    .nav-link.active::after { width:80%; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100">
+  <nav class="fixed top-0 w-full z-50 navbar-blur border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0">
+          <h1 class="text-xl font-bold text-emerald-400 font-poppins">{' <Alex />'}</h1>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="index.html" class="nav-link text-slate-300 font-medium">Home</a>
+            <a href="edu-experience.html" class="nav-link text-slate-300 font-medium">Education &amp; Experience</a>
+            <a href="projects.html" class="nav-link text-slate-300 font-medium">Projects</a>
+            <a href="achievements.html" class="nav-link active text-slate-300 font-medium">Achievements</a>
+            <a href="gallery.html" class="nav-link text-slate-300 font-medium">Gallery</a>
+          </div>
+        </div>
+        <div class="md:hidden">
+          <button onclick="toggleMobileMenu()" class="text-slate-300 hover:text-emerald-400 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden navbar-blur border-t border-slate-800">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Home</a>
+        <a href="edu-experience.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Education &amp; Experience</a>
+        <a href="projects.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Projects</a>
+        <a href="achievements.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Achievements</a>
+        <a href="gallery.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Gallery</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 max-w-7xl mx-auto px-6">
+    <div class="text-center mb-8">
+      <h2 class="text-4xl md:text-5xl font-bold text-emerald-400 font-poppins mb-3">Pencapaian</h2>
+      <p class="text-slate-400 text-lg">Beberapa milestone yang saya banggakan</p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 justify-between mb-6">
+      <input id="searchInput" type="text" placeholder="Cari pencapaian..." class="w-full sm:w-1/2 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+      <div class="text-slate-400 text-sm" id="resultCount">Menampilkan semua item</div>
+    </div>
+
+    <div id="achievementsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- 6 sample achievements -->
+      <div class="achievement-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-title="Best Developer Award" data-tags="award full-stack">
+        <div class="h-32 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 flex items-center justify-center">
+          <i class="fas fa-trophy text-4xl text-white"></i>
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-yellow-400">Best Developer Award</h3>
+            <span class="text-emerald-400 font-semibold text-sm">2023</span>
+          </div>
+          <div class="text-white font-medium mb-2">Tech Innovation Summit</div>
+          <p class="text-slate-300 text-sm">Penghargaan developer terbaik kategori Full-Stack Development.</p>
+        </div>
+      </div>
+      <div class="achievement-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-title="Hackathon Winner" data-tags="hackathon winner smart city">
+        <div class="h-32 bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 flex items-center justify-center">
+          <i class="fas fa-medal text-4xl text-white"></i>
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-purple-400">Hackathon Winner</h3>
+            <span class="text-emerald-400 font-semibold text-sm">2022</span>
+          </div>
+          <div class="text-white font-medium mb-2">Jakarta Tech Week</div>
+          <p class="text-slate-300 text-sm">Juara 1 hackathon 48 jam bertema Smart City.</p>
+        </div>
+      </div>
+      <div class="achievement-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-title="Open Source Contributor" data-tags="open source maintainer">
+        <div class="h-32 bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center">
+          <i class="fab fa-github text-4xl text-white"></i>
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-emerald-400">Open Source Contributor</h3>
+            <span class="text-emerald-400 font-semibold text-sm">2021–2024</span>
+          </div>
+          <div class="text-white font-medium mb-2">GitHub Community</div>
+          <p class="text-slate-300 text-sm">Kontributor aktif 15+ proyek; maintainer 3 library.</p>
+        </div>
+      </div>
+      <div class="achievement-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-title="Tech Speaker" data-tags="speaker conference web cloud devops">
+        <div class="h-32 bg-gradient-to-br from-red-500 via-orange-500 to-yellow-500 flex items-center justify-center">
+          <i class="fas fa-microphone text-4xl text-white"></i>
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-red-400">Tech Speaker</h3>
+            <span class="text-emerald-400 font-semibold text-sm">2022–2024</span>
+          </div>
+          <div class="text-white font-medium mb-2">Various Tech Events</div>
+          <p class="text-slate-300 text-sm">Pembicara di 12+ konferensi teknologi.</p>
+        </div>
+      </div>
+      <div class="achievement-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-title="AWS Certified" data-tags="aws certification cloud">
+        <div class="h-32 bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-500 flex items-center justify-center">
+          <i class="fas fa-cloud text-4xl text-white"></i>
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-yellow-400">AWS Certified</h3>
+            <span class="text-emerald-400 font-semibold text-sm">2023</span>
+          </div>
+          <div class="text-white font-medium mb-2">Amazon Web Services</div>
+          <p class="text-slate-300 text-sm">Solutions Architect Professional & DevOps Engineer.</p>
+        </div>
+      </div>
+      <div class="achievement-card bg-slate-800/50 border border-slate-700/50 rounded-2xl overflow-hidden" data-title="Mentor Award" data-tags="mentor community">
+        <div class="h-32 bg-gradient-to-br from-pink-500 via-rose-500 to-purple-500 flex items-center justify-center">
+          <i class="fas fa-user-graduate text-4xl text-white"></i>
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-lg font-bold text-pink-400">Mentor Award</h3>
+            <span class="text-emerald-400 font-semibold text-sm">2023</span>
+          </div>
+          <div class="text-white font-medium mb-2">Developer Community</div>
+          <p class="text-slate-300 text-sm">Mentor terbaik; membimbing 50+ developer.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="pagination" class="flex items-center justify-center gap-2 mt-8"></div>
+  </main>
+
+  <script>
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    }
+
+    const searchInput = document.getElementById('searchInput');
+    const achievementsGrid = document.getElementById('achievementsGrid');
+    const cards = Array.from(achievementsGrid.querySelectorAll('.achievement-card'));
+    const paginationEl = document.getElementById('pagination');
+    const resultCount = document.getElementById('resultCount');
+
+    let currentPage = 1;
+    const itemsPerPage = 3;
+    let filtered = cards.slice();
+
+    function render() {
+      const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      cards.forEach(card => card.classList.add('hidden'));
+      const start = (currentPage - 1) * itemsPerPage;
+      const pageItems = filtered.slice(start, start + itemsPerPage);
+      pageItems.forEach(card => card.classList.remove('hidden'));
+
+      // result count
+      resultCount.textContent = filtered.length === cards.length
+        ? 'Menampilkan semua item'
+        : `Ditemukan ${filtered.length} item`;
+
+      // pagination controls
+      paginationEl.innerHTML = '';
+      const makeBtn = (label, page, disabled, active) => {
+        const btn = document.createElement('button');
+        btn.textContent = label;
+        btn.className = `px-3 py-2 rounded-lg text-sm ${disabled ? 'opacity-40 cursor-not-allowed' : 'bg-slate-800 border border-slate-700 text-slate-200 hover:border-emerald-500'} ${active ? 'ring-2 ring-emerald-500' : ''}`;
+        if (!disabled) btn.addEventListener('click', () => { currentPage = page; render(); });
+        return btn;
+      };
+
+      const total = totalPages;
+      paginationEl.appendChild(makeBtn('Prev', Math.max(1, currentPage - 1), currentPage === 1, false));
+      for (let p = 1; p <= total; p++) {
+        paginationEl.appendChild(makeBtn(String(p), p, false, p === currentPage));
+      }
+      paginationEl.appendChild(makeBtn('Next', Math.min(total, currentPage + 1), currentPage === total, false));
+    }
+
+    function doSearch() {
+      const q = searchInput.value.trim().toLowerCase();
+      filtered = cards.filter(card => {
+        const title = (card.dataset.title || '').toLowerCase();
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const text = card.innerText.toLowerCase();
+        return !q || title.includes(q) || tags.includes(q) || text.includes(q);
+      });
+      currentPage = 1;
+      render();
+    }
+
+    searchInput.addEventListener('input', doSearch);
+    render();
+  </script>
+</body>
+</html>
