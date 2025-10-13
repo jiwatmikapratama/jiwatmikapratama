@@ -1,42 +1,94 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pendidikan & Pengalaman - Alex Rivera</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
-    body { box-sizing: border-box; font-family: 'Inter', sans-serif; }
-    .font-poppins { font-family: 'Poppins', sans-serif; }
-    .navbar-blur { backdrop-filter: blur(10px); background: rgba(15,23,42,0.9); }
-    .nav-link { position: relative; transition: all .3s ease; padding: 8px 16px; border-radius: 8px; }
-    .nav-link:hover { color:#10b981; background: rgba(16,185,129,.1); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16,185,129,.2); }
-    .nav-link::after { content:''; position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:0; height:2px; background:linear-gradient(90deg,#10b981,#06d6a0); transition: width .3s ease; border-radius:1px; }
-    .nav-link:hover::after { width:80%; }
-    .nav-link.active { color:#10b981; background: rgba(16,185,129,.15); box-shadow:0 2px 8px rgba(16,185,129,.3); }
-    .nav-link.active::after { width:80%; }
+    body {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .font-poppins {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .navbar-blur {
+      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: all .3s ease;
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+
+    .nav-link:hover {
+      color: #10b981;
+      background: rgba(16, 185, 129, .1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, .2);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #10b981, #06d6a0);
+      transition: width .3s ease;
+      border-radius: 1px;
+    }
+
+    .nav-link:hover::after {
+      width: 80%;
+    }
+
+    .nav-link.active {
+      color: #10b981;
+      background: rgba(16, 185, 129, .15);
+      box-shadow: 0 2px 8px rgba(16, 185, 129, .3);
+    }
+
+    .nav-link.active::after {
+      width: 80%;
+    }
   </style>
 </head>
+
 <body class="bg-slate-900 text-slate-100">
   <nav class="fixed top-0 w-full z-50 navbar-blur border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex justify-between items-center h-16">
         <div class="flex-shrink-0">
-          <h1 class="text-xl font-bold text-emerald-400 font-poppins">{' <Alex />'}</h1>
+          <h1 class="text-xl font-bold text-emerald-400 font-poppins">{'
+            <Alex />'}</h1>
         </div>
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
             <a href="index.html" class="nav-link text-slate-300 font-medium">Home</a>
-            <a href="edu-experience.html" class="nav-link active text-slate-300 font-medium">Education &amp; Experience</a>
+            <a href="edu-experience.html" class="nav-link active text-slate-300 font-medium">Education &amp;
+              Experience</a>
             <a href="projects.html" class="nav-link text-slate-300 font-medium">Projects</a>
             <a href="achievements.html" class="nav-link text-slate-300 font-medium">Achievements</a>
             <a href="gallery.html" class="nav-link text-slate-300 font-medium">Gallery</a>
           </div>
         </div>
         <div class="md:hidden">
-          <button onclick="toggleMobileMenu()" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle navigation" class="text-slate-300 hover:text-emerald-400 focus:outline-none">
+          <button onclick="toggleMobileMenu()" aria-controls="mobile-menu" aria-expanded="false"
+            aria-label="Toggle navigation" class="text-slate-300 hover:text-emerald-400 focus:outline-none">
             <i class="fas fa-bars text-xl"></i>
           </button>
         </div>
@@ -44,11 +96,17 @@
     </div>
     <div id="mobile-menu" class="md:hidden hidden navbar-blur border-t border-slate-800" aria-hidden="true">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Home</a>
-        <a href="edu-experience.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Education &amp; Experience</a>
-        <a href="projects.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Projects</a>
-        <a href="achievements.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Achievements</a>
-        <a href="gallery.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Gallery</a>
+        <a href="index.html"
+          class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Home</a>
+        <a href="edu-experience.html"
+          class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Education &amp;
+          Experience</a>
+        <a href="projects.html"
+          class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Projects</a>
+        <a href="achievements.html"
+          class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Achievements</a>
+        <a href="gallery.html"
+          class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Gallery</a>
       </div>
     </div>
   </nav>
@@ -148,7 +206,8 @@
   </main>
 
   <footer class="mt-16 border-t border-slate-800 bg-slate-900">
-    <div class="max-w-7xl mx-auto px-6 py-10 text-slate-400 text-sm flex flex-col md:flex-row items-center justify-between gap-3">
+    <div
+      class="max-w-7xl mx-auto px-6 py-10 text-slate-400 text-sm flex flex-col md:flex-row items-center justify-between gap-3">
       <div>© 2025 Alex Rivera. All rights reserved.</div>
       <div class="flex items-center gap-4">
         <a href="#" class="hover:text-emerald-400"><i class="fa-solid fa-envelope"></i></a>
@@ -169,4 +228,5 @@
     }
   </script>
 </body>
+
 </html>
