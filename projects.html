@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects - Alex Rivera</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    body { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    .font-poppins { font-family: 'Poppins', sans-serif; }
+    .navbar-blur { backdrop-filter: blur(10px); background: rgba(15,23,42,0.9); }
+    .nav-link { position: relative; transition: all .3s ease; padding: 8px 16px; border-radius: 8px; }
+    .nav-link:hover { color:#10b981; background: rgba(16,185,129,.1); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16,185,129,.2); }
+    .nav-link::after { content:''; position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:0; height:2px; background:linear-gradient(90deg,#10b981,#06d6a0); transition: width .3s ease; border-radius:1px; }
+    .nav-link:hover::after { width:80%; }
+    .nav-link.active { color:#10b981; background: rgba(16,185,129,.15); box-shadow:0 2px 8px rgba(16,185,129,.3); }
+    .nav-link.active::after { width:80%; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100">
+  <nav class="fixed top-0 w-full z-50 navbar-blur border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0">
+          <h1 class="text-xl font-bold text-emerald-400 font-poppins">{' <Alex />'}</h1>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="index.html" class="nav-link text-slate-300 font-medium">Home</a>
+            <a href="edu-experience.html" class="nav-link text-slate-300 font-medium">Education &amp; Experience</a>
+            <a href="projects.html" class="nav-link active text-slate-300 font-medium">Projects</a>
+            <a href="achievements.html" class="nav-link text-slate-300 font-medium">Achievements</a>
+            <a href="gallery.html" class="nav-link text-slate-300 font-medium">Gallery</a>
+          </div>
+        </div>
+        <div class="md:hidden">
+          <button onclick="toggleMobileMenu()" class="text-slate-300 hover:text-emerald-400 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden navbar-blur border-t border-slate-800">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Home</a>
+        <a href="edu-experience.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Education &amp; Experience</a>
+        <a href="projects.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Projects</a>
+        <a href="achievements.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Achievements</a>
+        <a href="gallery.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Gallery</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24 max-w-7xl mx-auto px-6">
+    <div class="text-center mb-8">
+      <h2 class="text-4xl md:text-5xl font-bold text-emerald-400 font-poppins mb-3">Projects</h2>
+      <p class="text-slate-400 text-lg">Koleksi proyek pilihan</p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 justify-between mb-6">
+      <input id="searchInput" type="text" placeholder="Cari proyek..." class="w-full sm:w-1/2 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+      <div class="text-slate-400 text-sm" id="resultCount">Menampilkan semua proyek</div>
+    </div>
+
+    <div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- 9 sample projects -->
+      <div class="project-card bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6" data-title="E-Commerce Platform" data-tags="react node payments ecommerce">
+        <div class="flex items-center gap-3 mb-3"><i class="fas fa-store text-emerald-400"></i><div class="text-lg font-bold">E-Commerce Platform</div></div>
+        <p class="text-slate-300 text-sm mb-3">Marketplace modern dengan cart, checkout, dan payment gateway.</p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 bg-slate-700 rounded-full">React</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Node.js</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">PostgreSQL</span>
+        </div>
+      </div>
+      <div class="project-card bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6" data-title="Realtime Chat App" data-tags="socket realtime chat nextjs">
+        <div class="flex items-center gap-3 mb-3"><i class="fas fa-comments text-emerald-400"></i><div class="text-lg font-bold">Realtime Chat App</div></div>
+        <p class="text-slate-300 text-sm mb-3">Chat multi-room dengan notifikasi dan read receipts.</p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Next.js</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Socket.IO</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Redis</span>
+        </div>
+      </div>
+      <div class="project-card bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6" data-title="Analytics Dashboard" data-tags="dashboard charts analytics d3">
+        <div class="flex items-center gap-3 mb-3"><i class="fas fa-chart-line text-emerald-400"></i><div class="text-lg font-bold">Analytics Dashboard</div></div>
+        <p class="text-slate-300 text-sm mb-3">Visualisasi data realtime dan laporan periodik.</p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 bg-slate-700 rounded-full">React</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">D3.js</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">NestJS</span>
+        </div>
+      </div>
+      <div class="project-card bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6" data-title="Portfolio Website" data-tags="portfolio tailwind seo">
+        <div class="flex items-center gap-3 mb-3"><i class="fas fa-id-card text-emerald-400"></i><div class="text-lg font-bold">Portfolio Website</div></div>
+        <p class="text-slate-300 text-sm mb-3">Website personal cepat dan SEO-friendly.</p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Vite</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Tailwind CSS</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Cloudflare</span>
+        </div>
+      </div>
+      <div class="project-card bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6" data-title="IoT Monitoring" data-tags="iot mqtt monitoring">
+        <div class="flex items-center gap-3 mb-3"><i class="fas fa-microchip text-emerald-400"></i><div class="text-lg font-bold">IoT Monitoring</div></div>
+        <p class="text-slate-300 text-sm mb-3">Monitoring sensor realtime dengan alerting.</p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 bg-slate-700 rounded-full">MQTT</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">TS</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Grafana</span>
+        </div>
+      </div>
+      <div class="project-card bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6" data-title="Booking App" data-tags="booking payments calendar">
+        <div class="flex items-center gap-3 mb-3"><i class="fas fa-calendar-check text-emerald-400"></i><div class="text-lg font-bold">Booking App</div></div>
+        <p class="text-slate-300 text-sm mb-3">Booking jadwal dengan pembayaran terintegrasi.</p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Next.js</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Stripe</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Prisma</span>
+        </div>
+      </div>
+      <div class="project-card bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6" data-title="Headless CMS Blog" data-tags="blog cms headless">
+        <div class="flex items-center gap-3 mb-3"><i class="fas fa-blog text-emerald-400"></i><div class="text-lg font-bold">Headless CMS Blog</div></div>
+        <p class="text-slate-300 text-sm mb-3">Blog cepat dengan editor modern.</p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Next.js</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">GraphQL</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Apollo</span>
+        </div>
+      </div>
+      <div class="project-card bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6" data-title="Finance Tracker" data-tags="finance tracker charts">
+        <div class="flex items-center gap-3 mb-3"><i class="fas fa-wallet text-emerald-400"></i><div class="text-lg font-bold">Finance Tracker</div></div>
+        <p class="text-slate-300 text-sm mb-3">Catat pemasukan-pengeluaran dengan grafik.</p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 bg-slate-700 rounded-full">React</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Chart.js</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Firebase</span>
+        </div>
+      </div>
+      <div class="project-card bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6" data-title="Task Manager" data-tags="tasks kanban productivity">
+        <div class="flex items-center gap-3 mb-3"><i class="fas fa-tasks text-emerald-400"></i><div class="text-lg font-bold">Task Manager</div></div>
+        <p class="text-slate-300 text-sm mb-3">Kanban board dengan drag & drop.</p>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span class="px-2 py-1 bg-slate-700 rounded-full">React</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">Zustand</span>
+          <span class="px-2 py-1 bg-slate-700 rounded-full">DnD Kit</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="pagination" class="flex items-center justify-center gap-2 mt-8"></div>
+  </main>
+
+  <script>
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    }
+
+    const searchInput = document.getElementById('searchInput');
+    const grid = document.getElementById('projectsGrid');
+    const cards = Array.from(grid.querySelectorAll('.project-card'));
+    const paginationEl = document.getElementById('pagination');
+    const resultCount = document.getElementById('resultCount');
+
+    let currentPage = 1;
+    const itemsPerPage = 6;
+    let filtered = cards.slice();
+
+    function render() {
+      const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      cards.forEach(card => card.classList.add('hidden'));
+      const start = (currentPage - 1) * itemsPerPage;
+      filtered.slice(start, start + itemsPerPage).forEach(card => card.classList.remove('hidden'));
+
+      resultCount.textContent = filtered.length === cards.length ? 'Menampilkan semua proyek' : `Ditemukan ${filtered.length} proyek`;
+
+      paginationEl.innerHTML = '';
+      const makeBtn = (label, page, disabled, active) => {
+        const btn = document.createElement('button');
+        btn.textContent = label;
+        btn.className = `px-3 py-2 rounded-lg text-sm ${disabled ? 'opacity-40 cursor-not-allowed' : 'bg-slate-800 border border-slate-700 text-slate-200 hover:border-emerald-500'} ${active ? 'ring-2 ring-emerald-500' : ''}`;
+        if (!disabled) btn.addEventListener('click', () => { currentPage = page; render(); });
+        return btn;
+      };
+
+      paginationEl.appendChild(makeBtn('Prev', Math.max(1, currentPage - 1), currentPage === 1, false));
+      for (let p = 1; p <= totalPages; p++) paginationEl.appendChild(makeBtn(String(p), p, false, p === currentPage));
+      paginationEl.appendChild(makeBtn('Next', Math.min(totalPages, currentPage + 1), currentPage === totalPages, false));
+    }
+
+    function doSearch() {
+      const q = searchInput.value.trim().toLowerCase();
+      filtered = cards.filter(card => {
+        const title = (card.dataset.title || '').toLowerCase();
+        const tags = (card.dataset.tags || '').toLowerCase();
+        const text = card.innerText.toLowerCase();
+        return !q || title.includes(q) || tags.includes(q) || text.includes(q);
+      });
+      currentPage = 1;
+      render();
+    }
+
+    searchInput.addEventListener('input', doSearch);
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pendidikan & Pengalaman - Alex Rivera</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    body { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    .font-poppins { font-family: 'Poppins', sans-serif; }
+    .navbar-blur { backdrop-filter: blur(10px); background: rgba(15,23,42,0.9); }
+    .nav-link { position: relative; transition: all .3s ease; padding: 8px 16px; border-radius: 8px; }
+    .nav-link:hover { color:#10b981; background: rgba(16,185,129,.1); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16,185,129,.2); }
+    .nav-link::after { content:''; position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:0; height:2px; background:linear-gradient(90deg,#10b981,#06d6a0); transition: width .3s ease; border-radius:1px; }
+    .nav-link:hover::after { width:80%; }
+    .nav-link.active { color:#10b981; background: rgba(16,185,129,.15); box-shadow:0 2px 8px rgba(16,185,129,.3); }
+    .nav-link.active::after { width:80%; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100">
+  <nav class="fixed top-0 w-full z-50 navbar-blur border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0">
+          <h1 class="text-xl font-bold text-emerald-400 font-poppins">{' <Alex />'}</h1>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-baseline space-x-4">
+            <a href="index.html" class="nav-link text-slate-300 font-medium">Home</a>
+            <a href="edu-experience.html" class="nav-link active text-slate-300 font-medium">Education &amp; Experience</a>
+            <a href="projects.html" class="nav-link text-slate-300 font-medium">Projects</a>
+            <a href="achievements.html" class="nav-link text-slate-300 font-medium">Achievements</a>
+            <a href="gallery.html" class="nav-link text-slate-300 font-medium">Gallery</a>
+          </div>
+        </div>
+        <div class="md:hidden">
+          <button onclick="toggleMobileMenu()" class="text-slate-300 hover:text-emerald-400 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden navbar-blur border-t border-slate-800">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Home</a>
+        <a href="edu-experience.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Education &amp; Experience</a>
+        <a href="projects.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Projects</a>
+        <a href="achievements.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Achievements</a>
+        <a href="gallery.html" class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-emerald-400">Gallery</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-24">
+    <section class="max-w-7xl mx-auto px-6 mb-12">
+      <div class="text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-emerald-400 font-poppins mb-3">Pendidikan & Pengalaman</h2>
+        <p class="text-slate-400 text-lg">Fondasi akademis dan perjalanan karier saya.</p>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-10">
+      <div>
+        <h3 class="text-2xl font-bold text-emerald-400 mb-6 font-poppins">Pendidikan</h3>
+        <div class="space-y-6">
+          <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="text-xl font-semibold text-white">S1 Teknik Informatika</h4>
+              <span class="text-emerald-400 font-semibold">2015–2019</span>
+            </div>
+            <div class="text-slate-300">Universitas Teknologi Indonesia</div>
+            <ul class="mt-4 text-slate-300 text-sm list-disc list-inside space-y-1">
+              <li>Fokus: Software Engineering & Sistem Informasi</li>
+              <li>Cum Laude (IPK 3.75)</li>
+              <li>Juara 2 Kompetisi Programming Nasional 2018</li>
+            </ul>
+          </div>
+          <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="text-xl font-semibold text-white">AWS Solutions Architect</h4>
+              <span class="text-cyan-400 font-semibold">2020</span>
+            </div>
+            <div class="text-slate-300">Amazon Web Services (Associate)</div>
+            <ul class="mt-4 text-slate-300 text-sm list-disc list-inside space-y-1">
+              <li>Skor 850/1000</li>
+              <li>20+ layanan inti AWS</li>
+              <li>5+ proyek arsitektur cloud</li>
+            </ul>
+          </div>
+          <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="text-xl font-semibold text-white">Full Stack JavaScript Bootcamp</h4>
+              <span class="text-emerald-400 font-semibold">2019</span>
+            </div>
+            <div class="text-slate-300">Hacktiv8 Indonesia (MERN)</div>
+            <ul class="mt-4 text-slate-300 text-sm list-disc list-inside space-y-1">
+              <li>Graduate terbaik (A+ seluruh modul)</li>
+              <li>Team Lead final project</li>
+              <li>Penempatan kerja sebelum lulus</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-2xl font-bold text-emerald-400 mb-6 font-poppins">Pengalaman</h3>
+        <div class="space-y-6">
+          <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="text-xl font-semibold text-white">Senior Full-Stack Developer</h4>
+              <span class="text-emerald-400 font-semibold">2022–Sekarang</span>
+            </div>
+            <div class="text-slate-300">Tech Innovation Ltd</div>
+            <ul class="mt-4 text-slate-300 text-sm list-disc list-inside space-y-1">
+              <li>Mendesain arsitektur microservices di cloud (AWS)</li>
+              <li>Memimpin 6 developer, review kode dan mentoring</li>
+              <li>Meningkatkan performa aplikasi 40%</li>
+            </ul>
+          </div>
+          <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="text-xl font-semibold text-white">Full-Stack Developer</h4>
+              <span class="text-emerald-400 font-semibold">2020–2022</span>
+            </div>
+            <div class="text-slate-300">Startup Nusantara</div>
+            <ul class="mt-4 text-slate-300 text-sm list-disc list-inside space-y-1">
+              <li>Membangun dashboard analitik (React, Node.js, PostgreSQL)</li>
+              <li>CI/CD dengan GitHub Actions & Docker</li>
+              <li>Kolaborasi lintas tim produk dan QA</li>
+            </ul>
+          </div>
+          <div class="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="text-xl font-semibold text-white">Software Engineer Intern</h4>
+              <span class="text-emerald-400 font-semibold">2019</span>
+            </div>
+            <div class="text-slate-300">Digital Labs</div>
+            <ul class="mt-4 text-slate-300 text-sm list-disc list-inside space-y-1">
+              <li>Mengembangkan fitur onboarding</li>
+              <li>Menulis test otomatis (Jest)</li>
+              <li>Dokumentasi teknis dan knowledge transfer</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>
