@@ -82,7 +82,14 @@ function applySearch({ queryInputId, cardsSelector, resultCountId, paginationElI
       const makeBtn = (label, page, disabled, active) => {
         const btn = document.createElement('button');
         btn.textContent = label;
-        btn.className = `px-3 py-2 rounded-lg text-sm ${disabled ? 'opacity-40 cursor-not-allowed' : 'bg-slate-800 border border-slate-700 text-slate-200 hover:border-emerald-500'} ${active ? 'ring-2 ring-emerald-500' : ''}`;
+        btn.className = [
+          'px-4', 'py-2.5', 'rounded-xl',
+          'text-sm', 'md:text-base',
+          disabled ? 'opacity-40 cursor-not-allowed' : 'bg-slate-800 border border-slate-700 text-slate-200 hover:border-emerald-500',
+          active ? 'ring-2 ring-emerald-500' : ''
+        ].join(' ');
+        btn.setAttribute('aria-label', `Go to page ${label}`);
+        btn.setAttribute('role', 'button');
         if (!disabled) btn.addEventListener('click', () => { currentPage = page; render(); });
         return btn;
       };
@@ -338,7 +345,14 @@ function initGalleryPage() {
       const makeBtn = (label, page, disabled, active) => {
         const btn = document.createElement('button');
         btn.textContent = label;
-        btn.className = `px-3 py-2 rounded-lg text-sm ${disabled ? 'opacity-40 cursor-not-allowed' : 'bg-slate-800 border border-slate-700 text-slate-200 hover:border-emerald-500'} ${active ? 'ring-2 ring-emerald-500' : ''}`;
+        btn.className = [
+          'px-4', 'py-2.5', 'rounded-xl',
+          'text-sm', 'md:text-base',
+          disabled ? 'opacity-40 cursor-not-allowed' : 'bg-slate-800 border border-slate-700 text-slate-200 hover:border-emerald-500',
+          active ? 'ring-2 ring-emerald-500' : ''
+        ].join(' ');
+        btn.setAttribute('aria-label', `Go to page ${label}`);
+        btn.setAttribute('role', 'button');
         if (!disabled) btn.addEventListener('click', () => { currentPage = page; render(); });
         return btn;
       };
@@ -392,7 +406,6 @@ function initGalleryPage() {
     ]
   };
 
-  const cards = Array.from(document.querySelectorAll('#galleryGrid .gallery-card'));
   cards.forEach((card, idx) => {
     const cat = card.getAttribute('data-category') || 'nature';
     const title = card.getAttribute('data-title') || `Gallery ${idx + 1}`;
