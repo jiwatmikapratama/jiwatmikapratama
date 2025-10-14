@@ -25,6 +25,14 @@ This is a static portfolio website showcasing Alex Rivera's work as a Full Stack
   - Google Fonts (Inter, Poppins)
 
 ## Recent Changes
+- **October 14, 2025**: Customized Swiper.js to match home carousel style
+  - Updated Swiper styling (navigation buttons, pagination dots, counter) to match home carousel
+  - Added slide counter (current/total) to Projects and Gallery Swiper carousels
+  - Fixed Gallery pagination issue with Swiper.update() for proper rendering
+  - Ensured responsive design works perfectly across all breakpoints
+  - Navigation buttons show on hover (desktop) and always visible on mobile
+  - Pagination dots styled consistently with home page carousel
+
 - **October 14, 2025**: Initial setup in Replit environment
   - Created Python HTTP server to serve static files on port 5000
   - Added .gitignore for Python and common development files

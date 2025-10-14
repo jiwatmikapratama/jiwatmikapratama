@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Auto activate global searches if the elements exist
   const projectsGrid = document.getElementById('projectsGrid');
   if (projectsGrid) {
+    initProjectsPage();
     applySearch({
       queryInputId: 'searchInput',
       cardsSelector: '#projectsGrid .project-card',
@@ -310,7 +311,6 @@ function initGalleryPage() {
   const grid = document.getElementById('galleryGrid');
   if (!grid) return;
 
-  // Search + filter + pagination (run once)
   if (grid.dataset.initGalleryList !== '1') {
     grid.dataset.initGalleryList = '1';
   }
@@ -322,6 +322,7 @@ function initGalleryPage() {
   let activeFilter = 'all';
   let currentPage = 1;
   const itemsPerPage = 4;
+  const swiperInstances = [];
 
   function getFiltered() {
     const q = (searchInput?.value || '').trim().toLowerCase();
@@ -335,6 +336,110 @@ function initGalleryPage() {
     });
   }
 
+  // Initialize Swiper for gallery cards
+  if (typeof Swiper !== 'undefined' && grid.dataset.initGallerySwiper !== '1') {
+    grid.dataset.initGallerySwiper = '1';
+
+    function slugify(text) { return (text || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
+    const imagesByCategory = {
+      nature: [
+        { src: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=600&auto=format&fit=crop', alt: 'Mountain sunrise' },
+        { src: 'https://images.unsplash.com/photo-1501785888041-173b4e0b2597?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1501785888041-173b4e0b2597?q=80&w=600&auto=format&fit=crop', alt: 'Forest path' },
+        { src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop', alt: 'Ocean waves' }
+      ],
+      architecture: [
+        { src: 'https://images.unsplash.com/photo-1433838552652-f9a46b332c40?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1433838552652-f9a46b332c40?q=80&w=600&auto=format&fit=crop', alt: 'Skyscraper' },
+        { src: 'https://images.unsplash.com/photo-1466853817435-05b43fe45b39?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1466853817435-05b43fe45b39?q=80&w=600&auto=format&fit=crop', alt: 'Modern building' },
+        { src: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=600&auto=format&fit=crop', alt: 'Classic architecture' }
+      ],
+      travel: [
+        { src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=600&auto=format&fit=crop', alt: 'City travel' },
+        { src: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=600&auto=format&fit=crop', alt: 'Street photography' },
+        { src: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=600&auto=format&fit=crop', alt: 'Memorable moments' }
+      ],
+      portrait: [
+        { src: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=600&auto=format&fit=crop', alt: 'Studio light' },
+        { src: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=600&auto=format&fit=crop', alt: 'Outdoor vibes' },
+        { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop', alt: 'Portrait story' }
+      ]
+    };
+
+    cards.forEach((card, idx) => {
+      const cat = card.getAttribute('data-category') || 'nature';
+      const title = card.getAttribute('data-title') || `Gallery ${idx + 1}`;
+      const slug = slugify(title);
+      const images = imagesByCategory[cat] || imagesByCategory['nature'];
+      const wrapper = document.createElement('div');
+      wrapper.className = 'relative rounded-xl overflow-hidden';
+      const swiperEl = document.createElement('div');
+      swiperEl.className = 'swiper gallery-swiper';
+      const inner = document.createElement('div');
+      inner.className = 'swiper-wrapper';
+      images.forEach(img => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        const a = document.createElement('a');
+        a.href = img.src;
+        a.className = 'glightbox';
+        a.setAttribute('data-gallery', `gallery-${slug}`);
+        const image = document.createElement('img');
+        image.src = img.thumb;
+        image.alt = img.alt;
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        image.className = 'w-full h-56 md:h-64 object-cover';
+        a.appendChild(image);
+        slide.appendChild(a);
+        inner.appendChild(slide);
+      });
+      swiperEl.appendChild(inner);
+      const pag = document.createElement('div');
+      pag.className = 'swiper-pagination';
+      const prev = document.createElement('div');
+      prev.className = 'swiper-button-prev';
+      const next = document.createElement('div');
+      next.className = 'swiper-button-next';
+      swiperEl.appendChild(pag);
+      swiperEl.appendChild(prev);
+      swiperEl.appendChild(next);
+      wrapper.appendChild(swiperEl);
+      const firstChild = card.firstChild;
+      card.insertBefore(wrapper, firstChild);
+    });
+
+    document.querySelectorAll('.gallery-swiper').forEach(swiperEl => {
+      const counter = document.createElement('div');
+      counter.className = 'swiper-counter';
+      const totalSlides = swiperEl.querySelectorAll('.swiper-slide').length;
+      counter.innerHTML = `<span class="current">1</span>/<span class="total">${totalSlides}</span>`;
+      swiperEl.appendChild(counter);
+      
+      const swiper = new Swiper(swiperEl, {
+        slidesPerView: 1,
+        loop: true,
+        spaceBetween: 12,
+        grabCursor: true,
+        keyboard: { enabled: true },
+        a11y: { enabled: true },
+        watchOverflow: true,
+        pagination: { el: swiperEl.querySelector('.swiper-pagination'), clickable: true, dynamicBullets: false },
+        navigation: { nextEl: swiperEl.querySelector('.swiper-button-next'), prevEl: swiperEl.querySelector('.swiper-button-prev') },
+        breakpoints: { 640: { spaceBetween: 12 }, 768: { spaceBetween: 16 }, 1024: { spaceBetween: 20 } },
+        on: {
+          slideChange: function() {
+            const currentSlide = this.realIndex + 1;
+            counter.querySelector('.current').textContent = currentSlide;
+          }
+        }
+      });
+      swiperInstances.push(swiper);
+    });
+
+    if (typeof GLightbox !== 'undefined') {
+      GLightbox({ selector: '.gallery-card .glightbox', touchNavigation: true, loop: true });
+    }
+  }
+
   function render() {
     const filtered = getFiltered();
     const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
@@ -344,14 +449,17 @@ function initGalleryPage() {
     const start = (currentPage - 1) * itemsPerPage;
     filtered.slice(start, start + itemsPerPage).forEach(c => c.classList.remove('hidden'));
 
-    // Empty state
+    // Update Swiper instances after cards visibility changes
+    setTimeout(() => {
+      swiperInstances.forEach(swiper => swiper && swiper.update());
+    }, 100);
+
     if (filtered.length === 0) {
       showEmptyState(grid.parentElement, 'Tidak ada data yang cocok');
     } else {
       hideEmptyState(grid.parentElement);
     }
 
-    // Pagination controls
     if (paginationEl) {
       paginationEl.innerHTML = '';
       const makeBtn = (label, page, disabled, active) => {
@@ -388,108 +496,6 @@ function initGalleryPage() {
   if (allBtn) allBtn.classList.add('border-emerald-400', 'text-emerald-400');
 
   render();
-
-  // Swiper + GLightbox for each gallery card
-  if (typeof Swiper === 'undefined') return;
-  if (grid.dataset.initGallerySwiper === '1') return;
-  grid.dataset.initGallerySwiper = '1';
-
-  function slugify(text) { return (text || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
-  const imagesByCategory = {
-    nature: [
-      { src: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=600&auto=format&fit=crop', alt: 'Mountain sunrise' },
-      { src: 'https://images.unsplash.com/photo-1501785888041-173b4e0b2597?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1501785888041-173b4e0b2597?q=80&w=600&auto=format&fit=crop', alt: 'Forest path' },
-      { src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop', alt: 'Ocean waves' }
-    ],
-    architecture: [
-      { src: 'https://images.unsplash.com/photo-1433838552652-f9a46b332c40?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1433838552652-f9a46b332c40?q=80&w=600&auto=format&fit=crop', alt: 'Skyscraper' },
-      { src: 'https://images.unsplash.com/photo-1466853817435-05b43fe45b39?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1466853817435-05b43fe45b39?q=80&w=600&auto=format&fit=crop', alt: 'Modern building' },
-      { src: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=600&auto=format&fit=crop', alt: 'Classic architecture' }
-    ],
-    travel: [
-      { src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=600&auto=format&fit=crop', alt: 'City travel' },
-      { src: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=600&auto=format&fit=crop', alt: 'Street photography' },
-      { src: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=600&auto=format&fit=crop', alt: 'Memorable moments' }
-    ],
-    portrait: [
-      { src: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=600&auto=format&fit=crop', alt: 'Studio light' },
-      { src: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=600&auto=format&fit=crop', alt: 'Outdoor vibes' },
-      { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200&auto=format&fit=crop', thumb: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop', alt: 'Portrait story' }
-    ]
-  };
-
-  cards.forEach((card, idx) => {
-    const cat = card.getAttribute('data-category') || 'nature';
-    const title = card.getAttribute('data-title') || `Gallery ${idx + 1}`;
-    const slug = slugify(title);
-    const images = imagesByCategory[cat] || imagesByCategory['nature'];
-    const wrapper = document.createElement('div');
-    wrapper.className = 'relative rounded-xl overflow-hidden';
-    const swiperEl = document.createElement('div');
-    swiperEl.className = 'swiper gallery-swiper';
-    const inner = document.createElement('div');
-    inner.className = 'swiper-wrapper';
-    images.forEach(img => {
-      const slide = document.createElement('div');
-      slide.className = 'swiper-slide';
-      const a = document.createElement('a');
-      a.href = img.src;
-      a.className = 'glightbox';
-      a.setAttribute('data-gallery', `gallery-${slug}`);
-      const image = document.createElement('img');
-      image.src = img.thumb;
-      image.alt = img.alt;
-      image.loading = 'lazy';
-      image.decoding = 'async';
-      image.className = 'w-full h-56 md:h-64 object-cover';
-      a.appendChild(image);
-      slide.appendChild(a);
-      inner.appendChild(slide);
-    });
-    swiperEl.appendChild(inner);
-    const pag = document.createElement('div');
-    pag.className = 'swiper-pagination';
-    const prev = document.createElement('div');
-    prev.className = 'swiper-button-prev';
-    const next = document.createElement('div');
-    next.className = 'swiper-button-next';
-    swiperEl.appendChild(pag);
-    swiperEl.appendChild(prev);
-    swiperEl.appendChild(next);
-    wrapper.appendChild(swiperEl);
-    const firstChild = card.firstChild;
-    card.insertBefore(wrapper, firstChild);
-  });
-  document.querySelectorAll('.gallery-swiper').forEach(swiperEl => {
-    const counter = document.createElement('div');
-    counter.className = 'swiper-counter';
-    const totalSlides = swiperEl.querySelectorAll('.swiper-slide').length;
-    counter.innerHTML = `<span class="current">1</span>/<span class="total">${totalSlides}</span>`;
-    swiperEl.appendChild(counter);
-    
-    const swiper = new Swiper(swiperEl, {
-      slidesPerView: 1,
-      loop: true,
-      spaceBetween: 12,
-      grabCursor: true,
-      keyboard: { enabled: true },
-      a11y: { enabled: true },
-      watchOverflow: true,
-      pagination: { el: swiperEl.querySelector('.swiper-pagination'), clickable: true, dynamicBullets: false },
-      navigation: { nextEl: swiperEl.querySelector('.swiper-button-next'), prevEl: swiperEl.querySelector('.swiper-button-prev') },
-      breakpoints: { 640: { spaceBetween: 12 }, 768: { spaceBetween: 16 }, 1024: { spaceBetween: 20 } },
-      on: {
-        slideChange: function() {
-          const currentSlide = this.realIndex + 1;
-          counter.querySelector('.current').textContent = currentSlide;
-        }
-      }
-    });
-  });
-
-  if (typeof GLightbox !== 'undefined') {
-    GLightbox({ selector: '.gallery-card .glightbox', touchNavigation: true, loop: true });
-  }
 }
 
 // ---------- Home page: custom carousel and filter buttons ----------
