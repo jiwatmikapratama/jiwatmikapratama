@@ -145,31 +145,78 @@ body {
 #backToTop:hover { transform: translateY(-2px) scale(1.1); }
 @media (max-width: 768px) { #backToTop { bottom: 1.5rem; right: 1rem; padding: 0.75rem; } }
 
-/* Swiper theme alignment (projects & gallery) */
-.swiper-pagination-bullet { background: rgba(16, 185, 129, 0.5); }
-.swiper-pagination-bullet-active { background: #10b981; }
+/* Swiper theme alignment (projects & gallery) - Matched with home carousel */
+.swiper-pagination-bullet { 
+  width: 8px; 
+  height: 8px; 
+  border-radius: 50%; 
+  background: rgba(255,255,255,0.5); 
+  transition: all 0.3s ease; 
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active { 
+  background: #fff; 
+  transform: scale(1.2); 
+}
 
 .swiper-button-prev,
 .swiper-button-next {
-  color: #fff;
-  width: 38px;
-  height: 38px;
-  border-radius: 9999px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(16, 185, 129, 0.4);
-  backdrop-filter: blur(6px);
-  transition: all 0.25s ease;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.project-card:hover .swiper-button-prev,
+.project-card:hover .swiper-button-next,
+.gallery-card:hover .swiper-button-prev,
+.gallery-card:hover .swiper-button-next { 
+  opacity: 1; 
 }
 
 .swiper-button-prev:hover,
-.swiper-button-next:hover { background: rgba(16, 185, 129, 0.25); border-color: #10b981; transform: scale(1.05); }
+.swiper-button-next:hover { 
+  background: rgba(0,0,0,0.7); 
+  transform: scale(1.1); 
+}
 
 .swiper-button-prev::after,
-.swiper-button-next::after { font-size: 14px; font-weight: 700; }
+.swiper-button-next::after { 
+  font-size: 16px; 
+  font-weight: 400; 
+}
 
 @media (max-width: 768px) {
   .swiper-button-prev,
-  .swiper-button-next { display: none; }
+  .swiper-button-next { 
+    opacity: 1;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .swiper-button-prev::after,
+  .swiper-button-next::after { 
+    font-size: 14px; 
+  }
+}
+
+/* Swiper counter (like home carousel) */
+.swiper-counter {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 10;
 }
 
 /* Gallery image smooth effects */
