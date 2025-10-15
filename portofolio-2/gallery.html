@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Modal Simplified</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-background-dark text-console-text-dark font-mono">
+
+    <!-- ========================= -->
+    <!-- Example Trigger Buttons -->
+    <!-- ========================= -->
+    <section class="p-10 space-x-4">
+        <button onclick="openModal('project1')"
+            class="border border-console-green px-4 py-2 rounded hover:bg-console-green hover:text-background-dark transition">
+            Open Project 1
+        </button>
+        <button onclick="openModal('project2')"
+            class="border border-console-green px-4 py-2 rounded hover:bg-console-green hover:text-background-dark transition">
+            Open Project 2
+        </button>
+        <button onclick="openGalleryModal('gallery1')"
+            class="border border-console-green px-4 py-2 rounded hover:bg-console-green hover:text-background-dark transition">
+            Open Gallery 1
+        </button>
+    </section>
+
+    <!-- ========================= -->
+    <!-- PROJECT MODAL TEMPLATE -->
+    <!-- ========================= -->
+    <div id="project-modal" class="modal fixed inset-0 bg-black/80 flex items-center justify-center hidden">
+        <div
+            class="relative bg-background-dark rounded-lg p-6 w-full max-w-3xl overflow-y-auto max-h-[90vh] shadow-console-glow">
+            <button id="close-project-modal" class="absolute top-4 right-4 text-console-green z-20">
+                <span class="material-icons">close</span>
+            </button>
+            <h3 id="modal-title" class="text-2xl font-bold mb-4 console-glow"></h3>
+
+            <div class="carousel mb-4 relative overflow-hidden">
+                <div id="carousel-inner" class="flex transition-transform duration-300"></div>
+                <button id="prev-slide" class="carousel-btn prev absolute left-2 top-1/2 -translate-y-1/2">
+                    <span class="material-icons">chevron_left</span>
+                </button>
+                <button id="next-slide" class="carousel-btn next absolute right-2 top-1/2 -translate-y-1/2">
+                    <span class="material-icons">chevron_right</span>
+                </button>
+            </div>
+
+            <p id="modal-description" class="text-console-text-dark mb-4"></p>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+                <span class="text-md font-semibold console-glow">&gt; TECHNOLOGIES:</span>
+                <div id="modal-technologies" class="flex flex-wrap gap-2"></div>
+            </div>
+
+            <div class="mb-6">
+                <p class="text-md font-semibold console-glow mb-2">&gt; CODE_SNIPPET:</p>
+                <pre id="modal-code" class="code-block bg-gray-900 p-3 rounded text-sm text-console-green"></pre>
+            </div>
+
+            <div class="text-center">
+                <button
+                    class="px-6 py-3 border border-console-green rounded-md font-semibold hover:bg-console-green hover:text-background-dark transition-colors console-glow">
+                    &gt; RUN_DEMO()
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- GALLERY MODAL TEMPLATE -->
+    <!-- ========================= -->
+    <div id="gallery-modal" class="modal fixed inset-0 bg-black/80 flex items-center justify-center hidden">
+        <div
+            class="relative bg-background-dark rounded-lg p-6 w-full max-w-3xl overflow-y-auto max-h-[90vh] shadow-console-glow">
+            <button id="close-gallery-modal" class="absolute top-4 right-4 text-console-green z-20">
+                <span class="material-icons">close</span>
+            </button>
+            <h3 id="gallery-title" class="text-2xl font-bold mb-4 console-glow"></h3>
+
+            <div class="carousel mb-4 relative overflow-hidden">
+                <div id="gallery-carousel-inner" class="flex transition-transform duration-300"></div>
+                <button id="prev-gallery" class="carousel-btn prev absolute left-2 top-1/2 -translate-y-1/2">
+                    <span class="material-icons">chevron_left</span>
+                </button>
+                <button id="next-gallery" class="carousel-btn next absolute right-2 top-1/2 -translate-y-1/2">
+                    <span class="material-icons">chevron_right</span>
+                </button>
+            </div>
+
+            <p id="gallery-description" class="text-console-text-dark mb-4"></p>
+            <div class="flex flex-wrap gap-2 mb-6">
+                <span class="text-md font-semibold console-glow">&gt; DATA_TAGS:</span>
+                <div id="gallery-tags" class="flex flex-wrap gap-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- JAVASCRIPT SECTION -->
+    <!-- ========================= -->
+    <script>
+        let currentProjectImageIndex = 0;
+        let currentProject;
+        let currentGalleryImageIndex = 0;
+        let currentGallery;
+
+        // Data
+        const projectDetails = {
+            project1: {
+                title: 'E-commerce Platform',
+                images: [
+                    'https://images.unsplash.com/photo-1557821552-17105176677c',
+                    'https://images.unsplash.com/photo-1483985988355-763728e1935b',
+                    'https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f'
+                ],
+                description: 'A comprehensive e-commerce solution built with the MERN stack.',
+                technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Stripe API'],
+                codeSnippet: `fetch('/api/products')
+  .then(res => res.json())
+  .then(data => console.log(data));`
+            },
+            project2: {
+                title: 'Project Management Tool',
+                images: [
+                    'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40',
+                    'https://images.unsplash.com/photo-1552664730-d307ca884978',
+                    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0'
+                ],
+                description: 'A collaborative project management tool for teams.',
+                technologies: ['Vue.js', 'Firebase', 'Tailwind CSS', 'Vuex'],
+                codeSnippet: `db.collection('tasks').add({ name: 'Feature X', status: 'In Progress' });`
+            }
+        };
+
+        const galleryDetails = {
+            gallery1: {
+                title: 'Mountain Sunrise',
+                images: [
+                    'https://picsum.photos/id/10/800/500',
+                    'https://picsum.photos/id/11/800/500'
+                ],
+                description: 'Captured during an early morning hike in the Alps.',
+                tags: ['Nature', 'Travel', 'Sunrise']
+            }
+        };
+
+        // =========================
+        // PROJECT MODAL FUNCTIONS
+        // =========================
+        function openModal(projectId) {
+            currentProject = projectDetails[projectId];
+            currentProjectImageIndex = 0;
+
+            document.getElementById('modal-title').textContent = `> ${currentProject.title}`;
+            document.getElementById('modal-description').textContent = `> DESCRIPTION: ${currentProject.description}`;
+            document.getElementById('modal-code').textContent = currentProject.codeSnippet;
+
+            const techContainer = document.getElementById('modal-technologies');
+            techContainer.innerHTML = '';
+            currentProject.technologies.forEach(tech => {
+                const span = document.createElement('span');
+                span.className =
+                    'text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full';
+                span.textContent = `> ${tech}`;
+                techContainer.appendChild(span);
+            });
+
+            const carousel = document.getElementById('carousel-inner');
+            carousel.innerHTML = '';
+            currentProject.images.forEach(src => {
+                const div = document.createElement('div');
+                div.className = 'carousel-item w-full flex-shrink-0';
+                div.innerHTML =
+                    `<img src="${src}" alt="${currentProject.title}" class="rounded-lg w-full h-auto object-cover shadow-console-glow">`;
+                carousel.appendChild(div);
+            });
+
+            updateCarousel();
+            document.getElementById('project-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeSlide(direction) {
+            const numImages = currentProject.images.length;
+            currentProjectImageIndex = (currentProjectImageIndex + direction + numImages) % numImages;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const carousel = document.getElementById('carousel-inner');
+            carousel.style.transform = `translateX(-${currentProjectImageIndex * 100}%)`;
+        }
+
+        // =========================
+        // GALLERY MODAL FUNCTIONS
+        // =========================
+        function openGalleryModal(galleryId) {
+            currentGallery = galleryDetails[galleryId];
+            currentGalleryImageIndex = 0;
+
+            document.getElementById('gallery-title').textContent = `> ${currentGallery.title}`;
+            document.getElementById('gallery-description').textContent = `> LOG_ENTRY: ${currentGallery.description}`;
+
+            const tagContainer = document.getElementById('gallery-tags');
+            tagContainer.innerHTML = '';
+            currentGallery.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className =
+                    'text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full';
+                span.textContent = `> ${tag}`;
+                tagContainer.appendChild(span);
+            });
+
+            const galleryCarousel = document.getElementById('gallery-carousel-inner');
+            galleryCarousel.innerHTML = '';
+            currentGallery.images.forEach(src => {
+                const div = document.createElement('div');
+                div.className = 'carousel-item w-full flex-shrink-0';
+                div.innerHTML =
+                    `<img src="${src}" alt="${currentGallery.title}" class="rounded-lg w-full h-auto object-cover shadow-console-glow">`;
+                galleryCarousel.appendChild(div);
+            });
+
+            updateGalleryCarousel();
+            document.getElementById('gallery-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGalleryModal() {
+            document.getElementById('gallery-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeGallerySlide(direction) {
+            const numImages = currentGallery.images.length;
+            currentGalleryImageIndex = (currentGalleryImageIndex + direction + numImages) % numImages;
+            updateGalleryCarousel();
+        }
+
+        function updateGalleryCarousel() {
+            const carousel = document.getElementById('gallery-carousel-inner');
+            carousel.style.transform = `translateX(-${currentGalleryImageIndex * 100}%)`;
+        }
+
+        // =========================
+        // EVENT LISTENERS
+        // =========================
+        document.getElementById('close-project-modal').addEventListener('click', closeModal);
+        document.getElementById('close-gallery-modal').addEventListener('click', closeGalleryModal);
+        document.getElementById('prev-slide').addEventListener('click', () => changeSlide(-1));
+        document.getElementById('next-slide').addEventListener('click', () => changeSlide(1));
+        document.getElementById('prev-gallery').addEventListener('click', () => changeGallerySlide(-1));
+        document.getElementById('next-gallery').addEventListener('click', () => changeGallerySlide(1));
+
+        document.getElementById('project-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'project-modal') closeModal();
+        });
+        document.getElementById('gallery-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'gallery-modal') closeGalleryModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeGalleryModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
