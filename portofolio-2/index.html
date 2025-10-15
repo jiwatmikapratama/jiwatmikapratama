@@ -325,8 +325,12 @@
             }
         }
 
-        .animate-bounce {
+        .animate-bounce-custom {
             animation: bounce 1s infinite;
+        }
+
+        .arrow-button:hover span {
+            transform: translateY(4px);
         }
     </style>
     <script>
@@ -454,8 +458,8 @@
                 </div>
             </div>
             <div class="absolute bottom-10 left-1/2 -translate-x-1/2">
-                <a class="nav-link text-console-green animate-bounce" href="#about">
-                    <span class="material-icons text-4xl">keyboard_arrow_down</span>
+                <a class="nav-link text-console-green animate-bounce-custom arrow-button" href="#about">
+                    <span class="material-icons text-4xl transition-transform duration-300">keyboard_arrow_down</span>
                 </a>
             </div>
         </section>

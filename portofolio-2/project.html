@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Alex Rinza - Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <style>
+        :root {
+            --console-green: #00BFFF;
+            --console-blue: #00FFFF;
+            --background-dark: #0D0D0D;
+            --card-dark: #1A1A1A;
+            --text-dark: #00BFFF;
+        }
+
+        .dark-mode {
+            --console-green: #00BFFF;
+            --console-blue: #00FFFF;
+            --background-dark: #0D0D0D;
+            --card-dark: #1A1A1A;
+            --text-dark: #00BFFF;
+        }
+
+        .console-glow {
+            text-shadow: 0 0 5px var(--console-green), 0 0 10px var(--console-green);
+        }
+
+        .console-card {
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .console-card:hover {
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        #page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background-dark);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #page-loader.hidden {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .loader-text {
+            color: var(--console-green);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.25rem;
+            animation: blink-caret 1s step-end infinite;
+            text-shadow: 0 0 8px var(--console-green);
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--console-green);
+            }
+        }
+
+        .modal-console {
+            background-color: var(--background-dark);
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+        }
+
+        .modal {
+            display: none;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background-dark": "var(--background-dark)",
+                        "card-dark": "var(--card-dark)",
+                        "console-green": "var(--console-green)",
+                        "console-blue": "var(--console-blue)",
+                        "console-text-dark": "var(--text-dark)",
+                    },
+                    fontFamily: {
+                        mono: ['Roboto Mono', 'monospace']
+                    },
+                }
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-background-dark text-console-green font-mono antialiased dark-mode">
+    <div id="page-loader">
+        <div class="loader-text">&gt; LOADING_PROJECTS...</div>
+    </div>
+    <div class="w-full shadow-console-glow modal-console sticky top-0 z-50">
+        <header class="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 border-b border-console-green/20">
+            <a class="text-xl md:text-2xl font-bold console-glow" href="#">&gt; ALEX_RINZA/PROJECTS</a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors"
+                    href="index.html">Home</a>
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors console-glow"
+                    href="projects.html">Project</a>
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors"
+                    href="index.html#gallery">Gallery</a>
+            </nav>
+            <button class="md:hidden text-console-green" id="menu-button">
+                <span class="material-icons">menu</span>
+            </button>
+        </header>
+        <div class="hidden md:hidden" id="mobile-menu">
+            <nav class="flex flex-col items-center space-y-4 py-4 border-b border-console-green/20">
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors"
+                    href="index.html">Home</a>
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors console-glow"
+                    href="projects.html">Project</a>
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors"
+                    href="index.html#gallery">Gallery</a>
+            </nav>
+        </div>
+    </div>
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <section id="projects-gallery">
+            <h2 class="text-2xl md:text-3xl font-bold text-center console-glow mb-2">&gt; QUERY_ALL_PROJECTS()</h2>
+            <p class="text-center text-console-text-dark mb-10 max-w-xl mx-auto">Browse through the full catalog of my
+                work. Use the filters to find projects by category or technology.</p>
+            <div class="mb-10">
+                <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                    <div class="relative w-full md:w-1/2 lg:w-1/3">
+                        <input
+                            class="bg-card-dark border-2 border-console-green/50 text-console-green placeholder-console-green/70 focus:ring-console-blue focus:border-console-blue block w-full rounded-md pl-10 py-2.5 console-glow"
+                            placeholder="&gt; search_project..." type="text" />
+                        <span
+                            class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-console-green">search</span>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button
+                            class="text-xs bg-card-dark border border-console-text-dark/50 text-console-text-dark px-3 py-1.5 rounded-full hover:bg-console-green hover:text-background-dark transition-colors">&gt;
+                            All</button>
+                        <button
+                            class="text-xs bg-card-dark border border-console-text-dark/50 text-console-text-dark px-3 py-1.5 rounded-full hover:bg-console-green hover:text-background-dark transition-colors">&gt;
+                            Web App</button>
+                        <button
+                            class="text-xs bg-card-dark border border-console-text-dark/50 text-console-text-dark px-3 py-1.5 rounded-full hover:bg-console-green hover:text-background-dark transition-colors">&gt;
+                            API</button>
+                        <button
+                            class="text-xs bg-card-dark border border-console-text-dark/50 text-console-text-dark px-3 py-1.5 rounded-full hover:bg-console-green hover:text-background-dark transition-colors">&gt;
+                            Mobile</button>
+                    </div>
+                </div>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer flex flex-col project-card"
+                    data-modal="project-modal-1">
+                    <img alt="E-commerce Platform" class="w-full h-48 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuChgBX2VJDjbqhhriJIj_EO9oUvtD3oWYCWpsjyTasXbaxe13PfGa5Ra3G1YlibjQntjMGGA8pspeSCr-_aqg9cfqv8ovzJ6glchlRcJR3NF0HoXvnUcy15leE7ZbkllXd0qqDVcUlq20K5Aub-vr8QQn1aUZr5LKgOnKfcSo2sgwnsZZBqcIlSmSLn-QuZC06I6CjKbAxN0QfHD1O979DYqj-Wg8y9S_TeF27eKyfr8vehk9u-fHERktAGHEPFBJLdqwgbnhN6IqrH" />
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-semibold mb-2 console-glow">E-commerce Platform</h3>
+                        <p class="text-console-text-dark text-sm mb-4 flex-grow">A full-featured e-commerce site with a
+                            custom CMS, payment gateway integration, and a responsive user interface.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                React</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                Node.js</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                MongoDB</span>
+                        </div>
+                        <span
+                            class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow mt-auto">
+                            &gt; VIEW_DETAILS <span
+                                class="material-icons text-sm ml-1 console-glow">arrow_forward</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer flex flex-col project-card"
+                    data-modal="project-modal-2">
+                    <img alt="Project Management Tool" class="w-full h-48 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyQZEAb0LCwGylmMqUGU-G8wescfsL37YXDKsfZS6OKhJLb34CKIf4VLLcHP_G5dRyZv5pJ64Klj4RGTw_dJCoX8ECtQDAlA9jHWAg2IEINfAH52MPMsBjkQtnSyV3hlsgCj3nW_52j0X80Cv36KRMsYl0P8eQXN53snb5qs8Tl6LNY764svBqrHyJ10siy3ny4l6CulxgCKS8MWVZqDtLy-jGSNhy7C8Hyc3OOYZj2cyFrtLLdIbGU2LDjvOnVCcrdXIqg4X18jhy" />
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-semibold mb-2 console-glow">Project Management Tool</h3>
+                        <p class="text-console-text-dark text-sm mb-4 flex-grow">A SaaS application for teams to manage
+                            tasks, track progress, and collaborate in real-time.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                Vue.js</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                Firebase</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                Tailwind CSS</span>
+                        </div>
+                        <span
+                            class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow mt-auto">
+                            &gt; VIEW_DETAILS <span
+                                class="material-icons text-sm ml-1 console-glow">arrow_forward</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer flex flex-col project-card"
+                    data-modal="project-modal-3">
+                    <img alt="Personal Blog API" class="w-full h-48 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_HZwnklS2D18FxbS2-UG8QegzCB28gT-fgspQZe-7BXBkCjTcsK_OKELSdLQlPriuOe1-SSVzEtVD-DEa4jSEGgm8f5TGYKT46B8ifQ-msDL2LuWHKQb8-6B1UT-T4nmbJmOK-thbXT8dSlp0eQnucLTFJKDm1XZYLp3mbJJyViDnoB5IbIcVcUf9_kzgYwA2Hc-nX0wOppM_77ff-6Ds6yOdm_mcpxMngznSFOdnVUNzgppyhe4drtoYtlkro7K0I3e5VD8AJDHn" />
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-semibold mb-2 console-glow">Personal Blog API</h3>
+                        <p class="text-console-text-dark text-sm mb-4 flex-grow">A headless CMS and RESTful API for a
+                            personal blog, built with a focus on performance and scalability.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                Go</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                PostgreSQL</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                Docker</span>
+                        </div>
+                        <span
+                            class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow mt-auto">
+                            &gt; VIEW_DETAILS <span
+                                class="material-icons text-sm ml-1 console-glow">arrow_forward</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer flex flex-col project-card"
+                    data-modal="project-modal-4">
+                    <img alt="Data Visualization Dashboard" class="w-full h-48 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuADwKJfMV3GawajvyeDK-pkWZ7WNGAFw8lqhHjW4ST9BwzE6o4H7ZRJvZuL-SIgrt9GhlK4kNF_vVxcaNy8TifVKq0QHp3ggmn-3suq0UwONXxtEtRjKfLVmFV-IR7FdWRculh6YsL9kSUp-Xozzx54TJh_Hw3ARyAaSox62ni2tUlGMJJYgDRob3eOyEYWhviFVu_Itl07113lRo-k3sKb0_zJq_kN8xq85UpO2GEdVxR3fka0YkSdN0o08AdhceZ_oKFqiLIecTcl" />
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-semibold mb-2 console-glow">Data Viz Dashboard</h3>
+                        <p class="text-console-text-dark text-sm mb-4 flex-grow">An interactive dashboard for
+                            visualizing complex datasets, featuring various chart types and real-time data feeds.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                D3.js</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                Python</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                Flask</span>
+                        </div>
+                        <span
+                            class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow mt-auto">
+                            &gt; VIEW_DETAILS <span
+                                class="material-icons text-sm ml-1 console-glow">arrow_forward</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer flex flex-col project-card"
+                    data-modal="project-modal-5">
+                    <img alt="Mobile Fitness App" class="w-full h-48 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvqc41KeQA6Ie8CJVI2spv2m8PxBMXjBbF4yMZJdi8j5zM-7KIYJwZzqQOBZCHGpKbL-fcTqcGRJtFm6EF9VdslZwI5KhxXcBXdzKclVzZ_C5bSw-9vpVKibWW_kv1uCx8JXYWVAQ2LPT6loyjrBMHHN3cnnbPSDcUOmltHwKmt7A4zt9HhK2v72ev7HjwCFbBpBrKghpvvTkl1GlnacSkwaO0jIH6xkfgk4bN-MBqAzNhATCSy88oC2rwr9xbKmUVOH_qKx1godcu" />
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-semibold mb-2 console-glow">Mobile Fitness App</h3>
+                        <p class="text-console-text-dark text-sm mb-4 flex-grow">A cross-platform mobile app for
+                            tracking workouts, setting fitness goals, and connecting with a community.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                React Native</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                GraphQL</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                AWS</span>
+                        </div>
+                        <span
+                            class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow mt-auto">
+                            &gt; VIEW_DETAILS <span
+                                class="material-icons text-sm ml-1 console-glow">arrow_forward</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer flex flex-col project-card"
+                    data-modal="project-modal-6">
+                    <img alt="AI Chatbot Interface" class="w-full h-48 object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEqpZrOJFLEWv4PS_yxZnAmcfwP8BYQd204FymxpwTE2fOfld13dE00MXfU5FvPESpr3carXe3GqyDTAj9Q_PYUm09gvwPbkjdvLttOGhFh2n8G9PfSlHV2uCQJUI12kQ3tT0cFDrJPTJpNFCULA9m3KCndQH1SIz7EtmtHVuzaPTRs4E9TdCoM9shJnSNaqoAKKqvVCFwaWw2RFjGFDuXu1eD9dewIHVsbRBcMw6hh6LCGAZ6mPmq0Da2C2xxTMJhs0q5WDA-UUQs" />
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-semibold mb-2 console-glow">AI Chatbot Interface</h3>
+                        <p class="text-console-text-dark text-sm mb-4 flex-grow">A sleek and intuitive user interface
+                            for an AI-powered chatbot, designed for seamless conversations.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                Svelte</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                WebSockets</span>
+                            <span
+                                class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                NLP</span>
+                        </div>
+                        <span
+                            class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow mt-auto">
+                            &gt; VIEW_DETAILS <span
+                                class="material-icons text-sm ml-1 console-glow">arrow_forward</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center items-center mt-12 space-x-2">
+                <button
+                    class="px-3 py-1 border border-console-green rounded-md font-semibold hover:bg-console-green hover:text-background-dark transition-colors console-glow flex items-center">
+                    <span class="material-icons text-lg">chevron_left</span>
+                    <span class="hidden sm:inline">&gt; PREVIOUS</span>
+                </button>
+                <button
+                    class="px-3 py-1 border border-console-green rounded-md font-semibold text-background-dark bg-console-green transition-colors console-glow">&gt;
+                    1</button>
+                <button
+                    class="px-3 py-1 border border-console-green rounded-md font-semibold hover:bg-console-green hover:text-background-dark transition-colors console-glow">&gt;
+                    2</button>
+                <button
+                    class="px-3 py-1 border border-console-green rounded-md font-semibold hover:bg-console-green hover:text-background-dark transition-colors console-glow">&gt;
+                    3</button>
+                <button
+                    class="px-3 py-1 border border-console-green rounded-md font-semibold hover:bg-console-green hover:text-background-dark transition-colors console-glow flex items-center">
+                    <span class="hidden sm:inline">&gt; NEXT</span>
+                    <span class="material-icons text-lg">chevron_right</span>
+                </button>
+            </div>
+        </section>
+    </main>
+    <footer class="py-8 border-t border-console-green/20 mt-auto">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+            <div class="flex space-x-6 mb-4">
+                <a aria-label="Facebook"
+                    class="text-console-text-dark hover:text-console-blue transition-colors console-glow" href="#"><svg
+                        aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z">
+                        </path>
+                    </svg></a>
+                <a aria-label="Instagram"
+                    class="text-console-text-dark hover:text-console-blue transition-colors console-glow" href="#"><svg
+                        aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z">
+                        </path>
+                    </svg></a>
+                <a aria-label="X" class="text-console-text-dark hover:text-console-blue transition-colors console-glow"
+                    href="#"><svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                        </path>
+                    </svg></a>
+                <a aria-label="Github"
+                    class="text-console-text-dark hover:text-console-blue transition-colors console-glow" href="#"><svg
+                        aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path clip-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.578.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"
+                            fill-rule="evenodd"></path>
+                    </svg></a>
+                <a aria-label="LinkedIn"
+                    class="text-console-text-dark hover:text-console-blue transition-colors console-glow" href="#"><svg
+                        aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+                        </path>
+                    </svg></a>
+            </div>
+            <p class="text-sm text-center text-console-text-dark">&gt; COPYRIGHT 2024 ALEX_RINZA. ALL_RIGHTS_RESERVED.
+            </p>
+        </div>
+    </footer>
+    <div class="modal fixed inset-0 z-50 items-center justify-center bg-black/80 p-4" id="project-modal-1">
+        <div class="modal-console relative w-full max-w-2xl rounded-lg border-2 border-console-green/50 p-6 md:p-8">
+            <button class="absolute top-4 right-4 text-console-green hover:text-console-blue close-modal">
+                <span class="material-icons">close</span>
+            </button>
+            <h3 class="text-2xl font-bold console-glow mb-4">&gt; E-commerce Platform</h3>
+            <img alt="E-commerce Platform" class="w-full h-64 object-cover rounded-md mb-4"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuChgBX2VJDjbqhhriJIj_EO9oUvtD3oWYCWpsjyTasXbaxe13PfGa5Ra3G1YlibjQntjMGGA8pspeSCr-_aqg9cfqv8ovzJ6glchlRcJR3NF0HoXvnUcy15leE7ZbkllXd0qqDVcUlq20K5Aub-vr8QQn1aUZr5LKgOnKfcSo2sgwnsZZBqcIlSmSLn-QuZC06I6CjKbAxN0QfHD1O979DYqj-Wg8y9S_TeF27eKyfr8vehk9u-fHERktAGHEPFBJLdqwgbnhN6IqrH" />
+            <p class="text-console-text-dark mb-4">A full-featured e-commerce site with a custom CMS, payment gateway
+                integration, and a responsive user interface. This project involved building a robust backend with
+                Node.js and a dynamic frontend with React, ensuring a seamless shopping experience.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                    class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                    React</span>
+                <span
+                    class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                    Node.js</span>
+                <span
+                    class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                    MongoDB</span>
+            </div>
+            <a class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow" href="#">&gt;
+                VIEW_LIVE_PROJECT <span class="material-icons text-sm ml-1">open_in_new</span></a>
+        </div>
+    </div>
+    <div class="modal fixed inset-0 z-50 items-center justify-center bg-black/80 p-4" id="project-modal-2">
+        <div class="modal-console relative w-full max-w-2xl rounded-lg border-2 border-console-green/50 p-6 md:p-8">
+            <button class="absolute top-4 right-4 text-console-green hover:text-console-blue close-modal">
+                <span class="material-icons">close</span>
+            </button>
+            <h3 class="text-2xl font-bold console-glow mb-4">&gt; Project Management Tool</h3>
+            <img alt="Project Management Tool" class="w-full h-64 object-cover rounded-md mb-4"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyQZEAb0LCwGylmMqUGU-G8wescfsL37YXDKsfZS6OKhJLb34CKIf4VLLcHP_G5dRyZv5pJ64Klj4RGTw_dJCoX8ECtQDAlA9jHWAg2IEINfAH52MPMsBjkQtnSyV3hlsgCj3nW_52j0X80Cv36KRMsYl0P8eQXN53snb5qs8Tl6LNY764svBqrHyJ10siy3ny4l6CulxgCKS8MWVZqDtLy-jGSNhy7C8Hyc3OOYZj2cyFrtLLdIbGU2LDjvOnVCcrdXIqg4X18jhy" />
+            <p class="text-console-text-dark mb-4">A SaaS application for teams to manage tasks, track progress, and
+                collaborate in real-time. Leveraged Vue.js for a reactive UI and Firebase for real-time database and
+                authentication functionalities.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                    class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                    Vue.js</span>
+                <span
+                    class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                    Firebase</span>
+                <span
+                    class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                    Tailwind CSS</span>
+            </div>
+            <a class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow" href="#">&gt;
+                VIEW_LIVE_PROJECT <span class="material-icons text-sm ml-1">open_in_new</span></a>
+        </div>
+    </div>
+    <script>
+        document.getElementById('menu-button').addEventListener('click', function () {
+            var mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        const pageLoader = document.getElementById('page-loader');
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                pageLoader.classList.add('hidden');
+            }, 500);
+        });
+        const projectCards = document.querySelectorAll('.project-card');
+        const modals = document.querySelectorAll('.modal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const modalId = card.getAttribute('data-modal');
+                document.getElementById(modalId).classList.add('open');
+            });
+        });
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.closest('.modal').classList.remove('open');
+            });
+        });
+        window.addEventListener('click', (event) => {
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
