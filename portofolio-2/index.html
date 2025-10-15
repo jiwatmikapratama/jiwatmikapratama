@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Alex Rinza - Dev Console</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <style>
+        :root {
+            --console-green: #00BFFF;
+            --console-blue: #00FFFF;
+            --background-dark: #0D0D0D;
+            --card-dark: #1A1A1A;
+            --text-dark: #00BFFF;
+            --console-green-light: #053805;
+            --console-blue-light: #0f4a4a;
+            --background-light: #f5f5f5;
+            --card-light: #ffffff;
+            --text-light: #053805;
+        }
+
+        .dark-mode {
+            --console-green: #00BFFF;
+            --console-blue: #00FFFF;
+            --background-dark: #0D0D0D;
+            --card-dark: #1A1A1A;
+            --text-dark: #00BFFF;
+        }
+
+        .light-mode {
+            --console-green: #0d47a1;
+            --console-blue: #0f4a4a;
+            --background-dark: #f5f5f5;
+            --card-dark: #ffffff;
+            --text-dark: #0d47a1;
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--console-green);
+            }
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid var(--console-green);
+            animation:
+                typing 3.5s steps(40, end) forwards,
+                blink-caret .75s step-end infinite;
+        }
+
+        .console-glow {
+            text-shadow: 0 0 5px var(--console-green), 0 0 10px var(--console-green);
+        }
+
+        .console-input {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            border-bottom: 1px dashed var(--console-green);
+            color: var(--console-green);
+            font-family: 'Roboto Mono', monospace;
+            padding-left: 0.5rem;
+        }
+
+        .console-card {
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .console-card:hover {
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .timeline-dot {
+            background-color: var(--console-green);
+            border: 2px solid var(--background-dark);
+            box-shadow: 0 0 5px var(--console-green);
+        }
+
+        .timeline-line {
+            background-color: var(--console-green);
+        }
+
+        .modal-console {
+            background-color: var(--background-dark);
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+        }
+
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+
+        .light-mode .lightbox {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .lightbox.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+        }
+
+        .lightbox:active img {
+            transform: scale(0.95);
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1050;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s linear;
+        }
+
+        .light-mode .modal {
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+
+        .modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: var(--background-dark);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 50rem;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease-out;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+            color: var(--console-green);
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .carousel {
+            position: relative;
+        }
+
+        .carousel-inner {
+            display: flex;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 191, 255, 0.2);
+            color: var(--console-green);
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .light-mode .carousel-btn {
+            background-color: rgba(13, 71, 161, 0.2);
+            border-color: #0d47a1;
+        }
+
+        .carousel-btn.prev {
+            left: 1rem;
+        }
+
+        .carousel-btn.next {
+            right: 1rem;
+        }
+
+        .carousel-btn:hover {
+            background-color: rgba(0, 191, 255, 0.4);
+            box-shadow: 0 0 8px var(--console-green);
+        }
+
+        .light-mode .carousel-btn:hover {
+            background-color: rgba(13, 71, 161, 0.4);
+        }
+
+        .light-mode .carousel-btn .material-icons {
+            color: #0d47a1;
+        }
+
+        .material-icons {
+            color: var(--console-green);
+        }
+
+        .code-block {
+            background-color: var(--card-dark);
+            color: var(--console-green);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Roboto Mono', monospace;
+            white-space: pre-wrap;
+        }
+
+        .light-mode .console-glow {
+            text-shadow: none;
+        }
+
+        #back-to-top {
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        #page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background-dark);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #page-loader.hidden {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .loader-text {
+            color: var(--console-green);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.25rem;
+            animation: blink-caret 1s step-end infinite;
+            text-shadow: 0 0 8px var(--console-green);
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .parallax-bg {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(-25%);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+
+            50% {
+                transform: translateY(0);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            }
+        }
+
+        .animate-bounce {
+            animation: bounce 1s infinite;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background-dark": "var(--background-dark)",
+                        "card-dark": "var(--card-dark)",
+                        "console-green": "var(--console-green)",
+                        "console-blue": "var(--console-blue)",
+                        "console-text-dark": "var(--text-dark)",
+                        primary: "#39E079",
+                        "background-light": "#f6f8f7"
+                    },
+                    fontFamily: {
+                        mono: ['Roboto Mono', 'monospace']
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    }
+                }
+            }
+        };
+    </script>
+    <style type="text/tailwindcss">
+        :root {
+            --console-green: #00BFFF;
+            --console-blue: #00FFFF;
+            --background-dark: #0D0D0D;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-dark text-console-green font-mono antialiased min-h-screen flex flex-col justify-between dark-mode">
+    <div id="page-loader">
+        <div class="loader-text">&gt; LOADING...</div>
+    </div>
+    <div class="w-full shadow-console-glow modal-console sticky top-0 z-50">
+        <header class="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 border-b border-console-green/20">
+            <a class="text-xl md:text-2xl font-bold console-glow" href="#">&gt; ALEX_RINZA</a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors console-glow"
+                    href="#home">Home</a>
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors"
+                    href="#projects">Project</a>
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors"
+                    href="#gallery">Gallery</a>
+            </nav>
+            <button class="md:hidden text-console-green" id="menu-button">
+                <span class="material-icons">menu</span>
+            </button>
+        </header>
+        <div class="hidden md:hidden" id="mobile-menu">
+            <nav class="flex flex-col items-center space-y-4 py-4 border-b border-console-green/20">
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors" href="#home">Home</a>
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors"
+                    href="#projects">Project</a>
+                <a class="nav-link text-sm font-medium hover:text-console-blue transition-colors"
+                    href="#gallery">Gallery</a>
+            </nav>
+        </div>
+    </div>
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section class="relative text-center min-h-screen flex flex-col justify-center items-center" id="home">
+            <div class="w-full">
+                <h1 class="text-3xl md:text-5xl font-bold leading-tight typewriter mx-auto console-glow max-w-full">
+                    <span class="overflow-hidden whitespace-nowrap border-r-2 border-console-green pr-2">
+                        &gt; INITIALIZING_PORTFOLIO_SYSTEM...
+                    </span>
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-console-text-dark max-w-2xl mx-auto animate-fade-in-up"
+                    onanimationend="this.style.opacity=1;" style="animation-delay: 3.5s; opacity: 0;">
+                    <span class="console-glow">&gt; STATUS: ONLINE</span> <br class="md:hidden" />
+                    <span class="ml-0 sm:ml-4">&gt; LOADING_DEVELOPER: ALEX_RINZA</span>
+                </p>
+                <div class="mt-8 flex justify-center items-center">
+                    <a class="nav-link px-6 py-3 border border-console-green text-console-green rounded-md font-semibold hover:bg-console-green hover:text-background-dark transition-colors console-glow w-full sm:w-auto"
+                        href="#projects">
+                        &gt; EXECUTE_PROJECTS()
+                    </a>
+                </div>
+                <div class="mt-12 flex justify-center items-center space-x-6 text-console-text-dark">
+                    <span>&gt; CONNECT:</span>
+                    <a aria-label="Facebook" class="hover:text-console-blue transition-colors console-glow" href="#">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a aria-label="Instagram" class="hover:text-console-blue transition-colors console-glow" href="#">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a aria-label="X" class="hover:text-console-blue transition-colors console-glow" href="#">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a aria-label="Github" class="hover:text-console-blue transition-colors console-glow" href="#">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path clip-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.578.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"
+                                fill-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a aria-label="LinkedIn" class="hover:text-console-blue transition-colors console-glow" href="#">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2">
+                <a class="nav-link text-console-green animate-bounce" href="#about">
+                    <span class="material-icons text-4xl">keyboard_arrow_down</span>
+                </a>
+            </div>
+        </section>
+        <section class="py-12 md:py-20 border-t border-console-green/20" id="about">
+            <h2 class="text-2xl md:text-3xl font-bold text-center console-glow mb-2">&gt; ABOUT_ME.SH</h2>
+            <p class="text-center text-console-text-dark mb-10 max-w-xl mx-auto">Get to know the developer behind the
+                code. Here's a brief overview of my journey, skills, and professional milestones.</p>
+            <div class="flex flex-col md:flex-row items-center gap-8 lg:gap-12">
+                <div class="md:w-1/2 flex justify-center mt-8 md:mt-0 md:order-2">
+                    <div class="relative w-72 h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-lg console-glow">
+                        <img alt="Portrait of a smiling person, Placeholder Image"
+                            class="rounded-full object-cover w-full h-full"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfJ7u5aVUkK3YjNb5o3PZ93GIU9_-xhJRtbxC_YAPXJk2HbvIWWIvfcwN3Sc8R-O5RAno2SYqZQ7uV54hTZnm9tt7_Qsxvh7PjYW3p6WxX1WxQonkaxL4y_Yzn-eS1EYJeMD3HeoXTejyIUTXBsbZaH7AoQ1Sg9y98MAfSB-XG4rE0fhMWLv10R-hvc1TAqB_YBUoWjc-n2R815mvC3sfxbZSRezsJaccOpKfdLabewvrfLICb4We15lYXENZxxwfcs5oJqv_CJujU" />
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-70 rounded-full flex items-center justify-center light-mode:bg-white light-mode:bg-opacity-70">
+                            <div
+                                class="w-24 h-24 bg-console-green/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-console-green/50">
+                                <span class="material-icons text-console-blue text-4xl console-glow">terminal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:order-1">
+                    <h3 class="text-xl md:text-2xl font-semibold console-glow mb-4">&gt; cat MY_JOURNEY.txt</h3>
+                    <p class="text-console-text-dark mb-4 leading-relaxed">
+                        Full-stack developer with over 6 years of experience, passionate about creating efficient and
+                        scalable web applications. My journey in technology began with a deep curiosity for how things
+                        work, which led me to the world of coding. I thrive in challenging environments and am always
+                        eager to learn new technologies.
+                    </p>
+                    <p class="text-console-text-dark mb-6 leading-relaxed">
+                        My expertise lies in both front-end and back-end development, with a strong focus on clean code,
+                        performance, and user experience. I believe in a collaborative approach and enjoy working with
+                        teams to bring ideas to life.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold console-glow mb-3">&gt; ls -l /job_titles</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="text-xs bg-card-dark border border-console-text-dark/50 text-console-text-dark px-3 py-1 rounded-full">&gt;
+                                Full-Stack_Developer</span>
+                            <span
+                                class="text-xs bg-card-dark border border-console-text-dark/50 text-console-text-dark px-3 py-1 rounded-full">&gt;
+                                Front-End_Specialist</span>
+                            <span
+                                class="text-xs bg-card-dark border border-console-text-dark/50 text-console-text-dark px-3 py-1 rounded-full">&gt;
+                                Back-End_Architect</span>
+                            <span
+                                class="text-xs bg-card-dark border border-console-text-dark/50 text-console-text-dark px-3 py-1 rounded-full">&gt;
+                                DevOps_Enthusiast</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-card-dark p-4 rounded-md console-card flex flex-col justify-center">
+                            <p class="text-2xl font-bold console-glow">6+</p>
+                            <p class="text-sm text-console-text-dark break-words">Years_Experience</p>
+                        </div>
+                        <div class="bg-card-dark p-4 rounded-md console-card flex flex-col justify-center">
+                            <p class="text-2xl font-bold console-glow">50+</p>
+                            <p class="text-sm text-console-text-dark break-words">Projects_Completed</p>
+                        </div>
+                        <div class="bg-card-dark p-4 rounded-md console-card flex flex-col justify-center">
+                            <p class="text-2xl font-bold console-glow">15+</p>
+                            <p class="text-sm text-console-text-dark break-words">Technologies_Mastered</p>
+                        </div>
+                        <div class="bg-card-dark p-4 rounded-md console-card flex flex-col justify-center">
+                            <p class="text-2xl font-bold console-glow">100+</p>
+                            <p class="text-sm text-console-text-dark break-words">Commits_Pushed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-12 md:py-20 border-t border-console-green/20" id="experience">
+            <h2 class="text-2xl md:text-3xl font-bold text-center console-glow mb-2">&gt; EXECUTE_EXPERIENCE.py</h2>
+            <p class="text-center text-console-text-dark mb-10 max-w-2xl mx-auto">Tracing my career path and academic
+                achievements. This section outlines my professional experience and educational background.</p>
+            <div class="max-w-4xl mx-auto md:grid md:grid-cols-2 md:gap-16">
+                <div class="animate-on-scroll">
+                    <h3 class="text-xl md:text-2xl font-bold text-center console-glow mb-8">&gt; EDUCATION_LOGS</h3>
+                    <div class="relative pl-8">
+                        <div class="absolute left-0 top-0 h-full w-0.5 bg-console-green/50"></div>
+                        <div class="space-y-12">
+                            <div class="relative">
+                                <div class="absolute -left-[2.3rem] top-1.5 h-4 w-4 rounded-full timeline-dot"></div>
+                                <div
+                                    class="bg-card-dark p-6 rounded-md shadow-md console-card hover:shadow-xl transition-shadow duration-300 border-l-4 border-console-green">
+                                    <p class="text-sm text-console-text-dark mb-1">&gt; 2012 - 2016</p>
+                                    <h4 class="text-lg font-semibold console-glow mb-2">B.Sc. in Computer Science</h4>
+                                    <p class="text-console-blue text-sm">University of Technology</p>
+                                    <p class="text-console-text-dark mt-3 text-sm">Focused on software engineering,
+                                        algorithms, and data structures. Graduated with honors.</p>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-[2.3rem] top-1.5 h-4 w-4 rounded-full timeline-dot"></div>
+                                <div
+                                    class="bg-card-dark p-6 rounded-md shadow-md console-card hover:shadow-xl transition-shadow duration-300 border-l-4 border-console-green">
+                                    <p class="text-sm text-console-text-dark mb-1">&gt; 2010 - 2012</p>
+                                    <h4 class="text-lg font-semibold console-glow mb-2">Advanced Diploma in IT</h4>
+                                    <p class="text-console-blue text-sm">Tech College</p>
+                                    <p class="text-console-text-dark mt-3 text-sm">Specialized in web development and
+                                        database management.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-16 md:mt-0 animate-on-scroll" style="transition-delay: 200ms">
+                    <h3 class="text-xl md:text-2xl font-bold text-center console-glow mb-8">&gt; EXPERIENCE_TIMELINE
+                    </h3>
+                    <div class="relative pl-8">
+                        <div class="absolute left-0 top-0 h-full w-0.5 bg-console-green/50"></div>
+                        <div class="space-y-12">
+                            <div class="relative">
+                                <div class="absolute -left-[2.3rem] top-1.5 h-4 w-4 rounded-full timeline-dot"></div>
+                                <div
+                                    class="bg-card-dark p-6 rounded-md shadow-md console-card hover:shadow-xl transition-shadow duration-300 border-l-4 border-console-green">
+                                    <p class="text-sm text-console-text-dark mb-1">&gt; 2020 - Present</p>
+                                    <h4 class="text-lg font-semibold console-glow mb-2">Senior Full Stack Developer</h4>
+                                    <p class="text-console-blue text-sm">Tech Solutions Inc.</p>
+                                    <p class="text-console-text-dark mt-3 text-sm">Leading development of new features,
+                                        mentoring junior developers, and optimizing application performance.</p>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-[2.3rem] top-1.5 h-4 w-4 rounded-full timeline-dot"></div>
+                                <div
+                                    class="bg-card-dark p-6 rounded-md shadow-md console-card hover:shadow-xl transition-shadow duration-300 border-l-4 border-console-green">
+                                    <p class="text-sm text-console-text-dark mb-1">&gt; 2018 - 2020</p>
+                                    <h4 class="text-lg font-semibold console-glow mb-2">Mid-Level Developer</h4>
+                                    <p class="text-console-blue text-sm">Web Innovators</p>
+                                    <p class="text-console-text-dark mt-3 text-sm">Developed and maintained client
+                                        websites, focusing on responsive design and feature implementation.</p>
+                                </div>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-[2.3rem] top-1.5 h-4 w-4 rounded-full timeline-dot"></div>
+                                <div
+                                    class="bg-card-dark p-6 rounded-md shadow-md console-card hover:shadow-xl transition-shadow duration-300 border-l-4 border-console-green">
+                                    <p class="text-sm text-console-text-dark mb-1">&gt; 2016 - 2018</p>
+                                    <h4 class="text-lg font-semibold console-glow mb-2">Junior Web Developer</h4>
+                                    <p class="text-console-blue text-sm">Creative Agency</p>
+                                    <p class="text-console-text-dark mt-3 text-sm">Assisted in building websites from
+                                        scratch, bug fixing, and learning the fundamentals of web development.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-12 md:py-20 border-t border-console-green/20" id="projects">
+            <div class="bg-card-dark/80 backdrop-blur-sm py-12 md:py-20">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-center console-glow mb-2">&gt;
+                        FETCH_FEATURED_PROJECTS()</h2>
+                    <p class="text-center text-console-text-dark mb-10 max-w-xl mx-auto">Here are some of the projects
+                        I've worked on. Each one represents a unique challenge and learning opportunity.</p>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer flex flex-col"
+                            onclick="openModal('project1')">
+                            <img alt="E-commerce Platform" class="w-full h-48 object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuChgBX2VJDjbqhhriJIj_EO9oUvtD3oWYCWpsjyTasXbaxe13PfGa5Ra3G1YlibjQntjMGGA8pspeSCr-_aqg9cfqv8ovzJ6glchlRcJR3NF0HoXvnUcy15leE7ZbkllXd0qqDVcUlq20K5Aub-vr8QQn1aUZr5LKgOnKfcSo2sgwnsZZBqcIlSmSLn-QuZC06I6CjKbAxN0QfHD1O979DYqj-Wg8y9S_TeF27eKyfr8vehk9u-fHERktAGHEPFBJLdqwgbnhN6IqrH" />
+                            <div class="p-6 flex-grow flex flex-col">
+                                <h3 class="text-xl font-semibold mb-2 console-glow">E-commerce Platform</h3>
+                                <p class="text-console-text-dark text-sm mb-4 flex-grow">A full-featured e-commerce site
+                                    with a custom CMS, payment gateway integration, and a responsive user interface.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span
+                                        class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                        React</span>
+                                    <span
+                                        class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                        Node.js</span>
+                                    <span
+                                        class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                        MongoDB</span>
+                                </div>
+                                <span
+                                    class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow mt-auto">
+                                    &gt; VIEW_DETAILS <span
+                                        class="material-icons text-sm ml-1 console-glow">arrow_forward</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer flex flex-col"
+                            onclick="openModal('project2')">
+                            <img alt="Project Management Tool" class="w-full h-48 object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyQZEAb0LCwGylmMqUGU-G8wescfsL37YXDKsfZS6OKhJLb34CKIf4VLLcHP_G5dRyZv5pJ64Klj4RGTw_dJCoX8ECtQDAlA9jHWAg2IEINfAH52MPMsBjkQtnSyV3hlsgCj3nW_52j0X80Cv36KRMsYl0P8eQXN53snb5qs8Tl6LNY764svBqrHyJ10siy3ny4l6CulxgCKS8MWVZqDtLy-jGSNhy7C8Hyc3OOYZj2cyFrtLLdIbGU2LDjvOnVCcrdXIqg4X18jhy" />
+                            <div class="p-6 flex-grow flex flex-col">
+                                <h3 class="text-xl font-semibold mb-2 console-glow">Project Management Tool</h3>
+                                <p class="text-console-text-dark text-sm mb-4 flex-grow">A SaaS application for teams to
+                                    manage tasks, track progress, and collaborate in real-time.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span
+                                        class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                        Vue.js</span>
+                                    <span
+                                        class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                        Firebase</span>
+                                    <span
+                                        class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                        Tailwind CSS</span>
+                                </div>
+                                <span
+                                    class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow mt-auto">
+                                    &gt; VIEW_DETAILS <span
+                                        class="material-icons text-sm ml-1 console-glow">arrow_forward</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer flex flex-col"
+                            onclick="openModal('project3')">
+                            <img alt="Personal Blog API" class="w-full h-48 object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_HZwnklS2D18FxbS2-UG8QegzCB28gT-fgspQZe-7BXBkCjTcsK_OKELSdLQlPriuOe1-SSVzEtVD-DEa4jSEGgm8f5TGYKT46B8ifQ-msDL2LuWHKQb8-6B1UT-T4nmbJmOK-thbXT8dSlp0eQnucLTFJKDm1XZYLp3mbJJyViDnoB5IbIcVcUf9_kzgYwA2Hc-nX0wOppM_77ff-6Ds6yOdm_mcpxMngznSFOdnVUNzgppyhe4drtoYtlkro7K0I3e5VD8AJDHn" />
+                            <div class="p-6 flex-grow flex flex-col">
+                                <h3 class="text-xl font-semibold mb-2 console-glow">Personal Blog API</h3>
+                                <p class="text-console-text-dark text-sm mb-4 flex-grow">A headless CMS and RESTful API
+                                    for a personal blog, built with a focus on performance and scalability.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span
+                                        class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                        Go</span>
+                                    <span
+                                        class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                        PostgreSQL</span>
+                                    <span
+                                        class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt;
+                                        Docker</span>
+                                </div>
+                                <span
+                                    class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow mt-auto">
+                                    &gt; VIEW_DETAILS <span
+                                        class="material-icons text-sm ml-1 console-glow">arrow_forward</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-12">
+                        <button
+                            class="px-6 py-3 border border-console-green rounded-md font-semibold hover:bg-console-green hover:text-background-dark transition-colors console-glow w-full sm:w-auto">
+                            &gt; LOAD_MORE_PROJECTS()
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-12 md:py-20 border-t border-console-green/20" id="gallery">
+            <div class="bg-card-dark/80 backdrop-blur-sm py-12 md:py-20">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-center console-glow mb-2">&gt; ACCESS_GALLERY_LOGS()
+                    </h2>
+                    <p class="text-center text-console-text-dark mb-10 max-w-xl mx-auto">A collection of captured data
+                        streams from my travels and everyday life. A visual diary of moments that inspire me.</p>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-container">
+                        <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer"
+                            onclick="openLightbox(this)">
+                            <img alt="Mountain Sunrise" class="w-full h-48 object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHVE0RNT1t0gkDMYFCPRiOOX78MnfBOunVTWk5pSRsEaLEEoId40sa6SQuIxPykDCwnFJN_4EPEcOYc62sBgeU0CAxlwz0yId8_kKwAoNsfXMzxi-dpdShfc6CmpqCvpaokvCbZYHEwDD8qDuEsssltWk5ltJTKPefQg-wc9vSfIqiUkYCam8RcfVeJVQCFsSuWfx95waJy4ofsxXTCpGFxeTZn7HnAaW5xvfByU5XDO-RkpRYvBgGDnLoPWWjKvXxvg4V8OTwEisE" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2 console-glow">Mountain_Sunrise</h3>
+                                <p class="text-console-text-dark text-sm mb-4">Captured during an early morning hike in
+                                    the Alps.</p>
+                                <span
+                                    class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow">
+                                    &gt; VIEW_LOG <span
+                                        class="material-icons text-sm ml-1 console-glow">visibility</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer"
+                            onclick="openLightbox(this)">
+                            <img alt="Modern Skyscraper" class="w-full h-48 object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeexMVr2tmiLvh96mQBfEt8MTGNsNxvZFjWC7z_7p141FGci2z9Ctv0ugkFEzfFNrfjZ-zWL48hsUXtLJ_xq90hf5RLC6FcmqdyJEBqLmdTTnUorg5_8MVfrzOrGW_mUVzE4t83Tc4mGPtCVxqZfcQF6fVsubqqrY8pQDZ0FDAH8C0Mo0YUJFGG2VoWMJXR5Y4KYLORGmwvkxJvsCMPF6ydyZTkq-ZtctvQN_gW8Ej9KE9_XCk_89ffwWPxpYK_kBotvI-gGClya8T" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2 console-glow">Modern_Skyscraper</h3>
+                                <p class="text-console-text-dark text-sm mb-4">Architectural shot from a recent trip to
+                                    a bustling city.</p>
+                                <span
+                                    class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow">
+                                    &gt; VIEW_LOG <span
+                                        class="material-icons text-sm ml-1 console-glow">visibility</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bg-background-dark rounded-md overflow-hidden shadow-lg console-card transform hover:-translate-y-1 cursor-pointer"
+                            onclick="openLightbox(this)">
+                            <img alt="Travel Adventures" class="w-full h-48 object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVMSKce5uzyiogXJ40wrDaCDCn9a6ffgTIZBLe8NJfan1vAADhW8XWb-es0sETTJ7SPRtw4yLN7UaltFbLRKk85UPRYe8NIlSsgPvO19eLgLnYMKvOrexw0OS2b_9xJ93kZj9CdYri2OFGP9dz8xrV7tSDzcspoMoTeCwjSws54mil1uMWBRuO8RROhyZm-xQiHANCtoh8S8XYb3-wp6ME6UxNwcknDrqUC83Qm2GXEAeO6I-5xvo5OlhuOjjSUu03-n7NziW_KuUR" />
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2 console-glow">Travel_Adventures</h3>
+                                <p class="text-console-text-dark text-sm mb-4">Exploring serene waters during a weekend
+                                    getaway.</p>
+                                <span
+                                    class="inline-flex items-center text-sm font-semibold hover:text-console-blue console-glow">
+                                    &gt; VIEW_LOG <span
+                                        class="material-icons text-sm ml-1 console-glow">visibility</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-12">
+                        <button
+                            class="px-6 py-3 border border-console-green rounded-md font-semibold hover:bg-console-green hover:text-background-dark transition-colors console-glow w-full sm:w-auto">
+                            &gt; LOAD_MORE_LOGS()
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="py-8 border-t border-console-green/20 mt-auto">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+                <div class="flex space-x-6 mb-4">
+                    <a aria-label="Facebook"
+                        class="text-console-text-dark hover:text-console-blue transition-colors console-glow" href="#">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a aria-label="Instagram"
+                        class="text-console-text-dark hover:text-console-blue transition-colors console-glow" href="#">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a aria-label="X"
+                        class="text-console-text-dark hover:text-console-blue transition-colors console-glow" href="#">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a aria-label="Github"
+                        class="text-console-text-dark hover:text-console-blue transition-colors console-glow" href="#">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path clip-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.578.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"
+                                fill-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a aria-label="LinkedIn"
+                        class="text-console-text-dark hover:text-console-blue transition-colors console-glow" href="#">
+                        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-sm text-center text-console-text-dark">&gt; COPYRIGHT 2024 ALEX_RINZA.
+                    ALL_RIGHTS_RESERVED.</p>
+            </div>
+        </footer>
+        <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+            <img alt="Enlarged gallery image" id="lightbox-img" src="" />
+        </div>
+        <div class="modal" id="project-modal">
+            <div class="modal-content" id="modal-content-container">
+            </div>
+        </div>
+        <div class="modal" id="gallery-modal">
+            <div class="modal-content" id="gallery-modal-content-container">
+            </div>
+        </div>
+        <a class="nav-link fixed bottom-8 right-8 bg-console-green/20 text-console-green p-3 rounded-full shadow-lg hover:bg-console-green/40 console-glow z-50 opacity-0 invisible"
+            href="#home" id="back-to-top">
+            <span class="material-icons">arrow_upward</span>
+        </a>
+        <script>
+            let currentImageIndex = 0;
+            let imageSources = [];
+            let currentProject;
+            let currentGalleryItem;
+            let currentProjectImageIndex = 0;
+            document.getElementById('menu-button').addEventListener('click', function () {
+                var mobileMenu = document.getElementById('mobile-menu');
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            function openLightbox(element) {
+                const imageElements = element.querySelectorAll('img');
+                imageSources = Array.from(imageElements).map(img => img.src);
+                currentImageIndex = 0;
+                updateLightboxImage();
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function updateLightboxImage() {
+                const lightboxImg = document.getElementById('lightbox-img');
+                lightboxImg.src = imageSources[currentImageIndex];
+            }
+
+            function closeLightbox() {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            document.getElementById('lightbox').addEventListener('click', (e) => {
+                if (e.target.id === 'lightbox') {
+                    closeLightbox();
+                } else {
+                    currentImageIndex = (currentImageIndex + 1) % imageSources.length;
+                    updateLightboxImage();
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                    closeModal();
+                    closeGalleryModal();
+                }
+            });
+            const projectDetails = {
+                project1: {
+                    title: 'E-commerce Platform',
+                    images: [
+                        'https://images.unsplash.com/photo-1557821552-17105176677c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU1MDF8MHwxfHNlYXJjaHwxfHxlLWNvbW1lcmNlJTIwcGxhdGZvcm18ZW58MHx8fHwxNzE4MTM0Mjg4fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                        'https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU1MDF8MHwxfHNlYXJjaHwyfHxlLWNvbW1lcmNlJTIwcGxhdGZvcm18ZW58MHx8fHwxNzE4MTM0Mjg4fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                        'https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU1MDF8MHwxfHNlYXJjaHwzfHxlLWNvbW1lcmNlJTIwcGxhdGZvcm18ZW58MHx8fHwxNzE4MTM0Mjg4fDA&ixlib=rb-4.0.3&q=80&w=1080'
+                    ],
+                    description: 'A comprehensive e-commerce solution built with the MERN stack. It features a fully functional shopping cart, user authentication, product management, and order processing. The platform is designed for scalability and provides a seamless user experience across all devices.',
+                    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Stripe API'],
+                    codeSnippet: `// Example: Fetching products
+fetch('/api/products')
+  .then(response => response.json())
+  .then(data => console.log('Products fetched:', data))
+  .catch(error => console.error('Error fetching products:', error));`
+                },
+                project2: {
+                    title: 'Project Management Tool',
+                    images: [
+                        'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU1MDF8MHwxfHNlYXJjaHwxfHxwcm9qZWN0JTIwbWFuYWdlbWVudCUyMHRvb2x8ZW58MHx8fHwxNzE4MTM0Mjg5fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                        'https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU1MDF8MHwxfHNlYXJjaHwyfHxwcm9qZWN0JTIwbWFuYWdlbWVudCUyMHRvb2x8ZW58MHx8fHwxNzE4MTM0Mjg5fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                        'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU1MDF8MHwxfHNlYXJjaHwzfHxwcm9qZWN0JTIwbWFuYWdlbWVudCUyMHRvb2x8ZW58MHx8fHwxNzE4MTM0Mjg5fDA&ixlib=rb-4.0.3&q=80&w=1080'
+                    ],
+                    description: 'A collaborative project management tool that helps teams organize tasks, track deadlines, and communicate effectively. Features include customizable boards, real-time updates, file sharing, and third-party integrations.',
+                    technologies: ['Vue.js', 'Firebase', 'Tailwind CSS', 'Vuex'],
+                    codeSnippet: `// Example: Adding a new task
+db.collection('tasks').add({
+  name: 'Implement feature X',
+  assignedTo: 'Alex',
+  status: 'In Progress'
+}).then(() => {
+  console.log('Task added successfully!');
+}).catch(error => {
+  console.error('Error adding task:', error);
+});`
+                },
+                project3: {
+                    title: 'Personal Blog API',
+                    images: [
+                        'https://images.unsplash.com/photo-1518770660439-4636190af475?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU1MDF8MHwxfHNlYXJjaHwxfHxibG9nJTIwYXBpJTIwY29kZXxlbnwwfHx8fDE3MTgxMzQyODl8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                        'https://images.unsplash.com/photo-1516116216624-53e6973bea99?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU1MDF8MHwxfHNlYXJjaHwyfHxibG9nJTIwYXBpJTIwY29kZXxlbnwwfHx8fDE3MTgxMzQyODl8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                        'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU1MDF8MHwxfHNlYXJjaHwzfHxibG9nJTIwYXBpJTIwY29kZXxlbnwwfHx8fDE3MTgxMzQyODl8MA&ixlib=rb-4.0.3&q=80&w=1080'
+                    ],
+                    description: 'A high-performance RESTful API for a headless blog. Built with Go and PostgreSQL, it offers fast response times and a secure authentication system. The API is containerized with Docker for easy deployment and scaling.',
+                    technologies: ['Go', 'PostgreSQL', 'Docker', 'Gin Gonic', 'JWT'],
+                    codeSnippet: `// Example: API endpoint for fetching blog posts
+func getPosts(c *gin.Context) {
+    var posts []Post
+    db.Find(&posts)
+    c.JSON(http.StatusOK, posts)
+}`
+                }
+            };
+            const galleryDetails = {
+                gallery1: {
+                    title: 'Mountain_Sunrise',
+                    images: [
+                        'https://lh3.googleusercontent.com/aida-public/AB6AXuBRNz5JgRbun7C_i1sTlG7wuLfb6dWgGA6c37PxVGBzt2pNlpVrY8BOWCzq6HVaLg01_jN5BBhxukZ1P4IcXL3LOP11YDmbtxKZSUkgWnQtE-aAa6Z0sJFTxKu31vcDH2ytqIVzv6m2NeFSNuMjZf0EsXPqn-okySxLjNZY0Z_C4TX-Ry6Cf1a2K_5CDEz7cuadrPi5QpSShI7Qf1GRuTqF0DYIvQ28Jpm4-v1xzqBs68Pgj-7oA9P-JvwtGfVQzqkZ4sflPHmj4DSB',
+                        'https://lh3.googleusercontent.com/aida-public/AB6AXuDk5-FgVbCFjmDHwImaYd5auZCjTvkvtp08L6ExmhNMkxA2hIDdu4xECJgD6t0TvJkO_k8ZSUmVyGQ9nhGAOEh5KZ6iBzCz8pVaDEvpmsC2OFQ8fs4fFXbxPVpPgrfECoP_sss9xfR8P3BtsCOAC9STH3uNVY2kmxurm2hytr0oflr3mG1W4NHPZH9SFKM0miJAA7-emOS0ORCPs6wZd2IzEDDUwrucgW9RKWvPgjIIZfwrdPUk3KrU7KGJmnOm7jCjRT6e20YXDkF0'
+                    ],
+                    description: 'Captured during an early morning hike in the Alps, this series showcases the serene beauty of nature waking up.',
+                    tags: ['Nature', 'Travel', 'Alps', 'Sunrise']
+                },
+                gallery2: {
+                    title: 'Modern_Skyscraper',
+                    images: [
+                        'https://lh3.googleusercontent.com/aida-public/AB6AXuAF5kPIhZRpVK3t2W-Nbm_Weu_swAKrMsn4-i9cUwbkt24kIrVCvN3iD7BsFv_e8UbLWLSdxOTSyKajm8Pxk7yJd34FglLA4ojK_Bry52D1_wTJ_bw-kNxFf1tUxEG1HBsa_V0lUV2A40YQqjl-tCHI3xuG9rLOgw8JjpmUvQ_-DPNm5W-Za0FiSFhOp0IfYjZRucC99Jf-xF9-BVMDL3dW4AOXnb0UDIDk19lxUkkhGikLiPl70z_jIblL_ZjI7Zau8u84LAMAdsZm',
+                        'https://lh3.googleusercontent.com/aida-public/AB6AXuDk5-FgVbCFjmDHwImaYd5auZCjTvkvtp08L6ExmhNMkxA2hIDdu4xECJgD6t0TvJkO_k8ZSUmVyGQ9nhGAOEh5KZ6iBzCz8pVaDEvpmsC2OFQ8fs4fFXbxPVpPgrfECoP_sss9xfR8P3BtsCOAC9STH3uNVY2kmxurm2hytr0oflr3mG1W4NHPZH9SFKM0miJAA7-emOS0ORCPs6wZd2IzEDDUwrucgW9RKWvPgjIIZfwrdPUk3KrU7KGJmnOm7jCjRT6e20YXDkF0'
+                    ],
+                    description: 'A collection of architectural shots from a recent trip to a bustling city, highlighting the clean lines and impressive scale of modern buildings.',
+                    tags: ['Architecture', 'Urban', 'Cityscape', 'Modern']
+                },
+                gallery3: {
+                    title: 'Travel_Adventures',
+                    images: [
+                        'https://lh3.googleusercontent.com/aida-public/AB6AXuCNIlHB_LWf1QMPWqy5GgRs4J3C8o3bPDINz-Hx18snSFIGkZq7KsajdYRa_eH8czYQskK_cDgaM_hLu8_R6G67P8GoHfvi0cHsposFUm7yEwZ9EKFquCtbLp5ocF7bn7hvBZIT2tgRiRaTm_cmeQFOAEMR_p7iNuN6eUiqanDe5KNLdkA8lRFAz01hKKWkgGTij1yEFt-tHRsqkKUJ6EX8RzjLhUwTldq4EyKIH6BfLLJsH4ub763frgOaHpYsEh07hqRgff8vTQDx',
+                        'https://lh3.googleusercontent.com/aida-public/AB6AXuDk5-FgVbCFjmDHwImaYd5auZCjTvkvtp08L6ExmhNMkxA2hIDdu4xECJgD6t0TvJkO_k8ZSUmVyGQ9nhGAOEh5KZ6iBzCz8pVaDEvpmsC2OFQ8fs4fFXbxPVpPgrfECoP_sss9xfR8P3BtsCOAC9STH3uNVY2kmxurm2hytr0oflr3mG1W4NHPZH9SFKM0miJAA7-emOS0ORCPs6wZd2IzEDDUwrucgW9RKWvPgjIIZfwrdPUk3KrU7KGJmnOm7jCjRT6e20YXDkF0'
+                    ],
+                    description: 'Exploring serene waters during a weekend getaway. These photos capture the peace and excitement of adventure.',
+                    tags: ['Travel', 'Adventure', 'Kayaking', 'Lake']
+                }
+            };
+
+            function openModal(projectId) {
+                currentProject = projectDetails[projectId];
+                currentProjectImageIndex = 0;
+                const modalContainer = document.getElementById('modal-content-container');
+                modalContainer.innerHTML = `
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-console-green z-20">
+                <span class="material-icons">close</span>
+            </button>
+            <h3 class="text-2xl font-bold mb-4 console-glow">&gt; ${currentProject.title}</h3>
+            <div class="carousel mb-4">
+                <div class="carousel-inner" id="carousel-inner">
+                    ${currentProject.images.map((src, index) => `<div class="carousel-item" style="transform: translateX(-${currentProjectImageIndex * 100}%);"><img src="${src}" alt="${currentProject.title}" class="rounded-lg w-full h-auto object-cover shadow-console-glow"></div>`).join('')}
+                </div>
+                <button class="carousel-btn prev" onclick="changeSlide(-1)"><span class="material-icons">chevron_left</span></button>
+                <button class="carousel-btn next" onclick="changeSlide(1)"><span class="material-icons">chevron_right</span></button>
+            </div>
+            <p class="text-console-text-dark mb-4">&gt; DESCRIPTION: ${currentProject.description}</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+                <span class="text-md font-semibold console-glow">&gt; TECHNOLOGIES:</span>
+                ${currentProject.technologies.map(tech => `<span class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt; ${tech}</span>`).join('')}
+            </div>
+            <div class="mb-6">
+                <p class="text-md font-semibold console-glow mb-2">&gt; CODE_SNIPPET:</p>
+                <pre class="code-block">${currentProject.codeSnippet}</pre>
+            </div>
+            <div class="text-center">
+              <button class="px-6 py-3 border border-console-green rounded-md font-semibold hover:bg-console-green hover:text-background-dark transition-colors console-glow">
+                  &gt; RUN_DEMO()
+              </button>
+            </div>
+        `;
+                document.getElementById('project-modal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                updateCarousel();
+            }
+
+            function openGalleryModal(galleryId) {
+                currentGalleryItem = galleryDetails[galleryId];
+                currentProjectImageIndex = 0;
+                const modalContainer = document.getElementById('gallery-modal-content-container');
+                modalContainer.innerHTML = `
+            <button onclick="closeGalleryModal()" class="absolute top-4 right-4 text-console-green z-20">
+                <span class="material-icons">close</span>
+            </button>
+            <h3 class="text-2xl font-bold mb-4 console-glow">&gt; ${currentGalleryItem.title}</h3>
+            <div class="carousel mb-4">
+                <div class="carousel-inner" id="gallery-carousel-inner">
+                    ${currentGalleryItem.images.map((src, index) => `<div class="carousel-item" style="transform: translateX(-${currentProjectImageIndex * 100}%);"><img src="${src}" alt="${currentGalleryItem.title}" class="rounded-lg w-full h-auto object-cover shadow-console-glow"></div>`).join('')}
+                </div>
+                <button class="carousel-btn prev" onclick="changeGallerySlide(-1)"><span class="material-icons">chevron_left</span></button>
+                <button class="carousel-btn next" onclick="changeGallerySlide(1)"><span class="material-icons">chevron_right</span></button>
+            </div>
+            <p class="text-console-text-dark mb-4">&gt; LOG_ENTRY: ${currentGalleryItem.description}</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+                <span class="text-md font-semibold console-glow">&gt; DATA_TAGS:</span>
+                ${currentGalleryItem.tags.map(tag => `<span class="text-xs bg-background-dark border border-console-text-dark/50 text-console-text-dark px-2 py-1 rounded-full">&gt; ${tag}</span>`).join('')}
+            </div>
+        `;
+                document.getElementById('gallery-modal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                updateGalleryCarousel();
+            }
+
+            function changeSlide(direction) {
+                const numImages = currentProject.images.length;
+                currentProjectImageIndex = (currentProjectImageIndex + direction + numImages) % numImages;
+                updateCarousel();
+            }
+
+            function changeGallerySlide(direction) {
+                const numImages = currentGalleryItem.images.length;
+                currentProjectImageIndex = (currentProjectImageIndex + direction + numImages) % numImages;
+                updateGalleryCarousel();
+            }
+
+            function updateCarousel() {
+                const carouselInner = document.getElementById('carousel-inner');
+                if (carouselInner) {
+                    const items = carouselInner.querySelectorAll('.carousel-item');
+                    items.forEach((item, index) => {
+                        item.style.transform = `translateX(-${currentProjectImageIndex * 100}%)`;
+                    });
+                }
+            }
+
+            function updateGalleryCarousel() {
+                const carouselInner = document.getElementById('gallery-carousel-inner');
+                if (carouselInner) {
+                    const items = carouselInner.querySelectorAll('.carousel-item');
+                    items.forEach((item, index) => {
+                        item.style.transform = `translateX(-${currentProjectImageIndex * 100}%)`;
+                    });
+                }
+            }
+
+            function closeModal() {
+                document.getElementById('project-modal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            function closeGalleryModal() {
+                document.getElementById('gallery-modal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            document.getElementById('project-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'project-modal') {
+                    closeModal();
+                }
+            });
+            document.getElementById('gallery-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'gallery-modal') {
+                    closeGalleryModal();
+                }
+            });
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            const pageLoader = document.getElementById('page-loader');
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    pageLoader.classList.add('hidden');
+                }, 500);
+            });
+            document.querySelectorAll('.nav-link').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        pageLoader.classList.remove('hidden');
+                        setTimeout(() => {
+                            document.querySelector(href).scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                            setTimeout(() => {
+                                pageLoader.classList.add('hidden');
+                            }, 500);
+                        }, 500);
+                    }
+                });
+            });
+            const scrollElements = document.querySelectorAll(".animate-on-scroll");
+            const elementInView = (el, dividend = 1) => {
+                const elementTop = el.getBoundingClientRect().top;
+                return (
+                    elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+                );
+            };
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el, 1.25)) {
+                        el.classList.add("is-visible");
+                    }
+                });
+            }
+            window.addEventListener("scroll", () => {
+                handleScrollAnimation();
+            });
+        </script>
+    </main>
+</body>
+
+</html>
