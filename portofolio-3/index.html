@@ -8,31 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
-    <style type="text/tailwindcss">
-        .terminal-cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            background-color: currentColor;
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink {
-            from,
-            to {
-                background-color: transparent;
-            }
-            50% {
-                background-color: currentColor;
-            }
-        }
-        .back-to-top {
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-        }
-    </style>
+    <link href="style.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     <script>
         tailwind.config = {
@@ -70,8 +46,8 @@
                     Home
                     <span class="absolute left-0 -bottom-1 w-full h-0.5 bg-primary"></span>
                 </a>
-                <a class="hover:text-primary transition-colors duration-300" href="#projects">Project</a>
-                <a class="hover:text-primary transition-colors duration-300" href="#gallery">Gallery</a>
+                <a class="hover:text-primary transition-colors duration-300" href="projects.html">Project</a>
+                <a class="hover:text-primary transition-colors duration-300" href="gallery.html">Gallery</a>
             </nav>
             <button class="md:hidden">
                 <span class="material-icons">menu</span>
@@ -313,7 +289,7 @@
             </div>
             <div class="flex justify-center mt-12">
                 <a class="px-6 py-2 border border-text-light dark:border-text-dark hover:bg-text-light hover:text-background-light dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
-                    href="#">SHOW_MORE()</a>
+                    href="projects.html">SHOW_MORE()</a>
             </div>
         </section>
         <section class="py-16 md:py-24" id="gallery">
@@ -370,7 +346,7 @@
             </div>
             <div class="flex justify-center mt-12">
                 <a class="px-6 py-2 border border-text-light dark:border-text-dark hover:bg-text-light hover:text-background-light dark:hover:bg-text-dark dark:hover:text-background-dark transition-all duration-300"
-                    href="#">SHOW_MORE()</a>
+                    href="gallery.html">SHOW_MORE()</a>
             </div>
         </section>
         <footer class="text-center py-8 border-t border-accent-light dark:border-accent-dark">
@@ -425,151 +401,7 @@
         href="#top" id="backToTopBtn">
         <span class="material-icons">arrow_upward</span>
     </a>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('modal');
-            const closeModal = document.getElementById('closeModal');
-            const carousel = document.getElementById('carousel');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const paginationDots = document.getElementById('paginationDots');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalDescription = document.getElementById('modalDescription');
-            const modalTags = document.getElementById('modalTags');
-            const backToTopBtn = document.getElementById('backToTopBtn');
-            let currentModalData;
-            let currentIndex = 0;
-            const modalData = {
-                'project-modal-1': {
-                    title: 'Ecommerce Platform',
-                    description: 'A fully functional e-commerce site with a modern design and intuitive user interface. This project involved creating a complete online store from scratch, focusing on user experience, performance, and security. Features include product catalog, shopping cart, checkout process, and user account management.',
-                    tags: ['Vue.js', 'Node.js', 'Express', 'MongoDB'],
-                    images: ['image-679a9cfd-d922-4ef8-a532-a5f1e8e2c076.png',
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuDGvpXfNpuOVOfhzQOHY7ws6n-ItamsoRACvyWDqmDrJ7wrO9nuHmXEj52uUy5MWgwtDzWZcqV5fMZsFX2rmCvKZnIrqcILSxM0XqZdLHKVCUm2AN32Gaii6EB1liRe1WPwD3c9DmIpqLcibr7H-zZzvpctwwj3YgV49qzWJMZjzUOCyjKoBzZl3LmFnq8-e-8vNqqjApQApNYwPz0gnz8lSKVwZgpGBmOhsilLcH0CFciX3_otZ9WaRchXLf14_4yCFk3-AACAUw',
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuDiHqsD4Sy0UbxGdQco9ORuTcUkrxoyqZphB4L5t89ZJR9VslpX9QP5h6NkVwlAokevyMm46ioo5lUPgy2Qr2iRu1QZzhWjYGuJ1tTp9fgnLfJiBzCmOnHsNks7HGF_jIh7SOL--Ig1uNoVNKLnQJKOUbMDIF8QkGVXZ5j2geLpn1eOKkFpaZgK-q-e7BffKtPM4aa6Cs7FQP9TvKT_M91_WrX6OOuCYovxIbGlfl6NjwaXRYWJj4KVe-Lcpn-PwWYG4vH8f1Tutg'
-                    ],
-                },
-                'project-modal-2': {
-                    title: 'Project Management Tool',
-                    description: 'A tool to help teams manage tasks, deadlines, and project milestones effectively. Designed with collaboration in mind, this application provides features like task assignment, progress tracking, file sharing, and team communication channels. It aims to streamline workflows and improve productivity.',
-                    tags: ['React', 'Firebase', 'Tailwind CSS', 'Figma'],
-                    images: ['image-91899120-d3a7-47b2-bd74-7e88c0356501.png',
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuDuq7zQvfJvODNLENLc-qecb2TyBMImZnDId2cAAtoAtHy6vmWwIFwBjVUPm66y43plQexh6N7Itzflc_MVS3lAaKpXdFoKVjJDv0mX5DTf7eHNjJ54QRfgj0_RKewg0BHcybH8aQ5qEYiDFwZ1G24oulv_vbkHqDY6D2CaNsKmaT7GD0u8qBQkt0Y7YnxIhSCmjgEYRgmt_jZ7SqWkVEKatB6Bf0cKWY92Qlrm0g09oUzD34waPKS6HghITl0CcLE2Im1adSb-XQ'
-                    ],
-                },
-                'project-modal-3': {
-                    title: 'Personal Blog API',
-                    description: 'A custom-built, headless RESTful API for a personal blog with CRUD functionality. This backend system allows for easy management of blog posts, categories, and comments. It is designed to be consumed by any front-end framework, offering flexibility and scalability.',
-                    tags: ['Python', 'Flask', 'PostgreSQL', 'Docker'],
-                    images: ['image-95855f46-5acb-42ef-a28a-6b47bf504368.png'],
-                },
-                'gallery-modal-1': {
-                    title: 'Mountain Sunset',
-                    description: 'A breathtaking sky during an early morning hike in the alps. The colors were constantly changing, creating a magical atmosphere. This shot was taken at the peak, just as the sun began to rise over the horizon.',
-                    tags: [],
-                    images: [
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuBYzv9XTTd7Uc1h9ox2B_Es-taJrrLIrp2t4ulZq9BpV6HPdSvtnJoHwU3LZpMLPZjs8BeMyTAx1HWq-jTEXA-xoOXcWtrmU06IfqaTe1ri34gcSHEkkI_gyHOxTuGUCbpao9Dt7E_sWodlPdjxec_0Rzp5pk3oZ57rtyWEV5CdZfw4vmLPzU9fednt9a49Jkf5EjaSc19duEwk0T_HfsYx8ptOl3Bu0OC65MOoajloc2a9coqonXBOTU7bKJ6ljn4L82aZH8m7qg',
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuCNffRUJURPw4_Zx0E1chbFj1E6vcei0X17LXydIB0as9ouzZGZWxX5ygjwZhLSBC0ZoROqotrlpQ1SFbq1eTwB68TlT30LlWxDW6p0TiAj58asoTvSOZ4LGm8FsRae2mnrUXdBg-E7xNGaGKBcH8qbFQ_dLLLcuwC9XckrA2Eyg6i-bXbg2DqBd58c9066ggO3LpGWd3bTt9TERyYNEJZHdrwhwwmliKiV3sCDF2z7JtQnedouBnWe4OC81eRCIL1bS2tfvIu7cQ',
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuCLVI987BzrPv-iGhG8586UK8tdj3zlNzKKUpNrm3E9ngixX9hYlVlHKfyhcH5Rn9l413taU7tcSuT2ER-Ndk7oRkSr8TzoV69NiGTf1s2_vQDkHwzIG5utTrH0EcVpVYBqmt42iNmltmmB43yuNbpjBL2EZbUvWtjLSRwLVw2B-x1dG-CLaQxLcAMuyWwRrVxELUXdephf4x2esg5AZBjcuLY5KSZ3Dx8KrmawQLSmQbVQ6WhFj4xfUWseTEdc_2QzRz3v1POUsA'
-                    ],
-                },
-                'gallery-modal-2': {
-                    title: 'Urban Geometry',
-                    description: 'Architectural lines from a recent trip to the city. I was struck by the patterns and reflections on the glass facade of this modern building. It represents the organised chaos of urban life.',
-                    tags: [],
-                    images: [
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuCNffRUJURPw4_Zx0E1chbFj1E6vcei0X17LXydIB0as9ouzZGZWxX5ygjwZhLSBC0ZoROqotrlpQ1SFbq1eTwB68TlT30LlWxDW6p0TiAj58asoTvSOZ4LGm8FsRae2mnrUXdBg-E7xNGaGKBcH8qbFQ_dLLLcuwC9XckrA2Eyg6i-bXbg2DqBd58c9066ggO3LpGWd3bTt9TERyYNEJZHdrwhwwmliKiV3sCDF2z7JtQnedouBnWe4OC81eRCIL1bS2tfvIu7cQ'
-                    ],
-                },
-                'gallery-modal-3': {
-                    title: 'Coastal Adventures',
-                    description: 'Capturing serene waters during a weekend escape. The rhythmic sound of the waves and the salty air provided a much-needed break from the city. This photo encapsulates the tranquility of the coast.',
-                    tags: [],
-                    images: [
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuCLVI987BzrPv-iGhG8586UK8tdj3zlNzKKUpNrm3E9ngixX9hYlVlHKfyhcH5Rn9l413taU7tcSuT2ER-Ndk7oRkSr8TzoV69NiGTf1s2_vQDkHwzIG5utTrH0EcVpVYBqmt42iNmltmmB43yuNbpjBL2EZbUvWtjLSRwLVw2B-x1dG-CLaQxLcAMuyWwRrVxELUXdephf4x2esg5AZBjcuLY5KSZ3Dx8KrmawQLSmQbVQ6WhFj4xfUWseTEdc_2QzRz3v1POUsA'
-                    ],
-                },
-            };
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 200) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-            });
-
-            function updatePaginationDots() {
-                paginationDots.innerHTML = '';
-                if (currentModalData.images.length > 1) {
-                    currentModalData.images.forEach((_, index) => {
-                        const dot = document.createElement('button');
-                        dot.className =
-                            `w-2.5 h-2.5 rounded-full transition-colors duration-300 ${index === currentIndex ? 'bg-text-dark dark:bg-text-light' : 'bg-gray-400 hover:bg-gray-500'}`;
-                        dot.addEventListener('click', () => showImage(index));
-                        paginationDots.appendChild(dot);
-                    });
-                }
-            }
-
-            function showImage(index) {
-                carousel.innerHTML = '';
-                const img = document.createElement('img');
-                img.src = currentModalData.images[index];
-                img.alt = 'Carousel image ' + (index + 1);
-                img.className = 'w-full h-full object-contain';
-                carousel.appendChild(img);
-                currentIndex = index;
-                updatePaginationDots();
-            }
-
-            function showNext() {
-                const nextIndex = (currentIndex + 1) % currentModalData.images.length;
-                showImage(nextIndex);
-            }
-
-            function showPrev() {
-                const prevIndex = (currentIndex - 1 + currentModalData.images.length) % currentModalData.images
-                    .length;
-                showImage(prevIndex);
-            }
-            document.querySelectorAll('[data-modal-target]').forEach(trigger => {
-                trigger.addEventListener('click', () => {
-                    const targetId = trigger.getAttribute('data-modal-target');
-                    currentModalData = modalData[targetId];
-                    if (currentModalData) {
-                        modalTitle.textContent = currentModalData.title;
-                        modalDescription.textContent = currentModalData.description;
-                        modalTags.innerHTML = '';
-                        if (currentModalData.tags && currentModalData.tags.length > 0) {
-                            currentModalData.tags.forEach(tag => {
-                                const tagElement = document.createElement('span');
-                                tagElement.className =
-                                    'border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300';
-                                tagElement.textContent = tag;
-                                modalTags.appendChild(tagElement);
-                            });
-                        }
-                        showImage(0);
-                        modal.classList.remove('hidden');
-                        const hasMultipleImages = currentModalData.images.length > 1;
-                        prevBtn.style.display = hasMultipleImages ? 'block' : 'none';
-                        nextBtn.style.display = hasMultipleImages ? 'block' : 'none';
-                        paginationDots.style.display = hasMultipleImages ? 'flex' : 'none';
-                    }
-                });
-            });
-            closeModal.addEventListener('click', () => {
-                modal.classList.add('hidden');
-            });
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
-                }
-            });
-            nextBtn.addEventListener('click', showNext);
-            prevBtn.addEventListener('click', showPrev);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

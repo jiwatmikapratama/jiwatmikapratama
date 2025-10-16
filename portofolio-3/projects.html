@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Projects - Alex Rinza Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FFFFFF",
+                        "background-light": "#FFFFFF",
+                        "background-dark": "#0D0D0D",
+                        "text-light": "#0D0D0D",
+                        "text-dark": "#FFFFFF",
+                        "accent-light": "#F0F0F0",
+                        "accent-dark": "#1A1A1A",
+                    },
+                    fontFamily: {
+                        'mono': ['"Roboto Mono"', 'monospace'],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-mono transition-colors duration-300">
+    <div class="container mx-auto px-4 md:px-8 lg:px-16" id="app">
+        <header class="flex justify-between items-center py-6">
+            <a class="text-lg font-bold" href="index.html">ALEX_RINZA</a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a class="hover:text-primary transition-colors duration-300" href="index.html#top">Home</a>
+                <a class="text-primary transition-colors duration-300 relative" href="projects.html">
+                    Project
+                    <span class="absolute left-0 -bottom-1 w-full h-0.5 bg-primary"></span>
+                </a>
+                <a class="hover:text-primary transition-colors duration-300" href="gallery.html">Gallery</a>
+            </nav>
+            <button class="md:hidden">
+                <span class="material-icons">menu</span>
+            </button>
+        </header>
+
+        <section class="py-16 md:py-24" id="projects-container">
+            <h2 class="text-xl md:text-2xl font-bold mb-2"><span class="text-green-400">&gt;</span> FETCH_ALL_PROJECTS()</h2>
+            <p class="text-sm md:text-base mb-8">Explore my complete portfolio of projects. Each one represents a unique challenge and innovative solution.</p>
+            
+            <!-- Search Box -->
+            <div class="flex justify-center mb-8">
+                <input type="text" class="search-box border-text-light dark:border-text-dark text-text-light dark:text-text-dark placeholder-gray-500" placeholder="SEARCH_PROJECTS()..." />
+            </div>
+
+            <!-- Category Toggle -->
+            <div class="category-toggle">
+                <button class="category-btn active" data-category="All">ALL()</button>
+                <button class="category-btn" data-category="Web">WEB()</button>
+                <button class="category-btn" data-category="Mobile">MOBILE()</button>
+                <button class="category-btn" data-category="Design">DESIGN()</button>
+                <button class="category-btn" data-category="Other">OTHER()</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-grid">
+                <!-- Project 1 -->
+                <div class="bg-accent-light dark:bg-accent-dark p-6 cursor-pointer group transition-transform duration-300 hover:-translate-y-2" data-modal-target="project-modal-1">
+                    <div class="aspect-w-1 aspect-h-1 mb-4 bg-background-light dark:bg-background-dark flex items-center justify-center overflow-hidden">
+                        <img alt="Ecommerce Platform wireframe" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGvpXfNpuOVOfhzQOHY7ws6n-ItamsoRACvyWDqmDrJ7wrO9nuHmXEj52uUy5MWgwtDzWZcqV5fMZsFX2rmCvKZnIrqcILSxM0XqZdLHKVCUm2AN32Gaii6EB1liRe1WPwD3c9DmIpqLcibr7H-zZzvpctwwj3YgV49qzWJMZjzUOCyjKoBzZl3LmFnq8-e-8vNqqjApQApNYwPz0gnz8lSKVwZgpGBmOhsilLcH0CFciX3_otZ9WaRchXLf14_4yCFk3-AACAUw" />
+                    </div>
+                    <h3 class="font-bold text-lg">Ecommerce Platform</h3>
+                    <p class="text-xs mt-1">A fully functional e-commerce site with a modern design and intuitive user interface.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Vue.js</span>
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Node.js</span>
+                    </div>
+                    <button class="mt-4 text-green-400 text-sm font-bold flex items-center group-hover:underline">
+                        VIEW_DETAILS() <span class="material-icons text-base ml-1 transform group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+                    </button>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-accent-light dark:bg-accent-dark p-6 cursor-pointer group transition-transform duration-300 hover:-translate-y-2" data-modal-target="project-modal-2">
+                    <div class="aspect-w-1 aspect-h-1 mb-4 bg-background-light dark:bg-background-dark flex items-center justify-center overflow-hidden">
+                        <img alt="Project Management Tool wireframe" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiHqsD4Sy0UbxGdQco9ORuTcUkrxoyqZphB4L5t89ZJR9VslpX9QP5h6NkVwlAokevyMm46ioo5lUPgy2Qr2iRu1QZzhWjYGuJ1tTp9fgnLfJiBzCmOnHsNks7HGF_jIh7SOL--Ig1uNoVNKLnQJKOUbMDIF8QkGVXZ5j2geLpn1eOKkFpaZgK-q-e7BffKtPM4aa6Cs7FQP9TvKT_M91_WrX6OOuCYovxIbGlfl6NjwaXRYWJj4KVe-Lcpn-PwWYG4vH8f1Tutg" />
+                    </div>
+                    <h3 class="font-bold text-lg">Project Management Tool</h3>
+                    <p class="text-xs mt-1">A tool to help teams manage tasks, deadlines, and project milestones effectively.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">React</span>
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Firebase</span>
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Tailwind CSS</span>
+                    </div>
+                    <button class="mt-4 text-green-400 text-sm font-bold flex items-center group-hover:underline">
+                        VIEW_DETAILS() <span class="material-icons text-base ml-1 transform group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+                    </button>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-accent-light dark:bg-accent-dark p-6 cursor-pointer group transition-transform duration-300 hover:-translate-y-2" data-modal-target="project-modal-3">
+                    <div class="aspect-w-1 aspect-h-1 mb-4 bg-background-light dark:bg-background-dark flex items-center justify-center overflow-hidden">
+                        <img alt="Personal Blog API wireframe" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuq7zQvfJvODNLENLc-qecb2TyBMImZnDId2cAAtoAtHy6vmWwIFwBjVUPm66y43plQexh6N7Itzflc_MVS3lAaKpXdFoKVjJDv0mX5DTf7eHNjJ54QRfgj0_RKewg0BHcybH8aQ5qEYiDFwZl G24oulv_vbkHqDY6D2CaNsKmaT7GD0u8qBQkt0Y7YnxIhSCmjgEYRgmt_jZ7SqWkVEKatB6Bf0cKWY92Qlrm0g09oUzD34waPKS6HghITl0CcLE2Im1adSb-XQ" />
+                    </div>
+                    <h3 class="font-bold text-lg">Personal Blog API</h3>
+                    <p class="text-xs mt-1">A custom-built, headless RESTful API for a personal blog with CRUD functionality.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Python</span>
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Flask</span>
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">PostgreSQL</span>
+                    </div>
+                    <button class="mt-4 text-green-400 text-sm font-bold flex items-center group-hover:underline">
+                        VIEW_DETAILS() <span class="material-icons text-base ml-1 transform group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+                    </button>
+                </div>
+
+                <!-- Additional Projects -->
+                <div class="bg-accent-light dark:bg-accent-dark p-6 cursor-pointer group transition-transform duration-300 hover:-translate-y-2">
+                    <div class="aspect-w-1 aspect-h-1 mb-4 bg-background-light dark:bg-background-dark flex items-center justify-center overflow-hidden">
+                        <img alt="Weather App" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGvpXfNpuOVOfhzQOHY7ws6n-ItamsoRACvyWDqmDrJ7wrO9nuHmXEj52uUy5MWgwtDzWZcqV5fMZsFX2rmCvKZnIrqcILSxM0XqZdLHKVCUm2AN32Gaii6EB1liRe1WPwD3c9DmIpqLcibr7H-zZzvpctwwj3YgV49qzWJMZjzUOCyjKoBzZl3LmFnq8-e-8vNqqjApQApNYwPz0gnz8lSKVwZgpGBmOhsilLcH0CFciX3_otZ9WaRchXLf14_4yCFk3-AACAUw" />
+                    </div>
+                    <h3 class="font-bold text-lg">Weather Dashboard</h3>
+                    <p class="text-xs mt-1">Real-time weather application with location-based forecasts and interactive maps.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">JavaScript</span>
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">API</span>
+                    </div>
+                    <button class="mt-4 text-green-400 text-sm font-bold flex items-center group-hover:underline">
+                        VIEW_DETAILS() <span class="material-icons text-base ml-1 transform group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+                    </button>
+                </div>
+
+                <div class="bg-accent-light dark:bg-accent-dark p-6 cursor-pointer group transition-transform duration-300 hover:-translate-y-2">
+                    <div class="aspect-w-1 aspect-h-1 mb-4 bg-background-light dark:bg-background-dark flex items-center justify-center overflow-hidden">
+                        <img alt="Task Manager" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiHqsD4Sy0UbxGdQco9ORuTcUkrxoyqZphB4L5t89ZJR9VslpX9QP5h6NkVwlAokevyMm46ioo5lUPgy2Qr2iRu1QZzhWjYGuJ1tTp9fgnLfJiBzCmOnHsNks7HGF_jIh7SOL--Ig1uNoVNKLnQJKOUbMDIF8QkGVXZ5j2geLpn1eOKkFpaZgK-q-e7BffKtPM4aa6Cs7FQP9TvKT_M91_WrX6OOuCYovxIbGlfl6NjwaXRYWJj4KVe-Lcpn-PwWYG4vH8f1Tutg" />
+                    </div>
+                    <h3 class="font-bold text-lg">Task Manager Pro</h3>
+                    <p class="text-xs mt-1">Advanced task management system with team collaboration and analytics.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Angular</span>
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">TypeScript</span>
+                    </div>
+                    <button class="mt-4 text-green-400 text-sm font-bold flex items-center group-hover:underline">
+                        VIEW_DETAILS() <span class="material-icons text-base ml-1 transform group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+                    </button>
+                </div>
+
+                <div class="bg-accent-light dark:bg-accent-dark p-6 cursor-pointer group transition-transform duration-300 hover:-translate-y-2">
+                    <div class="aspect-w-1 aspect-h-1 mb-4 bg-background-light dark:bg-background-dark flex items-center justify-center overflow-hidden">
+                        <img alt="Social Media App" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuq7zQvfJvODNLENLc-qecb2TyBMImZnDId2cAAtoAtHy6vmWwIFwBjVUPm66y43plQexh6N7Itzflc_MVS3lAaKpXdFoKVjJDv0mX5DTf7eHNjJ54QRfgj0_RKewg0BHcybH8aQ5qEYiDFwZ1G24oulv_vbkHqDY6D2CaNsKmaT7GD0u8qBQkt0Y7YnxIhSCmjgEYRgmt_jZ7SqWkVEKatB6Bf0cKWY92Qlrm0g09oUzD34waPKS6HghITl0CcLE2Im1adSb-XQ" />
+                    </div>
+                    <h3 class="font-bold text-lg">Social Connect</h3>
+                    <p class="text-xs mt-1">Modern social media platform with real-time messaging and content sharing.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Next.js</span>
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Socket.io</span>
+                    </div>
+                    <button class="mt-4 text-green-400 text-sm font-bold flex items-center group-hover:underline">
+                        VIEW_DETAILS() <span class="material-icons text-base ml-1 transform group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+                    </button>
+                </div>
+                <div class="bg-accent-light dark:bg-accent-dark p-6 cursor-pointer group transition-transform duration-300 hover:-translate-y-2">
+                    <div class="aspect-w-1 aspect-h-1 mb-4 bg-background-light dark:bg-background-dark flex items-center justify-center overflow-hidden">
+                        <img alt="Social Media App" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuq7zQvfJvODNLENLc-qecb2TyBMImZnDId2cAAtoAtHy6vmWwIFwBjVUPm66y43plQexh6N7Itzflc_MVS3lAaKpXdFoKVjJDv0mX5DTf7eHNjJ54QRfgj0_RKewg0BHcybH8aQ5qEYiDFwZ1G24oulv_vbkHqDY6D2CaNsKmaT7GD0u8qBQkt0Y7YnxIhSCmjgEYRgmt_jZ7SqWkVEKatB6Bf0cKWY92Qlrm0g09oUzD34waPKS6HghITl0CcLE2Im1adSb-XQ" />
+                    </div>
+                    <h3 class="font-bold text-lg">Social Connect</h3>
+                    <p class="text-xs mt-1">Modern social media platform with real-time messaging and content sharing.</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Next.js</span>
+                        <span class="border border-green-400 text-green-400 px-2 py-1 text-xs hover:bg-green-400 hover:text-background-dark transition-colors duration-300">Socket.io</span>
+                    </div>
+                    <button class="mt-4 text-green-400 text-sm font-bold flex items-center group-hover:underline">
+                        VIEW_DETAILS() <span class="material-icons text-base ml-1 transform group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination"></div>
+        </section>
+
+        <footer class="text-center py-8 border-t border-accent-light dark:border-accent-dark">
+            <div class="flex justify-center items-center space-x-4 mb-4">
+                <a class="text-2xl hover:text-green-400 transition-colors duration-300" href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a class="text-2xl hover:text-green-400 transition-colors duration-300" href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a class="text-2xl hover:text-green-400 transition-colors duration-300" href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a class="text-2xl hover:text-green-400 transition-colors duration-300" href="#"><i class="fa-brands fa-github"></i></a>
+                <a class="text-2xl hover:text-green-400 transition-colors duration-300" href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+            <p class="text-xs">© COPYRIGHT 2023. ALEX_RINZA. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Modal (same as index.html) -->
+    <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-50" id="modal">
+        <div class="bg-background-light dark:bg-background-dark w-full max-w-4xl max-h-[90vh] flex flex-col md:flex-row relative">
+            <button class="absolute top-2 right-2 md:top-4 md:right-4 text-text-light dark:text-text-dark z-20 hover:text-green-400 transition-colors duration-300" id="closeModal">
+                <span class="material-icons text-3xl">close</span>
+            </button>
+            <div class="md:w-2/3 h-64 md:h-full relative">
+                <div class="w-full h-full" id="carousel"></div>
+                <button class="absolute top-1/2 left-2 md:left-4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-colors duration-300" id="prevBtn">
+                    <span class="material-icons">arrow_back_ios_new</span>
+                </button>
+                <button class="absolute top-1/2 right-2 md:right-4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-colors duration-300" id="nextBtn">
+                    <span class="material-icons">arrow_forward_ios</span>
+                </button>
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2" id="paginationDots"></div>
+            </div>
+            <div class="md:w-1/3 p-6 overflow-y-auto">
+                <h3 class="text-lg font-bold mb-2" id="modalTitle"></h3>
+                <p class="text-sm mb-4" id="modalDescription"></p>
+                <div class="flex flex-wrap gap-2" id="modalTags"></div>
+            </div>
+        </div>
+    </div>
+
+    <a class="back-to-top fixed bottom-8 right-8 bg-background-dark dark:bg-background-light text-text-dark dark:text-text-light p-3 rounded-full shadow-lg hover:bg-gray-700 dark:hover:bg-gray-200 transition-all duration-300 z-50" href="#top" id="backToTopBtn">
+        <span class="material-icons">arrow_upward</span>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+
+</html> 
