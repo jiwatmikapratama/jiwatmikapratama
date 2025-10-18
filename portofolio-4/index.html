@@ -1,0 +1,4089 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Portfolio Hero</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e9ecef 70%, #dee2e6 100%);
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        /* Sticky Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000000;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .nav-logo:hover::before {
+            left: 100%;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #000000;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: block;
+            border: 2px solid transparent;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(0, 0, 0, 0.1) 25%, 
+                rgba(0, 0, 0, 0.2) 50%, 
+                rgba(0, 0, 0, 0.1) 75%, 
+                transparent 100%
+            );
+            transition: left 0.6s ease;
+            border-radius: 6px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #000000, #333333, #000000);
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .nav-link:hover {
+            color: #000000;
+            transform: translateY(-2px);
+            border-color: rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #ffffff;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #333333 100%);
+            border-color: #000000;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                transparent 70%
+            );
+            animation: activeShine 2s ease-in-out infinite;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #28a745, #20c997, #28a745);
+            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+        }
+
+        @keyframes activeShine {
+            0% { transform: translateX(-100%) skewX(-15deg); }
+            50% { transform: translateX(-100%) skewX(-15deg); }
+            100% { transform: translateX(200%) skewX(-15deg); }
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #212529;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .hero-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            padding-top: 6rem;
+            position: relative;
+        }
+
+        .hero-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(0,0,0,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .terminal-text {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 3rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            position: relative;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: #000000;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+
+        .execute-button {
+            background: #000000;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.5s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .execute-button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .execute-button:active {
+            transform: translateY(0) scale(1.02);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 2s forwards;
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            fill: #000000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            fill: #333333;
+            transform: translateY(-2px) scale(1.1);
+        }
+
+        /* About Section Styles */
+        .about-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e9ecef 70%, #dee2e6 100%);
+            position: relative;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(0,0,0,0.015) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(0,0,0,0.02) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .about-header {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .terminal-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: bold;
+            color: #000000;
+            margin: 0 0 1rem 0;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .terminal-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: bold;
+            color: #333333;
+            margin: 0 0 2rem 0;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .prompt-symbol {
+            color: #000000;
+            margin-right: 0.5rem;
+        }
+
+        .about-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text {
+            opacity: 0;
+            animation: fadeInLeft 1s ease-out 0.3s forwards;
+        }
+
+        .about-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #333333;
+            margin-bottom: 2.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .skills-section {
+            margin-bottom: 2rem;
+        }
+
+        .skills-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 1.5rem;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .job-tag {
+            background: #000000;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: default;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .job-tag:hover {
+            background: #333333;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: fadeInRight 1s ease-out 0.5s forwards;
+        }
+
+        .profile-avatar {
+            width: 280px;
+            height: 280px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #000000 0%, #333333 50%, #666666 100%);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transform: rotate(-2deg);
+            transition: all 0.4s ease;
+        }
+
+        .profile-avatar:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-avatar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-avatar:hover::before {
+            opacity: 1;
+        }
+
+        .profile-avatar::after {
+            content: '{ DEV }';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #28a745;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            text-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+        }
+
+        .profile-info {
+            text-align: center;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .profile-role {
+            font-size: 1.1rem;
+            color: #333333;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #000000 0%, #333333 50%, #666666 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Projects Section Styles */
+        .projects-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e9ecef 70%, #dee2e6 100%);
+            position: relative;
+        }
+
+        .projects-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 25% 25%, rgba(0,0,0,0.015) 0%, transparent 50%),
+                        radial-gradient(circle at 75% 75%, rgba(0,0,0,0.02) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .projects-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .projects-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .projects-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #333333;
+            max-width: 800px;
+            margin: 1.5rem auto 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .projects-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border: 2px solid #e9ecef;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: #6c757d;
+            pointer-events: none;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #e9ecef;
+            background: #ffffff;
+            color: #495057;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border-color: #000000;
+            color: #000000;
+        }
+
+        .filter-btn.active {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
+        .project-card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            border-radius: 12px;
+            opacity: 0.8;
+        }
+
+        .project-image::after {
+            content: '{ }';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 0.8rem;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .project-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #333333;
+            margin-bottom: 1.2rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            background: #f8f9fa;
+            color: #495057;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .project-tag:hover {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+            transform: scale(1.05);
+        }
+
+        .project-button {
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .project-button:hover {
+            background: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-button:hover::before {
+            left: 100%;
+        }
+
+        .projects-pagination {
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pagination-btn {
+            background: #ffffff;
+            color: #495057;
+            border: 2px solid #e9ecef;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            min-width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination-btn:hover:not(.disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border-color: #000000;
+            color: #000000;
+        }
+
+        .pagination-btn.active {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f8f9fa;
+            color: #adb5bd;
+        }
+
+        .pagination-ellipsis {
+            color: #6c757d;
+            padding: 0.8rem 0.5rem;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            font-weight: bold;
+        }
+
+        .pagination-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin-top: 1rem;
+        }
+
+        .show-more-btn {
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .show-more-btn:hover {
+            background: #000000;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Project Detail Page Styles */
+        .project-detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .project-detail-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .project-detail-page {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 90%;
+            max-width: 800px;
+            height: 100%;
+            background: #ffffff;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+            z-index: 10001;
+            transition: right 0.4s ease;
+            overflow-y: auto;
+        }
+
+        .project-detail-page.active {
+            right: 0;
+        }
+
+        .project-detail-header {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            border-bottom: 1px solid #e9ecef;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .project-detail-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000000;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            margin: 0;
+        }
+
+        .project-detail-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #000000;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-detail-close:hover {
+            background: #f8f9fa;
+            color: #333333;
+            transform: scale(1.1);
+        }
+
+
+
+        /* Swipe indicator for mobile */
+        .mobile-swipe-indicator {
+            position: fixed;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            padding: 0.8rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            z-index: 10002;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            animation: pulseSwipe 2s ease-in-out infinite;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .mobile-swipe-indicator.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @keyframes pulseSwipe {
+            0%, 100% { opacity: 0.7; transform: translateY(-50%) scale(1); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.05); }
+        }
+
+        .project-detail-content {
+            padding: 2rem;
+        }
+
+        .project-detail-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #28a745;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        /* Image Carousel Styles */
+        .project-carousel {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #28a745;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            position: relative;
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(40, 167, 69, 0.1) 50%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .carousel-slide:hover::before {
+            opacity: 1;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: #000000;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .carousel-nav.prev {
+            left: 1rem;
+        }
+
+        .carousel-nav.next {
+            right: 1rem;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background: #000000;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-indicator:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: scale(1.1);
+        }
+
+        .carousel-counter {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-detail-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .project-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .project-meta-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 600;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .project-meta-value {
+            font-size: 1rem;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .project-detail-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #495057;
+            margin-bottom: 3rem;
+        }
+
+        .project-section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 1.5rem;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .project-tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-tech-tag {
+            background: #000000;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: default;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-tech-tag:hover {
+            background: #333333;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .project-action-btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .project-action-btn.primary {
+            background: #000000;
+            color: white;
+        }
+
+        .project-action-btn.secondary {
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        .project-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-action-btn.secondary:hover {
+            background: #000000;
+            color: white;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Experience Section Styles */
+        .experience-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 30%, #e9ecef 70%, #dee2e6 100%);
+            position: relative;
+        }
+
+        .experience-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 40% 20%, rgba(0,0,0,0.015) 0%, transparent 50%),
+                        radial-gradient(circle at 60% 80%, rgba(0,0,0,0.02) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .experience-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .terminal-command {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: bold;
+            color: #000000;
+            margin: 0 0 1.5rem 0;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .experience-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #333333;
+            max-width: 800px;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .column-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 2rem;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #000000 0%, #333333 50%, #666666 100%);
+            border-radius: 1px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .education-item {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .experience-item {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.7s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.9s; }
+
+        .timeline-marker {
+            position: absolute;
+            left: -23px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            background: #000000;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+
+        .timeline-content {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px) translateX(5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .timeline-year {
+            font-size: 0.9rem;
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+            opacity: 0.9;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .timeline-subtitle {
+            font-size: 1rem;
+            color: #adb5bd;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .timeline-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e9ecef;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .typewriter-text {
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline-block;
+            animation: typewriter 2s steps(30) 0.5s forwards;
+            width: 0;
+        }
+
+        /* Back to Top Button Styles */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .back-to-top:hover {
+            background: linear-gradient(135deg, #333333 0%, #666666 100%);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .back-to-top:active {
+            transform: translateY(-1px) scale(1.05);
+        }
+
+        .back-to-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-to-top:hover::before {
+            opacity: 1;
+        }
+
+        /* Footer Styles */
+        .footer-section {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #333333 100%);
+            color: #ffffff;
+            padding: 3rem 2rem 2rem;
+            position: relative;
+        }
+
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.02) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            color: #adb5bd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-social-link:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-social-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social-link:hover .footer-social-icon {
+            transform: scale(1.1);
+        }
+
+        .footer-copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            width: 100%;
+        }
+
+        .footer-copyright p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Mobile Navbar Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-toggle {
+                display: flex;
+                z-index: 1001;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem;
+                gap: 1.5rem;
+                transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-link {
+                width: 200px;
+                text-align: center;
+                margin: 0.3rem 0;
+                font-size: 1.1rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+                z-index: 1001;
+            }
+
+            .project-detail-page {
+                width: 100%;
+                max-width: none;
+                right: -100%;
+            }
+
+            .project-detail-header {
+                padding: 1rem;
+                position: sticky;
+                top: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                z-index: 100;
+            }
+
+            .project-detail-title {
+                font-size: 1.2rem;
+            }
+
+            .project-detail-content {
+                padding: 1rem;
+                padding-bottom: 6rem; /* Extra space for mobile close button */
+            }
+
+
+
+            .mobile-swipe-indicator {
+                display: none; /* Will be shown only when detail page is active */
+            }
+
+            /* Hide desktop close button on very small screens */
+            .project-detail-close {
+                width: 36px;
+                height: 36px;
+                font-size: 1.3rem;
+            }
+
+            .project-detail-meta {
+                gap: 1rem;
+                flex-direction: column;
+            }
+
+            .project-meta-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.8rem;
+                background: #f8f9fa;
+                border-radius: 8px;
+            }
+
+            .project-actions {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .project-action-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .project-carousel {
+                height: 220px;
+                margin-bottom: 1.5rem;
+            }
+
+            .carousel-nav {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+                background: rgba(0, 0, 0, 0.9);
+            }
+
+            .carousel-nav:hover {
+                background: #000000;
+            }
+
+            .carousel-nav.prev {
+                left: 0.5rem;
+            }
+
+            .carousel-nav.next {
+                right: 0.5rem;
+            }
+
+            .carousel-counter {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.3rem 0.6rem;
+                font-size: 0.75rem;
+            }
+
+            .carousel-indicators {
+                bottom: 0.8rem;
+            }
+
+            .carousel-indicator {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-container {
+                padding: 1.5rem;
+            }
+            
+            .about-section, .experience-section, .projects-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.8rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .about-content {
+                gap: 2.5rem;
+            }
+            
+            .profile-avatar {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .timeline-grid {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-container {
+                padding: 1rem;
+                min-height: 90vh;
+                padding-top: 5rem;
+            }
+            
+            .terminal-text {
+                font-size: clamp(1.3rem, 5vw, 2.2rem);
+                margin-bottom: 2rem;
+            }
+            
+            .execute-button {
+                padding: 0.9rem 1.8rem;
+                font-size: 1rem;
+            }
+            
+            .social-icons {
+                gap: 1.2rem;
+                margin-top: 2.5rem;
+            }
+
+            .about-section, .experience-section, .projects-section {
+                padding: 3rem 1rem;
+            }
+
+            .projects-controls {
+                gap: 1.5rem;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            .search-input {
+                padding: 0.9rem 1.3rem 0.9rem 2.8rem;
+                font-size: 0.95rem;
+                border-radius: 25px;
+            }
+
+            .search-icon {
+                width: 18px;
+                height: 18px;
+                left: 0.9rem;
+            }
+
+            .filter-container {
+                gap: 0.8rem;
+                justify-content: center;
+            }
+
+            .filter-btn {
+                padding: 0.7rem 1.3rem;
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+
+            .project-card {
+                margin: 0 auto;
+                max-width: 420px;
+            }
+
+            .project-image {
+                height: 200px;
+            }
+
+            .project-content {
+                padding: 1.3rem;
+            }
+
+            .project-title {
+                font-size: 1.2rem;
+                margin-bottom: 0.9rem;
+            }
+
+            .project-description {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                margin-bottom: 1.3rem;
+            }
+
+            .project-tags {
+                gap: 0.5rem;
+                margin-bottom: 1.6rem;
+            }
+
+            .project-tag {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .project-button {
+                padding: 0.8rem 1.4rem;
+                font-size: 0.9rem;
+            }
+
+            .show-more-btn {
+                padding: 0.9rem 1.8rem;
+                font-size: 0.95rem;
+            }
+
+            .pagination-controls {
+                gap: 0.4rem;
+                flex-wrap: wrap;
+            }
+
+            .pagination-btn {
+                padding: 0.7rem 0.9rem;
+                font-size: 0.85rem;
+                min-width: 38px;
+                height: 38px;
+            }
+
+            .pagination-ellipsis {
+                padding: 0.7rem 0.4rem;
+                font-size: 0.85rem;
+            }
+
+            .about-main {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                text-align: center;
+            }
+
+            .profile-avatar {
+                width: 220px;
+                height: 220px;
+            }
+
+            .profile-avatar::after {
+                font-size: 2.2rem;
+            }
+
+            .terminal-title {
+                font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+            }
+
+            .terminal-subtitle {
+                font-size: clamp(1.1rem, 3.2vw, 1.4rem);
+            }
+
+            .about-description, .experience-description {
+                font-size: 1.05rem;
+                line-height: 1.7;
+            }
+
+            .job-tags {
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .job-tag {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+
+            .stat-box {
+                padding: 1.8rem;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+
+            .timeline-grid {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+
+            .timeline {
+                padding-left: 1.8rem;
+            }
+
+            .timeline-marker {
+                left: -20px;
+                width: 15px;
+                height: 15px;
+            }
+
+            .terminal-command {
+                font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+            }
+
+            .timeline-content {
+                padding: 1.4rem;
+            }
+
+            .timeline-content:hover {
+                transform: translateY(-4px) translateX(3px);
+            }
+
+            .timeline-title {
+                font-size: 1.15rem;
+            }
+
+            .timeline-description {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 1.5rem;
+                right: 1.5rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                bottom: 1rem;
+                right: 1rem;
+                font-size: 1rem;
+            }
+
+            .hero-container {
+                padding: 0.8rem;
+                padding-top: 4.5rem;
+            }
+
+            .terminal-text {
+                margin-bottom: 1.8rem;
+                font-size: clamp(1.1rem, 4.5vw, 1.8rem);
+            }
+
+            .execute-button {
+                padding: 0.8rem 1.4rem;
+                font-size: 0.95rem;
+            }
+
+            .social-icons {
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+
+            .social-icon {
+                width: 22px;
+                height: 22px;
+            }
+
+            .about-section, .experience-section, .projects-section {
+                padding: 2.5rem 0.8rem;
+            }
+
+            .profile-avatar {
+                width: 180px;
+                height: 180px;
+            }
+
+            .profile-avatar::after {
+                font-size: 1.9rem;
+            }
+
+            .job-tag {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .timeline {
+                padding-left: 1.4rem;
+            }
+
+            .timeline-marker {
+                left: -17px;
+                width: 13px;
+                height: 13px;
+            }
+
+            .timeline-content {
+                padding: 1.1rem;
+            }
+
+            .column-title {
+                font-size: 1.15rem;
+            }
+
+            .search-input {
+                padding: 0.8rem 1.1rem 0.8rem 2.5rem;
+                font-size: 0.9rem;
+            }
+
+            .search-icon {
+                width: 16px;
+                height: 16px;
+                left: 0.8rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1.1rem;
+                font-size: 0.85rem;
+            }
+
+            .project-card {
+                max-width: 100%;
+            }
+
+            .project-content {
+                padding: 1.1rem;
+            }
+
+            .project-title {
+                font-size: 1.1rem;
+            }
+
+            .project-description {
+                font-size: 0.9rem;
+            }
+
+            .project-tag {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.75rem;
+            }
+
+            .project-button {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            .pagination-btn {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+                min-width: 34px;
+                height: 34px;
+            }
+
+            .stat-box {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero-container {
+                padding: 0.6rem;
+                padding-top: 4rem;
+            }
+
+            .terminal-text {
+                font-size: clamp(1rem, 4vw, 1.6rem);
+                margin-bottom: 1.5rem;
+            }
+
+            .execute-button {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .social-icons {
+                gap: 0.8rem;
+                margin-top: 1.8rem;
+            }
+
+            .social-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .about-section, .experience-section, .projects-section {
+                padding: 2rem 0.6rem;
+            }
+
+            .profile-avatar {
+                width: 160px;
+                height: 160px;
+            }
+
+            .profile-avatar::after {
+                font-size: 1.7rem;
+            }
+
+            .job-tag {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.8rem;
+            }
+
+            .timeline {
+                padding-left: 1.2rem;
+            }
+
+            .timeline-marker {
+                left: -16px;
+                width: 12px;
+                height: 12px;
+            }
+
+            .timeline-content {
+                padding: 1rem;
+            }
+
+            .column-title {
+                font-size: 1.1rem;
+            }
+
+            .search-input {
+                padding: 0.7rem 1rem 0.7rem 2.3rem;
+                font-size: 0.85rem;
+            }
+
+            .search-icon {
+                width: 15px;
+                height: 15px;
+                left: 0.7rem;
+            }
+
+            .filter-container {
+                gap: 0.6rem;
+            }
+
+            .filter-btn {
+                padding: 0.55rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .project-content {
+                padding: 1rem;
+            }
+
+            .project-title {
+                font-size: 1.05rem;
+            }
+
+            .project-description {
+                font-size: 0.85rem;
+            }
+
+            .project-tag {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+            }
+
+            .project-button {
+                padding: 0.65rem 1.1rem;
+                font-size: 0.8rem;
+            }
+
+            .pagination-btn {
+                padding: 0.55rem 0.7rem;
+                font-size: 0.75rem;
+                min-width: 32px;
+                height: 32px;
+            }
+
+            .footer-section {
+                padding: 2rem 0.8rem 1.5rem;
+            }
+
+            .footer-social {
+                gap: 1.2rem;
+            }
+
+            .footer-social-link {
+                width: 42px;
+                height: 42px;
+            }
+
+            .footer-social-icon {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <nav class="navbar" id="navbar">
+   <div class="nav-container"><a href="#home" class="nav-logo">DEV.PORTFOLIO</a>
+    <ul class="nav-menu" id="nav-menu">
+     <li class="nav-item"><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+     <li class="nav-item"><a href="#projects-featured" class="nav-link" data-section="projects-featured">Projects</a></li>
+     <li class="nav-item"><a href="#gallery" class="nav-link" data-section="gallery">Gallery</a></li>
+    </ul>
+    <div class="nav-toggle" id="nav-toggle"><span></span> <span></span> <span></span>
+    </div>
+   </div>
+  </nav>
+  <main class="hero-container" id="home">
+   <div class="terminal-text"><span class="typewriter-text" id="typing-text">INITIALIZING_PORTFOLIO_SYSTEM…</span> <span class="typing-cursor"></span>
+   </div><button class="execute-button" id="execute-btn" onclick="executeAction()"> &gt; EXECUTE_ME.py() </button>
+   <div class="social-icons"><a href="https://instagram.com/username" target="_blank" rel="noopener noreferrer" id="instagram-link">
+     <svg class="social-icon" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+     </svg></a> <a href="https://facebook.com/username" target="_blank" rel="noopener noreferrer" id="facebook-link">
+     <svg class="social-icon" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+     </svg></a> <a href="https://twitter.com/username" target="_blank" rel="noopener noreferrer" id="twitter-link">
+     <svg class="social-icon" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+     </svg></a> <a href="https://github.com/username" target="_blank" rel="noopener noreferrer" id="github-link">
+     <svg class="social-icon" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+     </svg></a> <a href="https://linkedin.com/in/username" target="_blank" rel="noopener noreferrer" id="linkedin-link">
+     <svg class="social-icon" viewbox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+     </svg></a>
+   </div>
+  </main>
+  <section class="about-section" id="projects">
+   <div class="about-container">
+    <div class="about-content">
+     <div class="about-header">
+      <h2 class="terminal-title" id="about-title"><span class="prompt-symbol">&gt;</span> About Me</h2>
+      <h3 class="terminal-subtitle" id="about-subtitle"><span class="prompt-symbol">&gt;</span> My Journey</h3>
+     </div>
+     <div class="about-main">
+      <div class="about-text">
+       <p class="about-description" id="about-description">Passionate full-stack developer with 5+ years of experience crafting digital solutions. I specialize in modern web technologies, creating seamless user experiences and robust backend systems. My journey began with curiosity about how things work under the hood, and evolved into a deep love for clean code, innovative problem-solving, and continuous learning.</p>
+       <div class="skills-section">
+        <h4 class="skills-title"><span class="prompt-symbol">&gt;</span> skills.list()</h4>
+        <div class="job-tags"><span class="job-tag">Full-Stack Developer</span> <span class="job-tag">Front-End Specialist</span> <span class="job-tag">Back-End Architect</span> <span class="job-tag">UI/UX Enthusiast</span>
+        </div>
+       </div>
+      </div>
+      <div class="profile-section">
+       <div class="profile-avatar"></div>
+       <div class="profile-info">
+        <div class="profile-name">
+         Pratama Jiwatmika
+        </div>
+        <div class="profile-role">
+         Full-Stack Engineer
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="stats-container">
+     <div class="stat-box">
+      <div class="stat-number">
+       5+
+      </div>
+      <div class="stat-label">
+       Years Experience
+      </div>
+     </div>
+     <div class="stat-box">
+      <div class="stat-number">
+       50+
+      </div>
+      <div class="stat-label">
+       Projects Completed
+      </div>
+     </div>
+     <div class="stat-box">
+      <div class="stat-number">
+       100+
+      </div>
+      <div class="stat-label">
+       Technologies Mastered
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <section class="experience-section" id="experience">
+   <div class="experience-container">
+    <div class="experience-header">
+     <h2 class="terminal-command" id="experience-title"><span class="prompt-symbol">&gt;</span> Experience</h2>
+     <p class="experience-description" id="experience-description">My professional journey spans across innovative startups and established companies, where I've honed my skills in full-stack development, led cross-functional teams, and delivered scalable solutions that drive business growth.</p>
+    </div>
+    <div class="timeline-grid">
+     <div class="education-column">
+      <h3 class="column-title" id="education-title">Education</h3>
+      <div class="timeline">
+       <div class="timeline-item education-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+         <div class="timeline-year">
+          2019 - 2023
+         </div>
+         <div class="timeline-title">
+          Bachelor of Computer Science
+         </div>
+         <div class="timeline-subtitle">
+          University of Technology
+         </div>
+         <div class="timeline-description">
+          Specialized in Software Engineering and Data Structures. Graduated Magna Cum Laude with focus on web technologies.
+         </div>
+        </div>
+       </div>
+       <div class="timeline-item education-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+         <div class="timeline-year">
+          2023
+         </div>
+         <div class="timeline-title">
+          AWS Cloud Practitioner
+         </div>
+         <div class="timeline-subtitle">
+          Amazon Web Services
+         </div>
+         <div class="timeline-description">
+          Certified in cloud computing fundamentals, AWS services, and cloud architecture best practices.
+         </div>
+        </div>
+       </div>
+       <div class="timeline-item education-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+         <div class="timeline-year">
+          2024
+         </div>
+         <div class="timeline-title">
+          Advanced React Development
+         </div>
+         <div class="timeline-subtitle">
+          Meta Professional Certificate
+         </div>
+         <div class="timeline-description">
+          Advanced concepts in React, Redux, and modern JavaScript frameworks for building scalable applications.
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="experience-column">
+      <h3 class="column-title" id="professional-title">Professional Experience</h3>
+      <div class="timeline">
+       <div class="timeline-item experience-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+         <div class="timeline-year">
+          2024 - Present
+         </div>
+         <div class="timeline-title">
+          Senior Full-Stack Developer
+         </div>
+         <div class="timeline-subtitle">
+          TechCorp Solutions
+         </div>
+         <div class="timeline-description">
+          Leading development of enterprise web applications using React, Node.js, and AWS. Mentoring junior developers and architecting scalable microservices.
+         </div>
+        </div>
+       </div>
+       <div class="timeline-item experience-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+         <div class="timeline-year">
+          2022 - 2024
+         </div>
+         <div class="timeline-title">
+          Frontend Developer
+         </div>
+         <div class="timeline-subtitle">
+          StartupHub Inc.
+         </div>
+         <div class="timeline-description">
+          Developed responsive web applications using modern JavaScript frameworks. Collaborated with UX/UI teams to implement pixel-perfect designs.
+         </div>
+        </div>
+       </div>
+       <div class="timeline-item experience-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+         <div class="timeline-year">
+          2021 - 2022
+         </div>
+         <div class="timeline-title">
+          Junior Web Developer
+         </div>
+         <div class="timeline-subtitle">
+          Digital Agency Pro
+         </div>
+         <div class="timeline-description">
+          Built custom websites and web applications for clients. Gained experience in full development lifecycle from concept to deployment.
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Project Detail Page -->
+  <div class="project-detail-overlay" id="project-detail-overlay" onclick="closeProjectDetail()"></div>
+  <div class="project-detail-page" id="project-detail-page">
+   <div class="project-detail-header">
+    <h2 class="project-detail-title" id="project-detail-title">Project Title</h2><button class="project-detail-close" onclick="closeProjectDetail()">×</button>
+   </div>
+   <div class="project-detail-content" id="project-detail-content"><!-- Content will be dynamically generated -->
+   </div><!-- Mobile Swipe Indicator -->
+   <div class="mobile-swipe-indicator" id="mobile-swipe-indicator"><span>←</span> <span>SWIPE</span>
+   </div>
+  </div><!-- Featured Projects Section -->
+  <section class="projects-section" id="projects-featured">
+   <div class="projects-container">
+    <div class="projects-header">
+     <h2 class="terminal-command" id="projects-title"><span class="prompt-symbol">&gt;</span> Featured Projects</h2>
+     <p class="projects-description" id="projects-description">A curated collection of my most impactful work, showcasing innovative solutions and cutting-edge technologies across web, mobile, and API development.</p>
+    </div>
+    <div class="projects-controls">
+     <div class="search-container"><input type="text" class="search-input" id="project-search" placeholder="Search projects…">
+      <svg class="search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle> <path d="m21 21-4.35-4.35" />
+      </svg>
+     </div>
+     <div class="filter-container"><button class="filter-btn active" data-filter="all">All</button> <button class="filter-btn" data-filter="web">Web Apps</button> <button class="filter-btn" data-filter="mobile">Mobile</button> <button class="filter-btn" data-filter="api">API</button> <button class="filter-btn" data-filter="design">Design</button>
+     </div>
+    </div>
+    <div class="projects-grid" id="projects-grid"><!-- Project cards will be dynamically generated -->
+    </div>
+    <div class="projects-pagination">
+     <div class="pagination-controls" id="pagination-controls"><!-- Pagination will be dynamically generated -->
+     </div><button class="show-more-btn" id="show-more-btn" style="display: none;"> <span class="prompt-symbol">&gt;</span> SHOW_MORE() </button>
+    </div>
+   </div>
+  </section><!-- Gallery Section -->
+  <section class="projects-section" id="gallery">
+   <div class="projects-container">
+    <div class="projects-header">
+     <h2 class="terminal-command" id="gallery-title"><span class="prompt-symbol">&gt;</span> Creative Gallery</h2>
+     <p class="projects-description" id="gallery-description">Explore my creative journey through visual designs, UI/UX concepts, and artistic explorations that showcase my passion for beautiful and functional digital experiences.</p>
+    </div>
+    <div class="projects-controls">
+     <div class="search-container"><input type="text" class="search-input" id="gallery-search" placeholder="Search gallery…">
+      <svg class="search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle> <path d="m21 21-4.35-4.35" />
+      </svg>
+     </div>
+     <div class="filter-container"><button class="filter-btn active" data-filter="all">All</button> <button class="filter-btn" data-filter="ui">UI Design</button> <button class="filter-btn" data-filter="branding">Branding</button> <button class="filter-btn" data-filter="illustration">Illustration</button> <button class="filter-btn" data-filter="photography">Photography</button>
+     </div>
+    </div>
+    <div class="projects-grid" id="gallery-grid"><!-- Gallery items will be dynamically generated -->
+    </div>
+    <div class="projects-pagination">
+     <div class="pagination-controls" id="gallery-pagination-controls"><!-- Pagination will be dynamically generated -->
+     </div><button class="show-more-btn" id="gallery-show-more-btn" style="display: none;"> <span class="prompt-symbol">&gt;</span> LOAD_MORE() </button>
+    </div>
+   </div>
+  </section><!-- Back to Top Button --> <button class="back-to-top" id="back-to-top" onclick="scrollToTop()" title="Back to Top"> ↑ </button> <!-- Footer Section -->
+  <footer class="footer-section">
+   <div class="footer-container">
+    <div class="footer-content">
+     <div class="footer-social"><a href="https://instagram.com/pratamajiwatmika" target="_blank" rel="noopener noreferrer" class="footer-social-link" id="footer-instagram">
+       <svg class="footer-social-icon" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+       </svg></a> <a href="https://facebook.com/pratamajiwatmika" target="_blank" rel="noopener noreferrer" class="footer-social-link" id="footer-facebook">
+       <svg class="footer-social-icon" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+       </svg></a> <a href="https://twitter.com/pratamajiwatmika" target="_blank" rel="noopener noreferrer" class="footer-social-link" id="footer-twitter">
+       <svg class="footer-social-icon" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+       </svg></a> <a href="https://github.com/pratamajiwatmika" target="_blank" rel="noopener noreferrer" class="footer-social-link" id="footer-github">
+       <svg class="footer-social-icon" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+       </svg></a> <a href="https://linkedin.com/in/pratamajiwatmika" target="_blank" rel="noopener noreferrer" class="footer-social-link" id="footer-linkedin">
+       <svg class="footer-social-icon" viewbox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+       </svg></a>
+     </div>
+     <div class="footer-copyright">
+      <p>© 2024 Pratama Jiwatmika. All rights reserved.</p>
+     </div>
+    </div>
+   </div>
+  </footer>
+  <script>
+        const defaultConfig = {
+            typing_text: "INITIALIZING_PORTFOLIO_SYSTEM…",
+            button_text: "> EXECUTE_ME.py()",
+            about_title: "About Me",
+            about_subtitle: "My Journey",
+            about_description: "Passionate full-stack developer with 5+ years of experience crafting digital solutions. I specialize in modern web technologies, creating seamless user experiences and robust backend systems. My journey began with curiosity about how things work under the hood, and evolved into a deep love for clean code, innovative problem-solving, and continuous learning.",
+            experience_title: "Experience",
+            experience_description: "My professional journey spans across innovative startups and established companies, where I've honed my skills in full-stack development, led cross-functional teams, and delivered scalable solutions that drive business growth.",
+            projects_title: "Featured Projects",
+            education_title: "Education",
+            professional_title: "Professional Experience",
+            instagram_url: "https://instagram.com/pratamajiwatmika",
+            facebook_url: "https://facebook.com/pratamajiwatmika",
+            twitter_url: "https://twitter.com/pratamajiwatmika",
+            github_url: "https://github.com/pratamajiwatmika",
+            linkedin_url: "https://linkedin.com/in/pratamajiwatmika"
+        };
+
+        async function render(config) {
+            const elements = {
+                'typing-text': (el, val) => el.textContent = val,
+                'execute-btn': (el, val) => el.textContent = val,
+                'about-title': (el, val) => el.innerHTML = `<span class="prompt-symbol">></span> ${val}`,
+                'about-subtitle': (el, val) => el.innerHTML = `<span class="prompt-symbol">></span> ${val}`,
+                'about-description': (el, val) => el.textContent = val,
+                'experience-title': (el, val) => el.innerHTML = `<span class="prompt-symbol">></span> ${val}`,
+                'experience-description': (el, val) => el.textContent = val,
+                'projects-title': (el, val) => el.innerHTML = `<span class="prompt-symbol">></span> ${val}`,
+                'education-title': (el, val) => el.textContent = val,
+                'professional-title': (el, val) => el.textContent = val,
+                'instagram-link': (el, val) => el.href = val,
+                'facebook-link': (el, val) => el.href = val,
+                'twitter-link': (el, val) => el.href = val,
+                'github-link': (el, val) => el.href = val,
+                'linkedin-link': (el, val) => el.href = val
+            };
+
+            const configMap = {
+                'typing-text': 'typing_text',
+                'execute-btn': 'button_text',
+                'about-title': 'about_title',
+                'about-subtitle': 'about_subtitle',
+                'about-description': 'about_description',
+                'experience-title': 'experience_title',
+                'experience-description': 'experience_description',
+                'projects-title': 'projects_title',
+                'education-title': 'education_title',
+                'professional-title': 'professional_title',
+                'instagram-link': 'instagram_url',
+                'facebook-link': 'facebook_url',
+                'twitter-link': 'twitter_url',
+                'github-link': 'github_url',
+                'linkedin-link': 'linkedin_url'
+            };
+
+            Object.keys(elements).forEach(id => {
+                const el = document.getElementById(id);
+                const configKey = configMap[id];
+                if (el && configKey) {
+                    elements[id](el, config[configKey] || defaultConfig[configKey]);
+                }
+            });
+        }
+
+        // Navbar functionality
+        function initNavbar() {
+            const navbar = document.getElementById('navbar');
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Mobile menu toggle
+            navToggle.addEventListener('click', () => {
+                navToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling and active link management
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+
+                    // Update active link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
+
+            // Scroll handling is now optimized and handled in DOMContentLoaded
+        }
+
+        function executeAction() {
+            const btn = document.getElementById('execute-btn');
+            const original = btn.textContent;
+            
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = '';
+                btn.textContent = '> EXECUTED_SUCCESSFULLY ✓';
+                btn.style.background = '#28a745';
+                setTimeout(() => {
+                    btn.textContent = original;
+                    btn.style.background = '#000000';
+                }, 1500);
+            }, 150);
+        }
+
+        // Gallery data
+        const galleryData = [
+            {
+                id: 1,
+                title: "Modern Dashboard UI",
+                description: "Clean and intuitive dashboard interface design with data visualization components and responsive layout.",
+                tags: ["Figma", "UI Design", "Dashboard", "Data Viz"],
+                category: "ui",
+                image: "dashboard-ui",
+                images: [
+                    { title: "Main Dashboard", label: "DASH" },
+                    { title: "Analytics View", label: "STATS" },
+                    { title: "Settings Panel", label: "CONFIG" },
+                    { title: "Mobile View", label: "MOBILE" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Brand Identity Design",
+                description: "Complete brand identity system including logo design, color palette, typography, and brand guidelines.",
+                tags: ["Branding", "Logo Design", "Identity", "Guidelines"],
+                category: "branding",
+                image: "brand-identity",
+                images: [
+                    { title: "Logo Variations", label: "LOGO" },
+                    { title: "Color System", label: "COLORS" },
+                    { title: "Typography", label: "FONTS" },
+                    { title: "Applications", label: "USAGE" }
+                ]
+            },
+            {
+                id: 3,
+                title: "Mobile App Interface",
+                description: "User-friendly mobile application interface with smooth animations and intuitive navigation patterns.",
+                tags: ["Mobile UI", "App Design", "UX", "Prototyping"],
+                category: "ui",
+                image: "mobile-app",
+                images: [
+                    { title: "Onboarding", label: "INTRO" },
+                    { title: "Main Interface", label: "HOME" },
+                    { title: "Navigation", label: "NAV" },
+                    { title: "Profile Screen", label: "USER" }
+                ]
+            },
+            {
+                id: 4,
+                title: "Digital Illustrations",
+                description: "Creative digital artwork and illustrations showcasing artistic skills and visual storytelling abilities.",
+                tags: ["Digital Art", "Illustration", "Creative", "Visual"],
+                category: "illustration",
+                image: "illustrations",
+                images: [
+                    { title: "Character Design", label: "CHAR" },
+                    { title: "Landscape Art", label: "SCENE" },
+                    { title: "Icon Set", label: "ICONS" },
+                    { title: "Abstract Art", label: "ART" }
+                ]
+            },
+            {
+                id: 5,
+                title: "Product Photography",
+                description: "Professional product photography with creative lighting and composition for e-commerce and marketing.",
+                tags: ["Photography", "Product", "Commercial", "Studio"],
+                category: "photography",
+                image: "product-photos",
+                images: [
+                    { title: "Tech Products", label: "TECH" },
+                    { title: "Fashion Items", label: "STYLE" },
+                    { title: "Food & Beverage", label: "FOOD" },
+                    { title: "Lifestyle", label: "LIFE" }
+                ]
+            },
+            {
+                id: 6,
+                title: "E-commerce Website UI",
+                description: "Modern e-commerce website design with focus on user experience and conversion optimization.",
+                tags: ["Web Design", "E-commerce", "UX", "Conversion"],
+                category: "ui",
+                image: "ecommerce-ui",
+                images: [
+                    { title: "Homepage", label: "HOME" },
+                    { title: "Product Pages", label: "PRODUCT" },
+                    { title: "Checkout Flow", label: "CART" },
+                    { title: "User Account", label: "ACCOUNT" }
+                ]
+            },
+            {
+                id: 7,
+                title: "Corporate Branding",
+                description: "Professional corporate branding package including business cards, letterheads, and marketing materials.",
+                tags: ["Corporate", "Business", "Stationery", "Marketing"],
+                category: "branding",
+                image: "corporate-brand",
+                images: [
+                    { title: "Business Cards", label: "CARDS" },
+                    { title: "Letterhead", label: "LETTER" },
+                    { title: "Brochures", label: "PRINT" },
+                    { title: "Digital Assets", label: "DIGITAL" }
+                ]
+            },
+            {
+                id: 8,
+                title: "Icon Design System",
+                description: "Comprehensive icon system with consistent style and multiple variations for digital applications.",
+                tags: ["Icons", "System Design", "UI Elements", "Consistency"],
+                category: "illustration",
+                image: "icon-system",
+                images: [
+                    { title: "Basic Icons", label: "BASIC" },
+                    { title: "Navigation", label: "NAV" },
+                    { title: "Actions", label: "ACTION" },
+                    { title: "Categories", label: "CATS" }
+                ]
+            },
+            {
+                id: 9,
+                title: "Portrait Photography",
+                description: "Creative portrait photography sessions with natural lighting and artistic composition techniques.",
+                tags: ["Portrait", "People", "Natural Light", "Creative"],
+                category: "photography",
+                image: "portraits",
+                images: [
+                    { title: "Professional", label: "PROF" },
+                    { title: "Creative", label: "ART" },
+                    { title: "Environmental", label: "ENV" },
+                    { title: "Studio", label: "STUDIO" }
+                ]
+            },
+            {
+                id: 10,
+                title: "Landing Page Design",
+                description: "High-converting landing page designs with clear call-to-actions and persuasive visual hierarchy.",
+                tags: ["Landing Page", "Conversion", "Marketing", "CTA"],
+                category: "ui",
+                image: "landing-page",
+                images: [
+                    { title: "Hero Section", label: "HERO" },
+                    { title: "Features", label: "FEAT" },
+                    { title: "Testimonials", label: "TEST" },
+                    { title: "Call to Action", label: "CTA" }
+                ]
+            },
+            {
+                id: 11,
+                title: "Package Design",
+                description: "Creative packaging design for consumer products with focus on shelf appeal and brand recognition.",
+                tags: ["Package Design", "Product", "Branding", "Retail"],
+                category: "branding",
+                image: "packaging",
+                images: [
+                    { title: "Box Design", label: "BOX" },
+                    { title: "Label Design", label: "LABEL" },
+                    { title: "Mockups", label: "MOCK" },
+                    { title: "Variations", label: "VARS" }
+                ]
+            },
+            {
+                id: 12,
+                title: "Abstract Digital Art",
+                description: "Experimental digital artwork exploring color, form, and composition in abstract visual expressions.",
+                tags: ["Abstract", "Digital Art", "Experimental", "Color"],
+                category: "illustration",
+                image: "abstract-art",
+                images: [
+                    { title: "Color Studies", label: "COLOR" },
+                    { title: "Form Exploration", label: "FORM" },
+                    { title: "Texture Work", label: "TEX" },
+                    { title: "Compositions", label: "COMP" }
+                ]
+            }
+        ];
+
+        // Projects data and functionality
+        const projectsData = [
+            {
+                id: 1,
+                title: "E-Commerce Platform",
+                description: "Full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard.",
+                tags: ["React", "Node.js", "MongoDB", "Stripe"],
+                category: "web",
+                image: "ecommerce",
+                images: [
+                    { title: "Homepage", label: "HOME" },
+                    { title: "Product Catalog", label: "CATALOG" },
+                    { title: "Shopping Cart", label: "CART" },
+                    { title: "Admin Dashboard", label: "ADMIN" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Task Management App",
+                description: "Cross-platform mobile app for team collaboration with real-time sync, push notifications, and offline support.",
+                tags: ["React Native", "Firebase", "Redux"],
+                category: "mobile",
+                image: "taskapp",
+                images: [
+                    { title: "Task List", label: "TASKS" },
+                    { title: "Project Board", label: "BOARD" },
+                    { title: "Team Chat", label: "CHAT" },
+                    { title: "Analytics", label: "STATS" }
+                ]
+            },
+            {
+                id: 3,
+                title: "Weather API Service",
+                description: "RESTful API providing real-time weather data with caching, rate limiting, and comprehensive documentation.",
+                tags: ["Python", "FastAPI", "Redis", "PostgreSQL"],
+                category: "api",
+                image: "weatherapi",
+                images: [
+                    { title: "API Documentation", label: "DOCS" },
+                    { title: "Response Format", label: "JSON" },
+                    { title: "Rate Limiting", label: "LIMITS" },
+                    { title: "Dashboard", label: "DASH" }
+                ]
+            },
+            {
+                id: 4,
+                title: "Portfolio Website",
+                description: "Responsive portfolio website with modern design, smooth animations, and optimized performance.",
+                tags: ["HTML", "CSS", "JavaScript", "GSAP"],
+                category: "design",
+                image: "portfolio",
+                images: [
+                    { title: "Hero Section", label: "HERO" },
+                    { title: "Projects Gallery", label: "WORK" },
+                    { title: "About Page", label: "ABOUT" },
+                    { title: "Contact Form", label: "CONTACT" }
+                ]
+            },
+            {
+                id: 5,
+                title: "Social Media Dashboard",
+                description: "Analytics dashboard for social media management with data visualization and automated reporting.",
+                tags: ["Vue.js", "D3.js", "Express", "MySQL"],
+                category: "web",
+                image: "dashboard",
+                images: [
+                    { title: "Overview", label: "OVERVIEW" },
+                    { title: "Analytics", label: "CHARTS" },
+                    { title: "Post Scheduler", label: "SCHEDULE" },
+                    { title: "Reports", label: "REPORTS" }
+                ]
+            },
+            {
+                id: 6,
+                title: "Fitness Tracker",
+                description: "Mobile fitness app with workout tracking, progress analytics, and social features for motivation.",
+                tags: ["Flutter", "Dart", "SQLite"],
+                category: "mobile",
+                image: "fitness",
+                images: [
+                    { title: "Workout Log", label: "WORKOUT" },
+                    { title: "Progress Charts", label: "PROGRESS" },
+                    { title: "Social Feed", label: "SOCIAL" },
+                    { title: "Profile", label: "PROFILE" }
+                ]
+            },
+            {
+                id: 7,
+                title: "Chat Application",
+                description: "Real-time messaging app with end-to-end encryption, file sharing, and group chat functionality.",
+                tags: ["Socket.io", "React", "Node.js", "MongoDB"],
+                category: "web",
+                image: "chat",
+                images: [
+                    { title: "Chat Interface", label: "CHAT" },
+                    { title: "Group Rooms", label: "GROUPS" },
+                    { title: "File Sharing", label: "FILES" },
+                    { title: "Settings", label: "CONFIG" }
+                ]
+            },
+            {
+                id: 8,
+                title: "Food Delivery App",
+                description: "Mobile app for food ordering with GPS tracking, payment integration, and restaurant management.",
+                tags: ["React Native", "Stripe", "Google Maps"],
+                category: "mobile",
+                image: "food",
+                images: [
+                    { title: "Restaurant List", label: "MENU" },
+                    { title: "Order Cart", label: "CART" },
+                    { title: "Live Tracking", label: "TRACK" },
+                    { title: "Payment", label: "PAY" }
+                ]
+            },
+            {
+                id: 9,
+                title: "Analytics API",
+                description: "Comprehensive analytics API with real-time data processing, custom dashboards, and reporting tools.",
+                tags: ["Node.js", "GraphQL", "Redis", "PostgreSQL"],
+                category: "api",
+                image: "analytics",
+                images: [
+                    { title: "API Endpoints", label: "API" },
+                    { title: "Data Models", label: "SCHEMA" },
+                    { title: "Query Builder", label: "QUERY" },
+                    { title: "Performance", label: "PERF" }
+                ]
+            },
+            {
+                id: 10,
+                title: "Brand Identity System",
+                description: "Complete brand identity design with logo, color palette, typography, and brand guidelines.",
+                tags: ["Figma", "Adobe Creative Suite", "Branding"],
+                category: "design",
+                image: "branding",
+                images: [
+                    { title: "Logo Design", label: "LOGO" },
+                    { title: "Color Palette", label: "COLORS" },
+                    { title: "Typography", label: "FONTS" },
+                    { title: "Brand Guide", label: "GUIDE" }
+                ]
+            },
+            {
+                id: 11,
+                title: "Learning Management System",
+                description: "Educational platform with course management, progress tracking, and interactive learning modules.",
+                tags: ["React", "Express", "MongoDB", "WebRTC"],
+                category: "web",
+                image: "lms",
+                images: [
+                    { title: "Course Library", label: "COURSES" },
+                    { title: "Video Player", label: "VIDEO" },
+                    { title: "Progress Track", label: "PROGRESS" },
+                    { title: "Certificates", label: "CERTS" }
+                ]
+            },
+            {
+                id: 12,
+                title: "Expense Tracker",
+                description: "Personal finance app with budget planning, expense categorization, and financial insights.",
+                tags: ["Flutter", "Firebase", "Charts"],
+                category: "mobile",
+                image: "expense",
+                images: [
+                    { title: "Expense List", label: "EXPENSES" },
+                    { title: "Budget Plan", label: "BUDGET" },
+                    { title: "Analytics", label: "CHARTS" },
+                    { title: "Categories", label: "TAGS" }
+                ]
+            }
+        ];
+
+        let currentFilter = 'all';
+        let searchQuery = '';
+        let currentPage = 1;
+        const projectsPerPage = 6;
+
+        // Gallery variables
+        let galleryCurrentFilter = 'all';
+        let gallerySearchQuery = '';
+        let galleryCurrentPage = 1;
+        const galleryItemsPerPage = 6;
+
+        function createProjectCard(project) {
+            return `
+                <div class="project-card" data-category="${project.category}">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                        </div>
+                        <button class="project-button" onclick="viewProjectDetails(${project.id})">
+                            VIEW_DETAILS()
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterProjects() {
+            let filteredProjects = projectsData;
+
+            // Apply category filter
+            if (currentFilter !== 'all') {
+                filteredProjects = filteredProjects.filter(project => project.category === currentFilter);
+            }
+
+            // Apply search filter
+            if (searchQuery) {
+                filteredProjects = filteredProjects.filter(project => 
+                    project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+                );
+            }
+
+            return filteredProjects;
+        }
+
+        function renderProjects() {
+            const projectsGrid = document.getElementById('projects-grid');
+            const filteredProjects = filterProjects();
+            const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+            const startIndex = (currentPage - 1) * projectsPerPage;
+            const endIndex = startIndex + projectsPerPage;
+            const projectsToShow = filteredProjects.slice(startIndex, endIndex);
+
+            // Check if no data found
+            if (filteredProjects.length === 0) {
+                projectsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;">🔍</div>
+                        <h3 style="font-size: 1.5rem; color: #000000; margin-bottom: 1rem; font-family: 'Source Code Pro', monospace;">
+                            > DATA_NOT_FOUND
+                        </h3>
+                        <p style="color: #666666; font-size: 1.1rem; margin-bottom: 2rem;">
+                            ${searchQuery ? `Tidak ada proyek yang ditemukan untuk pencarian "<strong>${searchQuery}</strong>"` : 'Tidak ada proyek yang ditemukan untuk kategori ini'}
+                        </p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            ${searchQuery ? `
+                                <button onclick="clearProjectSearch()" style="background: #000000; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-family: 'Source Code Pro', monospace; cursor: pointer; transition: all 0.3s ease;">
+                                    > CLEAR_SEARCH()
+                                </button>
+                            ` : ''}
+                            <button onclick="resetProjectFilters()" style="background: transparent; color: #000000; border: 2px solid #000000; padding: 0.8rem 1.5rem; border-radius: 8px; font-family: 'Source Code Pro', monospace; cursor: pointer; transition: all 0.3s ease;">
+                                > SHOW_ALL_PROJECTS()
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                projectsGrid.innerHTML = projectsToShow.map(createProjectCard).join('');
+                
+                // Animate cards
+                const cards = projectsGrid.querySelectorAll('.project-card');
+                cards.forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                });
+            }
+
+            // Render pagination
+            renderPagination(totalPages, filteredProjects.length);
+        }
+
+        function renderPagination(totalPages, totalProjects) {
+            const paginationControls = document.getElementById('pagination-controls');
+            
+            if (totalPages <= 1) {
+                paginationControls.innerHTML = '';
+                return;
+            }
+
+            let paginationHTML = '';
+
+            // Previous button
+            paginationHTML += `
+                <button class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" 
+                        onclick="changePage(${currentPage - 1})" 
+                        ${currentPage === 1 ? 'disabled' : ''}>
+                    ‹
+                </button>
+            `;
+
+            // Page numbers
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            // Adjust start page if we're near the end
+            if (endPage - startPage < maxVisiblePages - 1) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            // First page and ellipsis
+            if (startPage > 1) {
+                paginationHTML += `
+                    <button class="pagination-btn" onclick="changePage(1)">1</button>
+                `;
+                if (startPage > 2) {
+                    paginationHTML += `<span class="pagination-ellipsis">…</span>`;
+                }
+            }
+
+            // Page numbers
+            for (let i = startPage; i <= endPage; i++) {
+                paginationHTML += `
+                    <button class="pagination-btn ${i === currentPage ? 'active' : ''}" 
+                            onclick="changePage(${i})">
+                        ${i}
+                    </button>
+                `;
+            }
+
+            // Last page and ellipsis
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    paginationHTML += `<span class="pagination-ellipsis">…</span>`;
+                }
+                paginationHTML += `
+                    <button class="pagination-btn" onclick="changePage(${totalPages})">${totalPages}</button>
+                `;
+            }
+
+            // Next button
+            paginationHTML += `
+                <button class="pagination-btn ${currentPage === totalPages ? 'disabled' : ''}" 
+                        onclick="changePage(${currentPage + 1})" 
+                        ${currentPage === totalPages ? 'disabled' : ''}>
+                    ›
+                </button>
+            `;
+
+            paginationControls.innerHTML = paginationHTML;
+
+            // Add pagination info
+            const existingInfo = document.querySelector('.pagination-info');
+            if (existingInfo) {
+                existingInfo.remove();
+            }
+
+            const paginationInfo = document.createElement('div');
+            paginationInfo.className = 'pagination-info';
+            paginationInfo.textContent = `Showing ${(currentPage - 1) * projectsPerPage + 1}-${Math.min(currentPage * projectsPerPage, totalProjects)} of ${totalProjects} projects`;
+            document.querySelector('.projects-pagination').appendChild(paginationInfo);
+        }
+
+        function changePage(page) {
+            const filteredProjects = filterProjects();
+            const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+            
+            if (page < 1 || page > totalPages) return;
+            
+            currentPage = page;
+            renderProjects();
+            
+            // Scroll to projects section
+            document.getElementById('projects-featured').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+
+        function filterGallery() {
+            let filteredGallery = galleryData;
+
+            // Apply category filter
+            if (galleryCurrentFilter !== 'all') {
+                filteredGallery = filteredGallery.filter(item => item.category === galleryCurrentFilter);
+            }
+
+            // Apply search filter
+            if (gallerySearchQuery) {
+                filteredGallery = filteredGallery.filter(item => 
+                    item.title.toLowerCase().includes(gallerySearchQuery.toLowerCase()) ||
+                    item.description.toLowerCase().includes(gallerySearchQuery.toLowerCase()) ||
+                    item.tags.some(tag => tag.toLowerCase().includes(gallerySearchQuery.toLowerCase()))
+                );
+            }
+
+            return filteredGallery;
+        }
+
+        function renderGallery() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            const filteredGallery = filterGallery();
+            const totalPages = Math.ceil(filteredGallery.length / galleryItemsPerPage);
+            const startIndex = (galleryCurrentPage - 1) * galleryItemsPerPage;
+            const endIndex = startIndex + galleryItemsPerPage;
+            const galleryToShow = filteredGallery.slice(startIndex, endIndex);
+
+            // Check if no data found
+            if (filteredGallery.length === 0) {
+                galleryGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;">🎨</div>
+                        <h3 style="font-size: 1.5rem; color: #000000; margin-bottom: 1rem; font-family: 'Source Code Pro', monospace;">
+                            > GALLERY_EMPTY
+                        </h3>
+                        <p style="color: #666666; font-size: 1.1rem; margin-bottom: 2rem;">
+                            ${gallerySearchQuery ? `Tidak ada item gallery yang ditemukan untuk pencarian "<strong>${gallerySearchQuery}</strong>"` : 'Tidak ada item gallery yang ditemukan untuk kategori ini'}
+                        </p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            ${gallerySearchQuery ? `
+                                <button onclick="clearGallerySearch()" style="background: #000000; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-family: 'Source Code Pro', monospace; cursor: pointer; transition: all 0.3s ease;">
+                                    > CLEAR_SEARCH()
+                                </button>
+                            ` : ''}
+                            <button onclick="resetGalleryFilters()" style="background: transparent; color: #000000; border: 2px solid #000000; padding: 0.8rem 1.5rem; border-radius: 8px; font-family: 'Source Code Pro', monospace; cursor: pointer; transition: all 0.3s ease;">
+                                > SHOW_ALL_GALLERY()
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                galleryGrid.innerHTML = galleryToShow.map(createGalleryCard).join('');
+                
+                // Animate cards
+                const cards = galleryGrid.querySelectorAll('.project-card');
+                cards.forEach((card, index) => {
+                    card.style.animationDelay = `${index * 0.1}s`;
+                });
+            }
+
+            // Render pagination
+            renderGalleryPagination(totalPages, filteredGallery.length);
+        }
+
+        function createGalleryCard(item) {
+            return `
+                <div class="project-card" data-category="${item.category}">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">${item.title}</h3>
+                        <p class="project-description">${item.description}</p>
+                        <div class="project-tags">
+                            ${item.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                        </div>
+                        <button class="project-button" onclick="viewGalleryDetails(${item.id})">
+                            VIEW_DETAILS()
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGalleryPagination(totalPages, totalItems) {
+            const paginationControls = document.getElementById('gallery-pagination-controls');
+            
+            if (totalPages <= 1) {
+                paginationControls.innerHTML = '';
+                return;
+            }
+
+            let paginationHTML = '';
+
+            // Previous button
+            paginationHTML += `
+                <button class="pagination-btn ${galleryCurrentPage === 1 ? 'disabled' : ''}" 
+                        onclick="changeGalleryPage(${galleryCurrentPage - 1})" 
+                        ${galleryCurrentPage === 1 ? 'disabled' : ''}>
+                    ‹
+                </button>
+            `;
+
+            // Page numbers
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, galleryCurrentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            // Adjust start page if we're near the end
+            if (endPage - startPage < maxVisiblePages - 1) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            // First page and ellipsis
+            if (startPage > 1) {
+                paginationHTML += `
+                    <button class="pagination-btn" onclick="changeGalleryPage(1)">1</button>
+                `;
+                if (startPage > 2) {
+                    paginationHTML += `<span class="pagination-ellipsis">…</span>`;
+                }
+            }
+
+            // Page numbers
+            for (let i = startPage; i <= endPage; i++) {
+                paginationHTML += `
+                    <button class="pagination-btn ${i === galleryCurrentPage ? 'active' : ''}" 
+                            onclick="changeGalleryPage(${i})">
+                        ${i}
+                    </button>
+                `;
+            }
+
+            // Last page and ellipsis
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    paginationHTML += `<span class="pagination-ellipsis">…</span>`;
+                }
+                paginationHTML += `
+                    <button class="pagination-btn" onclick="changeGalleryPage(${totalPages})">${totalPages}</button>
+                `;
+            }
+
+            // Next button
+            paginationHTML += `
+                <button class="pagination-btn ${galleryCurrentPage === totalPages ? 'disabled' : ''}" 
+                        onclick="changeGalleryPage(${galleryCurrentPage + 1})" 
+                        ${galleryCurrentPage === totalPages ? 'disabled' : ''}>
+                    ›
+                </button>
+            `;
+
+            paginationControls.innerHTML = paginationHTML;
+
+            // Add pagination info
+            const existingInfo = document.querySelector('#gallery .pagination-info');
+            if (existingInfo) {
+                existingInfo.remove();
+            }
+
+            const paginationInfo = document.createElement('div');
+            paginationInfo.className = 'pagination-info';
+            paginationInfo.textContent = `Showing ${(galleryCurrentPage - 1) * galleryItemsPerPage + 1}-${Math.min(galleryCurrentPage * galleryItemsPerPage, totalItems)} of ${totalItems} items`;
+            document.querySelector('#gallery .projects-pagination').appendChild(paginationInfo);
+        }
+
+        function changeGalleryPage(page) {
+            const filteredGallery = filterGallery();
+            const totalPages = Math.ceil(filteredGallery.length / galleryItemsPerPage);
+            
+            if (page < 1 || page > totalPages) return;
+            
+            galleryCurrentPage = page;
+            renderGallery();
+            
+            // Scroll to gallery section
+            document.getElementById('gallery').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }
+
+        function viewGalleryDetails(itemId) {
+            const item = galleryData.find(i => i.id === itemId);
+            if (!item) return;
+
+            // Update content
+            updateProjectDetailContent(item);
+
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+
+            // Show with animation
+            setTimeout(() => {
+                document.getElementById('project-detail-overlay').classList.add('active');
+                document.getElementById('project-detail-page').classList.add('active');
+                
+                // Add keyboard listener for carousel navigation
+                document.addEventListener('keydown', handleCarouselKeyboard);
+                
+                // Initialize mobile swipe gestures
+                initMobileSwipeGestures();
+                
+                // Show mobile indicators after a delay
+                setTimeout(() => {
+                    showMobileIndicators();
+                }, 1000);
+            }, 10);
+        }
+
+        function initGallery() {
+            // Filter buttons for gallery
+            const gallerySection = document.getElementById('gallery');
+            const galleryFilterBtns = gallerySection.querySelectorAll('.filter-btn');
+            galleryFilterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    galleryFilterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    galleryCurrentFilter = btn.dataset.filter;
+                    galleryCurrentPage = 1; // Reset to first page
+                    renderGallery();
+                });
+            });
+
+            // Initial render
+            renderGallery();
+        }
+
+        function initProjects() {
+            // Filter buttons
+            const projectsSection = document.getElementById('projects-featured');
+            const filterBtns = projectsSection.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.filter;
+                    currentPage = 1; // Reset to first page
+                    renderProjects();
+                });
+            });
+
+            // Initial render
+            renderProjects();
+        }
+
+        // Project detail page functionality
+        function viewProjectDetails(projectId) {
+            const project = projectsData.find(p => p.id === projectId);
+            if (!project) return;
+
+            // Update content
+            updateProjectDetailContent(project);
+
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+
+            // Show with animation
+            setTimeout(() => {
+                document.getElementById('project-detail-overlay').classList.add('active');
+                document.getElementById('project-detail-page').classList.add('active');
+                
+                // Add keyboard listener for carousel navigation
+                document.addEventListener('keydown', handleCarouselKeyboard);
+                
+                // Initialize mobile swipe gestures
+                initMobileSwipeGestures();
+                
+                // Show mobile indicators after a delay
+                setTimeout(() => {
+                    showMobileIndicators();
+                }, 1000);
+            }, 10);
+        }
+
+        function closeProjectDetail() {
+            // Restore body scroll
+            document.body.style.overflow = '';
+
+            // Hide with animation
+            document.getElementById('project-detail-overlay').classList.remove('active');
+            document.getElementById('project-detail-page').classList.remove('active');
+
+            // Remove keyboard listener
+            document.removeEventListener('keydown', handleCarouselKeyboard);
+            
+            // Remove mobile swipe listeners
+            removeMobileSwipeGestures();
+            
+            // Hide mobile indicators
+            hideMobileIndicators();
+        }
+
+        // Mobile swipe gesture functionality
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+        let swipeThreshold = 100;
+        let swipeVelocityThreshold = 0.3;
+
+        function initMobileSwipeGestures() {
+            const detailPage = document.getElementById('project-detail-page');
+            
+            if (detailPage) {
+                detailPage.addEventListener('touchstart', handleTouchStart, { passive: true });
+                detailPage.addEventListener('touchmove', handleTouchMove, { passive: true });
+                detailPage.addEventListener('touchend', handleTouchEnd, { passive: true });
+            }
+        }
+
+        function removeMobileSwipeGestures() {
+            const detailPage = document.getElementById('project-detail-page');
+            
+            if (detailPage) {
+                detailPage.removeEventListener('touchstart', handleTouchStart);
+                detailPage.removeEventListener('touchmove', handleTouchMove);
+                detailPage.removeEventListener('touchend', handleTouchEnd);
+            }
+        }
+
+        function handleTouchStart(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }
+
+        function handleTouchMove(e) {
+            touchEndX = e.touches[0].clientX;
+            touchEndY = e.touches[0].clientY;
+        }
+
+        function handleTouchEnd(e) {
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            const absDeltaX = Math.abs(deltaX);
+            const absDeltaY = Math.abs(deltaY);
+
+            // Check if it's a horizontal swipe and not a vertical scroll
+            if (absDeltaX > absDeltaY && absDeltaX > swipeThreshold) {
+                // Swipe right to close (like going back)
+                if (deltaX > 0) {
+                    closeProjectDetail();
+                }
+            }
+        }
+
+        function showMobileIndicators() {
+            const swipeIndicator = document.getElementById('mobile-swipe-indicator');
+            
+            if (window.innerWidth <= 768) {
+                if (swipeIndicator) {
+                    swipeIndicator.style.display = 'flex';
+                    // Add visible class after a small delay for smooth animation
+                    setTimeout(() => {
+                        swipeIndicator.classList.add('visible');
+                    }, 100);
+                    
+                    // Hide swipe indicator after 3 seconds
+                    setTimeout(() => {
+                        if (swipeIndicator) {
+                            swipeIndicator.classList.remove('visible');
+                            setTimeout(() => {
+                                if (swipeIndicator) {
+                                    swipeIndicator.style.display = 'none';
+                                }
+                            }, 300);
+                        }
+                    }, 3000);
+                }
+            }
+        }
+
+        function hideMobileIndicators() {
+            const swipeIndicator = document.getElementById('mobile-swipe-indicator');
+            
+            if (swipeIndicator) {
+                swipeIndicator.classList.remove('visible');
+                setTimeout(() => {
+                    swipeIndicator.style.display = 'none';
+                }, 300);
+            }
+        }
+
+        function handleCarouselKeyboard(e) {
+            if (!document.getElementById('project-detail-page').classList.contains('active')) return;
+            
+            switch(e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    prevSlide();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                case 'Escape':
+                    e.preventDefault();
+                    closeProjectDetail();
+                    break;
+            }
+        }
+
+        // Carousel functionality
+        let currentSlide = 0;
+        let totalSlides = 0;
+
+        function createCarousel(project) {
+            const images = project.images || [{ title: project.title, label: project.category.toUpperCase() }];
+            totalSlides = images.length;
+            currentSlide = 0;
+
+            return `
+                <div class="project-carousel">
+                    <div class="carousel-container">
+                        <div class="carousel-track" id="carousel-track">
+                            ${images.map((img, index) => `
+                                <div class="carousel-slide">
+                                    { ${img.label} }
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        ${totalSlides > 1 ? `
+                            <button class="carousel-nav prev" onclick="prevSlide()">‹</button>
+                            <button class="carousel-nav next" onclick="nextSlide()">›</button>
+                            
+                            <div class="carousel-indicators">
+                                ${images.map((_, index) => `
+                                    <button class="carousel-indicator ${index === 0 ? 'active' : ''}" 
+                                            onclick="goToSlide(${index})"></button>
+                                `).join('')}
+                            </div>
+                            
+                            <div class="carousel-counter">
+                                <span id="carousel-current">1</span> / ${totalSlides}
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateCarousel() {
+            const track = document.getElementById('carousel-track');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            const counter = document.getElementById('carousel-current');
+            
+            if (track) {
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+            
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+            
+            if (counter) {
+                counter.textContent = currentSlide + 1;
+            }
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function updateProjectDetailContent(project) {
+            document.getElementById('project-detail-title').textContent = project.title;
+            
+            const content = document.getElementById('project-detail-content');
+            content.innerHTML = `
+                ${createCarousel(project)}
+                
+                <div class="project-detail-meta">
+                    <div class="project-meta-item">
+                        <div class="project-meta-label">CATEGORY</div>
+                        <div class="project-meta-value">${project.category.charAt(0).toUpperCase() + project.category.slice(1)}</div>
+                    </div>
+                    <div class="project-meta-item">
+                        <div class="project-meta-label">STATUS</div>
+                        <div class="project-meta-value">Completed</div>
+                    </div>
+                    <div class="project-meta-item">
+                        <div class="project-meta-label">YEAR</div>
+                        <div class="project-meta-value">2024</div>
+                    </div>
+                </div>
+
+                <div class="project-detail-description">
+                    ${project.description} This project showcases modern development practices, 
+                    clean architecture, and user-centered design principles. Built with scalability 
+                    and performance in mind, it demonstrates expertise in full-stack development 
+                    and attention to detail in both functionality and user experience.
+                </div>
+
+                <div class="project-section-title">> TECHNOLOGIES_USED</div>
+                <div class="project-tech-grid">
+                    ${project.tags.map(tag => `<span class="project-tech-tag">${tag}</span>`).join('')}
+                </div>
+
+                <div class="project-section-title">> KEY_FEATURES</div>
+                <div style="margin-bottom: 3rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #f1f3f4;">
+                        <div style="width: 20px; height: 20px; background: #28a745; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; font-weight: bold;">✓</div>
+                        <div>Responsive design that works on all devices</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #f1f3f4;">
+                        <div style="width: 20px; height: 20px; background: #28a745; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; font-weight: bold;">✓</div>
+                        <div>Modern and intuitive user interface</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #f1f3f4;">
+                        <div style="width: 20px; height: 20px; background: #28a745; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; font-weight: bold;">✓</div>
+                        <div>Optimized performance and fast loading</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem 0;">
+                        <div style="width: 20px; height: 20px; background: #28a745; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem; font-weight: bold;">✓</div>
+                        <div>Secure and scalable architecture</div>
+                    </div>
+                </div>
+
+                <div class="project-actions">
+                    <button class="project-action-btn primary" onclick="showDemo('${project.title}')">
+                        > VIEW_DEMO()
+                    </button>
+                    <button class="project-action-btn secondary" onclick="showCode('${project.title}')">
+                        > VIEW_CODE()
+                    </button>
+                </div>
+            `;
+        }
+
+        function showDemo(projectTitle) {
+            showToast(`> LOADING_DEMO("${projectTitle}")`);
+        }
+
+        function showCode(projectTitle) {
+            showToast(`> OPENING_REPOSITORY("${projectTitle}")`);
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 2rem;
+                right: 2rem;
+                background: #28a745;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                font-family: 'Source Code Pro', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+                font-weight: bold;
+                box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+                z-index: 10002;
+                transform: translateY(100px);
+                opacity: 0;
+                transition: all 0.3s ease;
+            `;
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateY(0)';
+                toast.style.opacity = '1';
+            }, 10);
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateY(100px)';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Performance optimizations
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+
+        // Lazy loading for images
+        function lazyLoadImages() {
+            const images = document.querySelectorAll('.project-image, .carousel-slide');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // Back to Top functionality
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function initBackToTop() {
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            if (backToTopBtn) {
+                // Show/hide button based on scroll position
+                const toggleBackToTop = () => {
+                    if (window.scrollY > 300) {
+                        backToTopBtn.classList.add('visible');
+                    } else {
+                        backToTopBtn.classList.remove('visible');
+                    }
+                };
+
+                // Add to scroll handler
+                window.addEventListener('scroll', toggleBackToTop, { passive: true });
+                
+                // Initial check
+                toggleBackToTop();
+            }
+        }
+
+        // Optimize scroll performance
+        const optimizedScrollHandler = throttle(() => {
+            const navbar = document.getElementById('navbar');
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            // Navbar scroll effect
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Back to top button visibility
+            if (backToTopBtn) {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            }
+
+            // Update active link based on scroll position
+            const sections = ['home', 'projects', 'projects-featured', 'experience', 'gallery'];
+            let current = '';
+
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        current = sectionId;
+                    }
+                }
+            });
+
+            if (current) {
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }, 16); // ~60fps
+
+        // Optimize search performance
+        function createOptimizedSearch(inputId, renderFunction) {
+            const searchInput = document.getElementById(inputId);
+            if (searchInput) {
+                const debouncedSearch = debounce((query) => {
+                    if (inputId === 'project-search') {
+                        searchQuery = query;
+                        currentPage = 1;
+                    } else if (inputId === 'gallery-search') {
+                        gallerySearchQuery = query;
+                        galleryCurrentPage = 1;
+                    }
+                    renderFunction();
+                }, 300);
+
+                searchInput.addEventListener('input', (e) => {
+                    debouncedSearch(e.target.value);
+                });
+            }
+        }
+
+        // Clear and reset functions
+        function clearProjectSearch() {
+            const searchInput = document.getElementById('project-search');
+            if (searchInput) {
+                searchInput.value = '';
+                searchQuery = '';
+                currentPage = 1;
+                renderProjects();
+            }
+        }
+
+        function resetProjectFilters() {
+            const searchInput = document.getElementById('project-search');
+            const filterBtns = document.querySelectorAll('#projects-featured .filter-btn');
+            
+            if (searchInput) {
+                searchInput.value = '';
+                searchQuery = '';
+            }
+            
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            filterBtns[0]?.classList.add('active'); // Set "All" as active
+            
+            currentFilter = 'all';
+            currentPage = 1;
+            renderProjects();
+        }
+
+        function clearGallerySearch() {
+            const searchInput = document.getElementById('gallery-search');
+            if (searchInput) {
+                searchInput.value = '';
+                gallerySearchQuery = '';
+                galleryCurrentPage = 1;
+                renderGallery();
+            }
+        }
+
+        function resetGalleryFilters() {
+            const searchInput = document.getElementById('gallery-search');
+            const filterBtns = document.querySelectorAll('#gallery .filter-btn');
+            
+            if (searchInput) {
+                searchInput.value = '';
+                gallerySearchQuery = '';
+            }
+            
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            filterBtns[0]?.classList.add('active'); // Set "All" as active
+            
+            galleryCurrentFilter = 'all';
+            galleryCurrentPage = 1;
+            renderGallery();
+        }
+
+        // Initialize navbar when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavbar();
+            initProjects();
+            initGallery();
+            initBackToTop();
+            lazyLoadImages();
+            
+            // Replace scroll event listener with optimized version
+            window.removeEventListener('scroll', () => {}); // Remove any existing
+            window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
+            
+            // Initialize optimized search
+            createOptimizedSearch('project-search', renderProjects);
+            createOptimizedSearch('gallery-search', renderGallery);
+        });
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                render,
+                mapToCapabilities: () => ({ recolorables: [], borderables: [], fontEditable: undefined, fontSizeable: undefined }),
+                mapToEditPanelValues: (config) => new Map(Object.keys(defaultConfig).map(key => [key, config[key] || defaultConfig[key]]))
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9908b8f700b2df9b',t:'MTc2MDc5NzcxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
