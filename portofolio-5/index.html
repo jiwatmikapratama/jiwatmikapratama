@@ -1,0 +1,3227 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filament Developer Portfolio</title>
+    <script src="/_sdk/element_sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: rgb(249 250 251);
+            color: rgb(17 24 39);
+            min-height: 100%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        /* Filament Design Variables */
+        :root {
+            --filament-primary: rgb(59 130 246);
+            --filament-primary-dark: rgb(37 99 235);
+            --filament-primary-light: rgb(96 165 250);
+            --filament-secondary: rgb(168 85 247);
+            --filament-success: rgb(34 197 94);
+            --filament-warning: rgb(245 158 11);
+            --filament-danger: rgb(239 68 68);
+            --filament-surface: rgb(255 255 255);
+            --filament-background: rgb(249 250 251);
+            --filament-gray-50: rgb(249 250 251);
+            --filament-gray-100: rgb(243 244 246);
+            --filament-gray-200: rgb(229 231 235);
+            --filament-gray-300: rgb(209 213 219);
+            --filament-gray-400: rgb(156 163 175);
+            --filament-gray-500: rgb(107 114 128);
+            --filament-gray-600: rgb(75 85 99);
+            --filament-gray-700: rgb(55 65 81);
+            --filament-gray-800: rgb(31 41 55);
+            --filament-gray-900: rgb(17 24 39);
+            --filament-text-primary: rgb(17 24 39);
+            --filament-text-secondary: rgb(107 114 128);
+            --filament-border: rgb(229 231 235);
+            --filament-ring: rgb(59 130 246 / 0.2);
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--filament-border);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: var(--filament-surface);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--filament-primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-logo:hover {
+            color: var(--filament-primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background: var(--filament-gray-50);
+            border-radius: 12px;
+            padding: 6px;
+            border: 1px solid var(--filament-border);
+        }
+
+        .nav-item {
+            margin: 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--filament-text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            color: var(--filament-text-primary);
+            background: var(--filament-gray-100);
+        }
+
+        .nav-link.active {
+            color: var(--filament-primary);
+            background: var(--filament-surface);
+            border: 1px solid var(--filament-border);
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            background: var(--filament-gray-50);
+            border: 1px solid var(--filament-border);
+        }
+
+        .nav-toggle span {
+            width: 20px;
+            height: 2px;
+            background: var(--filament-text-primary);
+            margin: 2px 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 1px;
+        }
+
+        /* Hero Section Styles */
+        .hero-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--filament-background) 0%, var(--filament-gray-50) 100%);
+            position: relative;
+            padding: 120px 24px 80px;
+            overflow: hidden;
+        }
+
+        .hero-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, var(--filament-primary) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, var(--filament-secondary) 0%, transparent 50%);
+            opacity: 0.03;
+            z-index: 1;
+        }
+
+        .hero-container>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Terminal Text Styles */
+        .terminal-text {
+            background: var(--filament-gray-900);
+            color: var(--filament-success);
+            padding: 32px 40px;
+            border-radius: 16px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 48px;
+            border: 1px solid var(--filament-gray-700);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            position: relative;
+            overflow: hidden;
+            max-width: 90%;
+        }
+
+        .terminal-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 32px;
+            background: var(--filament-gray-800);
+            border-bottom: 1px solid var(--filament-gray-700);
+        }
+
+        .terminal-text::after {
+            content: '● ● ●';
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            color: var(--filament-gray-500);
+            font-size: 12px;
+            letter-spacing: 4px;
+        }
+
+        .typewriter-text {
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 24px;
+            background: var(--filament-success);
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Execute Button Styles */
+        .execute-button {
+            background: var(--filament-primary);
+            color: var(--filament-surface);
+            border: none;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 64px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--filament-primary);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .execute-button:hover {
+            background: var(--filament-primary-dark);
+            border-color: var(--filament-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .execute-button:active {
+            transform: translateY(0);
+        }
+
+        .execute-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .execute-button:hover::before {
+            left: 100%;
+        }
+
+        /* Social Icons Styles */
+        .social-icons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: var(--filament-surface);
+            border: 1px solid var(--filament-border);
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .social-icons a:hover {
+            background: var(--filament-primary);
+            border-color: var(--filament-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--filament-text-secondary);
+            transition: fill 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .social-icons a:hover .social-icon {
+            fill: var(--filament-surface);
+        }
+
+        /* About Section Styles */
+        .about-section {
+            padding: 80px 24px;
+            background: var(--filament-background);
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            background: var(--filament-surface);
+            border-radius: 20px;
+            padding: 48px;
+            border: 1px solid var(--filament-border);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            margin-bottom: 32px;
+        }
+
+        .about-header {
+            margin-bottom: 40px;
+        }
+
+        .terminal-title {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--filament-text-primary);
+            margin: 0 0 16px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .terminal-subtitle {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--filament-text-secondary);
+            margin: 0;
+        }
+
+        .prompt-symbol {
+            color: var(--filament-primary);
+            margin-right: 8px;
+        }
+
+        .about-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .about-description {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--filament-text-secondary);
+            margin: 0;
+        }
+
+        .skills-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .skills-title {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--filament-text-primary);
+            margin: 0;
+        }
+
+        .job-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .job-tag {
+            background: var(--filament-primary);
+            color: var(--filament-surface);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid var(--filament-primary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .job-tag:hover {
+            background: var(--filament-primary-dark);
+            border-color: var(--filament-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 24px;
+            padding: 32px;
+            background: var(--filament-gray-50);
+            border-radius: 16px;
+            border: 1px solid var(--filament-border);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--filament-primary), var(--filament-secondary));
+            border: 4px solid var(--filament-surface);
+            box-shadow: 0 8px 16px -4px rgb(0 0 0 / 0.1);
+            position: relative;
+        }
+
+        .profile-avatar::before {
+            content: '👨‍💻';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--filament-text-primary);
+        }
+
+        .profile-role {
+            font-size: 16px;
+            color: var(--filament-text-secondary);
+            font-weight: 500;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .stat-box {
+            background: var(--filament-surface);
+            padding: 32px 24px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--filament-border);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--filament-primary);
+            margin-bottom: 8px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--filament-text-secondary);
+            font-weight: 500;
+        }
+
+        /* Timeline Section Styles */
+        .timeline-section {
+            padding: 80px 24px;
+            background: var(--filament-gray-50);
+            position: relative;
+        }
+
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .timeline-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .column-title {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--filament-text-primary);
+            margin: 0 0 32px 0;
+            text-align: center;
+            padding: 16px 24px;
+            background: var(--filament-surface);
+            border-radius: 12px;
+            border: 1px solid var(--filament-border);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--filament-primary), var(--filament-secondary));
+            border-radius: 1px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 48px;
+            background: var(--filament-surface);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--filament-border);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -40px;
+            top: 32px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid var(--filament-surface);
+            box-shadow: 0 0 0 2px var(--filament-primary);
+            z-index: 2;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .experience-item .timeline-marker {
+            background: var(--filament-primary);
+        }
+
+        .education-item .timeline-marker {
+            background: var(--filament-secondary);
+        }
+
+        .timeline-item:hover .timeline-marker {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 4px var(--filament-primary);
+        }
+
+        .timeline-year {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--filament-primary);
+            margin-bottom: 8px;
+            padding: 4px 12px;
+            background: var(--filament-gray-50);
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid var(--filament-border);
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--filament-text-primary);
+            margin: 0 0 8px 0;
+            line-height: 1.3;
+        }
+
+        .timeline-subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--filament-text-secondary);
+            margin: 0 0 16px 0;
+            font-style: italic;
+        }
+
+        .timeline-description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--filament-text-secondary);
+            margin: 0;
+        }
+
+        /* Projects Section Styles */
+        .projects-section {
+            padding: 80px 24px;
+            background: var(--filament-background);
+            position: relative;
+        }
+
+        .projects-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .projects-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .terminal-command {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--filament-text-primary);
+            margin: 0 0 16px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .projects-description {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--filament-text-secondary);
+            margin: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .projects-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 48px;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 48px;
+            font-size: 16px;
+            border: 1px solid var(--filament-border);
+            border-radius: 12px;
+            background: var(--filament-surface);
+            color: var(--filament-text-primary);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-sizing: border-box;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--filament-primary);
+            box-shadow: 0 0 0 3px var(--filament-ring);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: var(--filament-text-secondary);
+            pointer-events: none;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: var(--filament-gray-50);
+            padding: 8px;
+            border-radius: 16px;
+            border: 1px solid var(--filament-border);
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--filament-text-secondary);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .filter-btn:hover {
+            background: var(--filament-gray-100);
+            color: var(--filament-text-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--filament-primary);
+            color: var(--filament-surface);
+            box-shadow: 0 2px 4px 0 rgb(0 0 0 / 0.1);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .project-card {
+            background: var(--filament-surface);
+            border-radius: 20px;
+            border: 1px solid var(--filament-border);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--filament-primary), var(--filament-secondary));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+        }
+
+        .project-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            opacity: 0.9;
+        }
+
+        .project-content {
+            padding: 24px;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--filament-text-primary);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .project-status {
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .status-live {
+            background: var(--filament-success);
+            color: var(--filament-surface);
+        }
+
+        .status-development {
+            background: var(--filament-warning);
+            color: var(--filament-surface);
+        }
+
+        .status-completed {
+            background: var(--filament-primary);
+            color: var(--filament-surface);
+        }
+
+        .project-description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--filament-text-secondary);
+            margin: 0 0 20px 0;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            background: var(--filament-gray-100);
+            color: var(--filament-text-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--filament-border);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .project-btn {
+            flex: 1;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--filament-primary);
+            color: var(--filament-surface);
+            border: 1px solid var(--filament-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--filament-primary-dark);
+            border-color: var(--filament-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--filament-text-secondary);
+            border: 1px solid var(--filament-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--filament-gray-50);
+            color: var(--filament-text-primary);
+            border-color: var(--filament-gray-300);
+        }
+
+        .projects-pagination {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .pagination-btn {
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid var(--filament-border);
+            border-radius: 8px;
+            background: var(--filament-surface);
+            color: var(--filament-text-secondary);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .pagination-btn:hover {
+            background: var(--filament-gray-50);
+            color: var(--filament-text-primary);
+        }
+
+        .pagination-btn.active {
+            background: var(--filament-primary);
+            color: var(--filament-surface);
+            border-color: var(--filament-primary);
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-ellipsis {
+            padding: 8px 4px;
+            font-size: 14px;
+            color: var(--filament-text-secondary);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            user-select: none;
+        }
+
+        .page-info {
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .page-text {
+            font-size: 14px;
+            color: var(--filament-text-secondary);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            background: var(--filament-gray-50);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--filament-border);
+        }
+
+        .show-more-btn {
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            background: var(--filament-primary);
+            color: var(--filament-surface);
+            border: 1px solid var(--filament-primary);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .show-more-btn:hover {
+            background: var(--filament-primary-dark);
+            border-color: var(--filament-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--filament-text-secondary);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            grid-column: 1 / -1;
+        }
+
+        .no-results-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* Project Detail Modal Styles */
+        .project-detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-detail-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .project-detail-page {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 800px;
+            height: 100vh;
+            background: var(--filament-surface);
+            z-index: 2001;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-detail-page.active {
+            transform: translateX(0);
+        }
+
+        .project-detail-header {
+            position: sticky;
+            top: 0;
+            background: var(--filament-surface);
+            border-bottom: 1px solid var(--filament-border);
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+
+        .project-detail-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--filament-text-primary);
+            margin: 0;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .project-detail-close {
+            width: 48px;
+            height: 48px;
+            border: none;
+            background: var(--filament-gray-100);
+            color: var(--filament-text-secondary);
+            border-radius: 12px;
+            font-size: 24px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-detail-close:hover {
+            background: var(--filament-danger);
+            color: var(--filament-surface);
+            transform: scale(1.05);
+        }
+
+        .project-detail-content {
+            padding: 32px;
+        }
+
+        .project-hero {
+            margin-bottom: 48px;
+        }
+
+        /* Image Carousel Styles */
+        .project-carousel {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-slides {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-slide.gradient-1 {
+            background: linear-gradient(135deg, var(--filament-primary), var(--filament-secondary));
+        }
+
+        .carousel-slide.gradient-2 {
+            background: linear-gradient(135deg, var(--filament-secondary), var(--filament-warning));
+        }
+
+        .carousel-slide.gradient-3 {
+            background: linear-gradient(135deg, var(--filament-success), var(--filament-primary));
+        }
+
+        .carousel-slide.gradient-4 {
+            background: linear-gradient(135deg, var(--filament-warning), var(--filament-danger));
+        }
+
+        .carousel-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+        }
+
+        .carousel-slide-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .carousel-slide-icon {
+            font-size: 80px;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+
+        .carousel-slide-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .carousel-slide-description {
+            font-size: 14px;
+            opacity: 0.9;
+            max-width: 250px;
+            line-height: 1.4;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            font-size: 20px;
+            color: var(--filament-text-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-nav.prev {
+            left: 16px;
+        }
+
+        .carousel-nav.next {
+            right: 16px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+
+        .carousel-indicator.active {
+            background: white;
+            transform: scale(1.2);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .carousel-counter {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            z-index: 10;
+        }
+
+        .project-hero-icon {
+            font-size: 80px;
+            opacity: 0.9;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .project-status-large {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .project-category-badge {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            background: var(--filament-gray-100);
+            color: var(--filament-text-secondary);
+            border-radius: 20px;
+            border: 1px solid var(--filament-border);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .project-description-full {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--filament-text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .project-section {
+            margin-bottom: 48px;
+        }
+
+        .project-section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--filament-text-primary);
+            margin: 0 0 16px 0;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .project-tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .tech-badge {
+            padding: 12px 16px;
+            background: var(--filament-gray-50);
+            border: 1px solid var(--filament-border);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--filament-text-primary);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tech-badge:hover {
+            background: var(--filament-primary);
+            color: var(--filament-surface);
+            border-color: var(--filament-primary);
+            transform: translateY(-2px);
+        }
+
+        .project-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .project-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--filament-border);
+            font-size: 16px;
+            color: var(--filament-text-secondary);
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .project-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--filament-success);
+            font-weight: 600;
+        }
+
+        .project-features li:last-child {
+            border-bottom: none;
+        }
+
+        .project-actions-large {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .project-btn-large {
+            flex: 1;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .mobile-swipe-indicator {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: var(--filament-gray-900);
+            color: var(--filament-surface);
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            z-index: 2002;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mobile-swipe-indicator.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-swipe-indicator span:first-child {
+            animation: swipeLeft 2s infinite;
+        }
+
+        @keyframes swipeLeft {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-8px);
+            }
+        }
+
+        /* Demo Content */
+        .demo-content {
+            padding: 48px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 48px;
+            background: var(--filament-surface);
+            border-radius: 16px;
+            border: 1px solid var(--filament-border);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .demo-section h2 {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--filament-text-primary);
+            margin: 0 0 16px 0;
+            letter-spacing: -1px;
+        }
+
+        .demo-section p {
+            font-size: 18px;
+            color: var(--filament-text-secondary);
+            margin: 0;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* Back to Top Button Styles */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 56px;
+            height: 56px;
+            background: var(--filament-primary);
+            color: var(--filament-surface);
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--filament-primary-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top:active {
+            transform: translateY(-2px);
+        }
+
+        /* Footer Section Styles */
+        .footer-section {
+            background: var(--filament-gray-900);
+            color: var(--filament-surface);
+            padding: 48px 24px 32px;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--filament-primary), transparent);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            text-align: center;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--filament-gray-800);
+            border: 1px solid var(--filament-gray-700);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--filament-primary), var(--filament-secondary));
+            opacity: 0;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .footer-social-link:hover::before {
+            opacity: 1;
+        }
+
+        .footer-social-link:hover {
+            transform: translateY(-4px);
+            border-color: var(--filament-primary);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .footer-social-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--filament-gray-300);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-social-link:hover .footer-social-icon {
+            fill: var(--filament-surface);
+            transform: scale(1.1);
+        }
+
+        .footer-copyright {
+            border-top: 1px solid var(--filament-gray-800);
+            padding-top: 24px;
+            width: 100%;
+        }
+
+        .footer-copyright p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--filament-gray-400);
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            font-weight: 400;
+        }
+
+        /* Mobile Footer Styles */
+        @media (max-width: 768px) {
+            .back-to-top {
+                bottom: 24px;
+                right: 24px;
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+
+            .footer-section {
+                padding: 40px 16px 24px;
+                margin-top: 60px;
+            }
+
+            .footer-content {
+                gap: 24px;
+            }
+
+            .footer-social {
+                gap: 16px;
+            }
+
+            .footer-social-link {
+                width: 44px;
+                height: 44px;
+            }
+
+            .footer-social-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .footer-copyright {
+                padding-top: 20px;
+            }
+
+            .footer-copyright p {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+                font-size: 18px;
+            }
+
+            .footer-social {
+                gap: 12px;
+            }
+
+            .footer-social-link {
+                width: 40px;
+                height: 40px;
+            }
+
+            .footer-social-icon {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 16px;
+                height: 64px;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--filament-surface);
+                border: none;
+                border-radius: 0;
+                border-bottom: 1px solid var(--filament-border);
+                flex-direction: column;
+                padding: 16px;
+                gap: 4px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-link {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 16px;
+                font-size: 16px;
+            }
+
+            .hero-container {
+                padding: 100px 16px 60px;
+            }
+
+            .terminal-text {
+                font-size: 18px;
+                padding: 24px 28px;
+                margin-bottom: 32px;
+            }
+
+            .execute-button {
+                font-size: 16px;
+                padding: 14px 28px;
+                margin-bottom: 48px;
+            }
+
+            .social-icons a {
+                width: 48px;
+                height: 48px;
+            }
+
+            .social-icon {
+                width: 20px;
+                height: 20px;
+            }
+
+            .demo-section {
+                padding: 32px 24px;
+                margin-bottom: 24px;
+            }
+
+            .demo-section h2 {
+                font-size: 32px;
+            }
+
+            .projects-section {
+                padding: 60px 16px;
+            }
+
+            .projects-controls {
+                gap: 16px;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            .filter-container {
+                padding: 6px;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .project-card {
+                margin: 0 auto;
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-section {
+                padding: 60px 16px;
+            }
+
+            .about-content {
+                padding: 32px 24px;
+            }
+
+            .about-main {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .terminal-title {
+                font-size: 24px;
+            }
+
+            .terminal-subtitle {
+                font-size: 18px;
+            }
+
+            .about-description {
+                font-size: 16px;
+            }
+
+            .profile-section {
+                padding: 24px;
+                order: -1;
+            }
+
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-avatar::before {
+                font-size: 40px;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .stat-box {
+                padding: 24px 20px;
+            }
+
+            .stat-number {
+                font-size: 28px;
+            }
+
+            .timeline-section {
+                padding: 60px 16px;
+            }
+
+            .timeline-header {
+                margin-bottom: 48px;
+            }
+
+            .timeline-columns {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .column-title {
+                font-size: 20px;
+                padding: 12px 20px;
+                margin-bottom: 24px;
+            }
+
+            .timeline {
+                padding-left: 24px;
+            }
+
+            .timeline::before {
+                left: 12px;
+            }
+
+            .timeline-marker {
+                left: -32px;
+                width: 12px;
+                height: 12px;
+                top: 28px;
+            }
+
+            .timeline-item {
+                padding: 20px;
+                margin-bottom: 32px;
+            }
+
+            .timeline-title {
+                font-size: 18px;
+            }
+
+            .timeline-subtitle {
+                font-size: 14px;
+            }
+
+            .timeline-description {
+                font-size: 14px;
+            }
+
+            /* Project Detail Mobile Styles */
+            .project-detail-page {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .project-detail-header {
+                padding: 20px 24px;
+            }
+
+            .project-detail-title {
+                font-size: 24px;
+            }
+
+            .project-detail-close {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .project-detail-content {
+                padding: 24px;
+            }
+
+            .project-carousel {
+                height: 200px;
+            }
+
+            .carousel-slide-icon {
+                font-size: 60px;
+                margin-bottom: 12px;
+            }
+
+            .carousel-slide-title {
+                font-size: 16px;
+                margin-bottom: 6px;
+            }
+
+            .carousel-slide-description {
+                font-size: 12px;
+                max-width: 200px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .carousel-nav.prev {
+                left: 12px;
+            }
+
+            .carousel-nav.next {
+                right: 12px;
+            }
+
+            .carousel-indicators {
+                bottom: 12px;
+                gap: 6px;
+            }
+
+            .carousel-indicator {
+                width: 10px;
+                height: 10px;
+            }
+
+            .carousel-counter {
+                top: 12px;
+                right: 12px;
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+
+            .project-hero-icon {
+                font-size: 60px;
+            }
+
+            .project-tech-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 8px;
+            }
+
+            .tech-badge {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .project-actions-large {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .mobile-swipe-indicator {
+                bottom: 24px;
+                right: 24px;
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .terminal-text {
+                font-size: 16px;
+                padding: 20px 24px;
+                max-width: 95%;
+            }
+
+            .execute-button {
+                font-size: 14px;
+                padding: 12px 24px;
+            }
+
+            .social-icons {
+                gap: 12px;
+            }
+
+            .social-icons a {
+                width: 44px;
+                height: 44px;
+            }
+
+            .social-icon {
+                width: 18px;
+                height: 18px;
+            }
+
+            .about-content {
+                padding: 24px 20px;
+            }
+
+            .terminal-title {
+                font-size: 20px;
+            }
+
+            .terminal-subtitle {
+                font-size: 16px;
+            }
+
+            .job-tags {
+                gap: 8px;
+            }
+
+            .job-tag {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+            }
+
+            .profile-avatar::before {
+                font-size: 32px;
+            }
+
+            .profile-name {
+                font-size: 18px;
+            }
+
+            .profile-role {
+                font-size: 14px;
+            }
+
+            .projects-controls {
+                gap: 12px;
+            }
+
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .project-content {
+                padding: 20px;
+            }
+
+            .project-title {
+                font-size: 18px;
+            }
+
+            .project-description {
+                font-size: 14px;
+            }
+
+            .tech-tag {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+
+            .project-btn {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+    </style>
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container"><a href="#home" class="nav-logo" id="navLogo">DEV.PORTFOLIO</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link active" data-section="home" id="homeLink">Home</a>
+                </li>
+                <li class="nav-item"><a href="#about" class="nav-link" data-section="about" id="aboutLink">About</a>
+                </li>
+                <li class="nav-item"><a href="#timeline" class="nav-link" data-section="timeline"
+                        id="timelineLink">Timeline</a></li>
+                <li class="nav-item"><a href="#projects-featured" class="nav-link" data-section="projects-featured"
+                        id="projectsLink">Projects</a></li>
+                <li class="nav-item"><a href="#gallery" class="nav-link" data-section="gallery"
+                        id="galleryLink">Gallery</a></li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle"><span></span> <span></span> <span></span>
+            </div>
+        </div>
+    </nav><!-- Hero Section -->
+    <main class="hero-container" id="home">
+        <div class="terminal-text"><span class="typewriter-text" id="typing-text">INITIALIZING_PORTFOLIO_SYSTEM…</span>
+            <span class="typing-cursor"></span>
+        </div><button class="execute-button" id="execute-btn" onclick="executeAction()"> &gt; EXECUTE_ME.py() </button>
+        <div class="social-icons"><a href="https://instagram.com/username" target="_blank" rel="noopener noreferrer"
+                id="instagram-link">
+                <svg class="social-icon" viewbox="0 0 24 24">
+                    <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg></a> <a href="https://facebook.com/username" target="_blank" rel="noopener noreferrer"
+                id="facebook-link">
+                <svg class="social-icon" viewbox="0 0 24 24">
+                    <path
+                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg></a> <a href="https://twitter.com/username" target="_blank" rel="noopener noreferrer"
+                id="twitter-link">
+                <svg class="social-icon" viewbox="0 0 24 24">
+                    <path
+                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg></a> <a href="https://github.com/username" target="_blank" rel="noopener noreferrer"
+                id="github-link">
+                <svg class="social-icon" viewbox="0 0 24 24">
+                    <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg></a> <a href="https://linkedin.com/in/username" target="_blank" rel="noopener noreferrer"
+                id="linkedin-link">
+                <svg class="social-icon" viewbox="0 0 24 24">
+                    <path
+                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg></a>
+        </div>
+    </main><!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <div class="about-header">
+                    <h2 class="terminal-title" id="about-title"><span class="prompt-symbol">&gt;</span> About Me</h2>
+                    <h3 class="terminal-subtitle" id="about-subtitle"><span class="prompt-symbol">&gt;</span> My Journey
+                    </h3>
+                </div>
+                <div class="about-main">
+                    <div class="about-text">
+                        <p class="about-description" id="about-description">Passionate full-stack developer with 5+
+                            years of experience crafting digital solutions. I specialize in modern web technologies,
+                            creating seamless user experiences and robust backend systems. My journey began with
+                            curiosity about how things work under the hood, and evolved into a deep love for clean code,
+                            innovative problem-solving, and continuous learning.</p>
+                        <div class="skills-section">
+                            <h4 class="skills-title"><span class="prompt-symbol">&gt;</span> skills.list()</h4>
+                            <div class="job-tags"><span class="job-tag">Full-Stack Developer</span> <span
+                                    class="job-tag">Front-End Specialist</span> <span class="job-tag">Back-End
+                                    Architect</span> <span class="job-tag">UI/UX Enthusiast</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-section">
+                        <div class="profile-avatar"></div>
+                        <div class="profile-info">
+                            <div class="profile-name">
+                                Pratama Jiwatmika
+                            </div>
+                            <div class="profile-role">
+                                Full-Stack Engineer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-number">
+                        5+
+                    </div>
+                    <div class="stat-label">
+                        Years Experience
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">
+                        50+
+                    </div>
+                    <div class="stat-label">
+                        Projects Completed
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">
+                        100+
+                    </div>
+                    <div class="stat-label">
+                        Technologies Mastered
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- Timeline Section -->
+    <section class="timeline-section" id="timeline">
+        <div class="timeline-container">
+            <div class="timeline-header">
+                <h2 class="terminal-title" id="timeline-title"><span class="prompt-symbol">&gt;</span> Career Timeline
+                </h2>
+                <h3 class="terminal-subtitle" id="timeline-subtitle"><span class="prompt-symbol">&gt;</span> My
+                    Professional Journey</h3>
+            </div>
+            <div class="timeline-columns">
+                <div class="experience-column">
+                    <h3 class="column-title" id="professional-title">Professional Experience</h3>
+                    <div class="timeline">
+                        <div class="timeline-item experience-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-year">
+                                    2024 - Present
+                                </div>
+                                <div class="timeline-title">
+                                    Senior Full-Stack Developer
+                                </div>
+                                <div class="timeline-subtitle">
+                                    TechCorp Solutions
+                                </div>
+                                <div class="timeline-description">
+                                    Leading development of enterprise web applications using React, Node.js, and AWS.
+                                    Mentoring junior developers and architecting scalable microservices.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item experience-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-year">
+                                    2022 - 2024
+                                </div>
+                                <div class="timeline-title">
+                                    Frontend Developer
+                                </div>
+                                <div class="timeline-subtitle">
+                                    StartupHub Inc.
+                                </div>
+                                <div class="timeline-description">
+                                    Developed responsive web applications using modern JavaScript frameworks.
+                                    Collaborated with UX/UI teams to implement pixel-perfect designs.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item experience-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-year">
+                                    2021 - 2022
+                                </div>
+                                <div class="timeline-title">
+                                    Junior Web Developer
+                                </div>
+                                <div class="timeline-subtitle">
+                                    Digital Agency Pro
+                                </div>
+                                <div class="timeline-description">
+                                    Built custom websites and web applications for clients. Gained experience in full
+                                    development lifecycle from concept to deployment.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="education-column">
+                    <h3 class="column-title" id="education-title">Education &amp; Certifications</h3>
+                    <div class="timeline">
+                        <div class="timeline-item education-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-year">
+                                    2021
+                                </div>
+                                <div class="timeline-title">
+                                    Bachelor of Computer Science
+                                </div>
+                                <div class="timeline-subtitle">
+                                    University of Technology
+                                </div>
+                                <div class="timeline-description">
+                                    Specialized in Software Engineering and Data Structures. Graduated Magna Cum Laude
+                                    with focus on web technologies.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item education-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-year">
+                                    2023
+                                </div>
+                                <div class="timeline-title">
+                                    AWS Cloud Practitioner
+                                </div>
+                                <div class="timeline-subtitle">
+                                    Amazon Web Services
+                                </div>
+                                <div class="timeline-description">
+                                    Certified in cloud computing fundamentals, AWS services, and cloud architecture best
+                                    practices.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item education-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="timeline-year">
+                                    2024
+                                </div>
+                                <div class="timeline-title">
+                                    Advanced React Development
+                                </div>
+                                <div class="timeline-subtitle">
+                                    Meta Professional Certificate
+                                </div>
+                                <div class="timeline-description">
+                                    Advanced concepts in React, Redux, and modern JavaScript frameworks for building
+                                    scalable applications.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- Projects Section -->
+    <section class="projects-section" id="projects-featured">
+        <div class="projects-container">
+            <div class="projects-header">
+                <h2 class="terminal-command" id="projects-title"><span class="prompt-symbol">&gt;</span> Featured
+                    Projects</h2>
+                <p class="projects-description" id="projects-description">A curated collection of my most impactful
+                    work, showcasing innovative solutions and cutting-edge technologies across web, mobile, and API
+                    development.</p>
+            </div>
+            <div class="projects-controls">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="project-search" placeholder="Search projects…">
+                    <svg class="search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                </div>
+                <div class="filter-container">
+                    <button class="filter-btn active" data-filter="all">All</button> <button class="filter-btn"
+                        data-filter="web">Web Apps</button> <button class="filter-btn"
+                        data-filter="mobile">Mobile</button> <button class="filter-btn" data-filter="api">API</button>
+                    <button class="filter-btn" data-filter="design">Design</button>
+                </div>
+            </div>
+            <div class="projects-grid" id="projects-grid">
+                <!-- Project cards will be dynamically generated -->
+            </div>
+            <div class="projects-pagination">
+                <div class="pagination-controls" id="pagination-controls">
+                    <!-- Pagination will be dynamically generated -->
+                </div><button class="show-more-btn" id="show-more-btn" style="display: none;"> <span
+                        class="prompt-symbol">&gt;</span> SHOW_MORE() </button>
+            </div>
+        </div>
+    </section><!-- Gallery Section -->
+    <section class="projects-section" id="gallery">
+        <div class="projects-container">
+            <div class="projects-header">
+                <h2 class="terminal-command" id="gallery-title"><span class="prompt-symbol">&gt;</span> Creative Gallery
+                </h2>
+                <p class="projects-description" id="gallery-description">A visual showcase of design work, UI/UX
+                    projects, and creative explorations across various mediums and platforms.</p>
+            </div>
+            <div class="projects-controls">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="gallery-search" placeholder="Search gallery…">
+                    <svg class="search-icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                </div>
+                <div class="filter-container">
+                    <button class="filter-btn active" data-filter="all">All</button> <button class="filter-btn"
+                        data-filter="ui">UI Design</button> <button class="filter-btn"
+                        data-filter="branding">Branding</button> <button class="filter-btn"
+                        data-filter="illustration">Illustration</button> <button class="filter-btn"
+                        data-filter="photography">Photography</button>
+                </div>
+            </div>
+            <div class="projects-grid" id="gallery-grid">
+                <!-- Gallery items will be dynamically generated -->
+            </div>
+            <div class="projects-pagination">
+                <div class="pagination-controls" id="gallery-pagination-controls">
+                    <!-- Pagination will be dynamically generated -->
+                </div><button class="show-more-btn" id="gallery-show-more-btn" style="display: none;"> <span
+                        class="prompt-symbol">&gt;</span> SHOW_MORE() </button>
+            </div>
+        </div>
+    </section><!-- Project Detail Page -->
+    <div class="project-detail-overlay" id="project-detail-overlay" onclick="closeProjectDetail()"></div>
+    <div class="project-detail-page" id="project-detail-page">
+        <div class="project-detail-header">
+            <h2 class="project-detail-title" id="project-detail-title">Project Title</h2><button
+                class="project-detail-close" onclick="closeProjectDetail()">×</button>
+        </div>
+        <div class="project-detail-content" id="project-detail-content">
+            <!-- Content will be dynamically generated -->
+        </div><!-- Mobile Swipe Indicator -->
+        <div class="mobile-swipe-indicator" id="mobile-swipe-indicator">
+            <span>←</span> <span>SWIPE</span>
+        </div>
+    </div><!-- Gallery Detail Page -->
+    <div class="project-detail-overlay" id="gallery-detail-overlay" onclick="closeGalleryDetail()"></div>
+    <div class="project-detail-page" id="gallery-detail-page">
+        <div class="project-detail-header">
+            <h2 class="project-detail-title" id="gallery-detail-title">Gallery Item</h2><button
+                class="project-detail-close" onclick="closeGalleryDetail()">×</button>
+        </div>
+        <div class="project-detail-content" id="gallery-detail-content">
+            <!-- Content will be dynamically generated -->
+        </div><!-- Mobile Swipe Indicator -->
+        <div class="mobile-swipe-indicator" id="gallery-mobile-swipe-indicator">
+            <span>←</span> <span>SWIPE</span>
+        </div>
+    </div><!-- Back to Top Button --> <button class="back-to-top" id="back-to-top" onclick="scrollToTop()"
+        title="Back to Top"> ↑ </button> <!-- Footer Section -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-social"><a href="https://instagram.com/pratamajiwatmika" target="_blank"
+                        rel="noopener noreferrer" class="footer-social-link" id="footer-instagram">
+                        <svg class="footer-social-icon" viewbox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg></a> <a href="https://facebook.com/pratamajiwatmika" target="_blank"
+                        rel="noopener noreferrer" class="footer-social-link" id="footer-facebook">
+                        <svg class="footer-social-icon" viewbox="0 0 24 24">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg></a> <a href="https://twitter.com/pratamajiwatmika" target="_blank"
+                        rel="noopener noreferrer" class="footer-social-link" id="footer-twitter">
+                        <svg class="footer-social-icon" viewbox="0 0 24 24">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg></a> <a href="https://github.com/pratamajiwatmika" target="_blank"
+                        rel="noopener noreferrer" class="footer-social-link" id="footer-github">
+                        <svg class="footer-social-icon" viewbox="0 0 24 24">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg></a> <a href="https://linkedin.com/in/pratamajiwatmika" target="_blank"
+                        rel="noopener noreferrer" class="footer-social-link" id="footer-linkedin">
+                        <svg class="footer-social-icon" viewbox="0 0 24 24">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg></a>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2024 Pratama Jiwatmika. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const defaultConfig = {
+            nav_logo: "DEV.PORTFOLIO",
+            home_link: "Home",
+            about_link: "About",
+            timeline_link: "Timeline",
+            projects_link: "Projects",
+            gallery_link: "Gallery",
+            terminal_text: "INITIALIZING_PORTFOLIO_SYSTEM…",
+            execute_button: "> EXECUTE_ME.py()",
+            about_title: "About Me",
+            about_subtitle: "My Journey",
+            about_description: "Passionate full-stack developer with 5+ years of experience crafting digital solutions. I specialize in modern web technologies, creating seamless user experiences and robust backend systems. My journey began with curiosity about how things work under the hood, and evolved into a deep love for clean code, innovative problem-solving, and continuous learning.",
+            profile_name: "Pratama Jiwatmika",
+            profile_role: "Full-Stack Engineer",
+            timeline_title: "Career Timeline",
+            timeline_subtitle: "My Professional Journey",
+            professional_title: "Professional Experience",
+            education_title: "Education & Certifications",
+            projects_title: "Featured Projects",
+            projects_description: "A curated collection of my most impactful work, showcasing innovative solutions and cutting-edge technologies across web, mobile, and API development.",
+            gallery_title: "Creative Gallery",
+            gallery_description: "A visual showcase of design work, UI/UX projects, and creative explorations across various mediums and platforms."
+        };
+
+        let config = {};
+
+        // Projects Data and Functionality
+        const projectsData = [{
+                id: 1,
+                title: "E-Commerce Platform",
+                description: "Full-stack e-commerce solution with React, Node.js, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.",
+                category: "web",
+                status: "live",
+                icon: "🛒",
+                technologies: ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
+                liveUrl: "https://example.com",
+                githubUrl: "https://github.com/username/ecommerce"
+            },
+            {
+                id: 2,
+                title: "Mobile Fitness App",
+                description: "React Native fitness tracking app with workout plans, progress tracking, and social features. Integrated with health APIs.",
+                category: "mobile",
+                status: "development",
+                icon: "💪",
+                technologies: ["React Native", "Firebase", "Redux", "Health API"],
+                liveUrl: null,
+                githubUrl: "https://github.com/username/fitness-app"
+            },
+            {
+                id: 3,
+                title: "REST API Gateway",
+                description: "Microservices API gateway built with Express.js and Docker. Handles authentication, rate limiting, and service discovery.",
+                category: "api",
+                status: "completed",
+                icon: "🔌",
+                technologies: ["Express.js", "Docker", "Redis", "JWT", "MongoDB"],
+                liveUrl: "https://api.example.com",
+                githubUrl: "https://github.com/username/api-gateway"
+            },
+            {
+                id: 4,
+                title: "Design System",
+                description: "Comprehensive design system with reusable components, design tokens, and documentation. Built with Storybook and Figma.",
+                category: "design",
+                status: "live",
+                icon: "🎨",
+                technologies: ["Storybook", "Figma", "CSS", "TypeScript"],
+                liveUrl: "https://design.example.com",
+                githubUrl: "https://github.com/username/design-system"
+            },
+            {
+                id: 5,
+                title: "Portfolio Website",
+                description: "Personal portfolio website showcasing projects and skills. Built with modern web technologies and optimized for performance.",
+                category: "web",
+                status: "live",
+                icon: "🌐",
+                technologies: ["HTML5", "CSS3", "JavaScript", "Netlify"],
+                liveUrl: "https://portfolio.example.com",
+                githubUrl: "https://github.com/username/portfolio"
+            },
+            {
+                id: 6,
+                title: "Chat Application",
+                description: "Real-time chat application with WebSocket support, file sharing, and group conversations. Built with Socket.io and React.",
+                category: "web",
+                status: "development",
+                icon: "💬",
+                technologies: ["React", "Socket.io", "Node.js", "MongoDB"],
+                liveUrl: null,
+                githubUrl: "https://github.com/username/chat-app"
+            },
+            {
+                id: 7,
+                title: "Task Management App",
+                description: "Collaborative task management application with real-time updates, team collaboration, and project tracking features.",
+                category: "web",
+                status: "live",
+                icon: "📋",
+                technologies: ["Vue.js", "Laravel", "MySQL", "WebSocket"],
+                liveUrl: "https://tasks.example.com",
+                githubUrl: "https://github.com/username/task-manager"
+            },
+            {
+                id: 8,
+                title: "Weather Mobile App",
+                description: "Cross-platform weather application with location-based forecasts, weather alerts, and beautiful animations.",
+                category: "mobile",
+                status: "live",
+                icon: "🌤️",
+                technologies: ["Flutter", "Dart", "Weather API", "SQLite"],
+                liveUrl: "https://play.google.com/store/apps/weather",
+                githubUrl: "https://github.com/username/weather-app"
+            },
+            {
+                id: 9,
+                title: "Social Media Dashboard",
+                description: "Analytics dashboard for social media management with real-time metrics, post scheduling, and engagement tracking.",
+                category: "web",
+                status: "live",
+                icon: "📊",
+                technologies: ["Next.js", "TypeScript", "Prisma", "Chart.js", "Vercel"],
+                liveUrl: "https://social-dashboard.example.com",
+                githubUrl: "https://github.com/username/social-dashboard"
+            },
+            {
+                id: 10,
+                title: "Cryptocurrency Tracker",
+                description: "Mobile app for tracking cryptocurrency prices, portfolio management, and market analysis with real-time data.",
+                category: "mobile",
+                status: "completed",
+                icon: "₿",
+                technologies: ["React Native", "Redux Toolkit", "CoinGecko API", "AsyncStorage"],
+                liveUrl: "https://play.google.com/store/apps/crypto-tracker",
+                githubUrl: "https://github.com/username/crypto-tracker"
+            },
+            {
+                id: 11,
+                title: "GraphQL API Server",
+                description: "Scalable GraphQL API server with authentication, real-time subscriptions, and comprehensive testing suite.",
+                category: "api",
+                status: "live",
+                icon: "🚀",
+                technologies: ["GraphQL", "Apollo Server", "Prisma", "PostgreSQL", "Jest"],
+                liveUrl: "https://graphql-api.example.com",
+                githubUrl: "https://github.com/username/graphql-server"
+            },
+            {
+                id: 12,
+                title: "Component Library",
+                description: "Reusable React component library with TypeScript, comprehensive documentation, and automated testing.",
+                category: "design",
+                status: "live",
+                icon: "🧩",
+                technologies: ["React", "TypeScript", "Storybook", "Jest", "Rollup"],
+                liveUrl: "https://components.example.com",
+                githubUrl: "https://github.com/username/component-library"
+            },
+            {
+                id: 13,
+                title: "Learning Management System",
+                description: "Full-featured LMS with course creation, student progress tracking, video streaming, and interactive quizzes.",
+                category: "web",
+                status: "development",
+                icon: "🎓",
+                technologies: ["React", "Node.js", "MongoDB", "AWS S3", "WebRTC"],
+                liveUrl: null,
+                githubUrl: "https://github.com/username/lms-platform"
+            },
+            {
+                id: 14,
+                title: "Food Delivery App",
+                description: "Cross-platform food delivery application with real-time tracking, payment integration, and restaurant management.",
+                category: "mobile",
+                status: "live",
+                icon: "🍕",
+                technologies: ["Flutter", "Firebase", "Google Maps API", "Stripe", "Push Notifications"],
+                liveUrl: "https://foodapp.example.com",
+                githubUrl: "https://github.com/username/food-delivery"
+            },
+            {
+                id: 15,
+                title: "Microservices Architecture",
+                description: "Distributed microservices system with service mesh, API gateway, monitoring, and automated deployment.",
+                category: "api",
+                status: "completed",
+                icon: "⚙️",
+                technologies: ["Docker", "Kubernetes", "Istio", "Prometheus", "Grafana"],
+                liveUrl: "https://microservices.example.com",
+                githubUrl: "https://github.com/username/microservices"
+            },
+            {
+                id: 16,
+                title: "Design Tokens System",
+                description: "Multi-platform design tokens system with automated generation for web, mobile, and design tools.",
+                category: "design",
+                status: "live",
+                icon: "🎯",
+                technologies: ["Style Dictionary", "Figma API", "JSON", "SCSS", "Swift"],
+                liveUrl: "https://tokens.example.com",
+                githubUrl: "https://github.com/username/design-tokens"
+            },
+            {
+                id: 17,
+                title: "Real Estate Platform",
+                description: "Comprehensive real estate platform with property listings, virtual tours, mortgage calculator, and agent portal.",
+                category: "web",
+                status: "live",
+                icon: "🏠",
+                technologies: ["Vue.js", "Nuxt.js", "Laravel", "MySQL", "Mapbox"],
+                liveUrl: "https://realestate.example.com",
+                githubUrl: "https://github.com/username/real-estate"
+            },
+            {
+                id: 18,
+                title: "Meditation Mobile App",
+                description: "Mindfulness and meditation app with guided sessions, progress tracking, and ambient soundscapes.",
+                category: "mobile",
+                status: "development",
+                icon: "🧘",
+                technologies: ["React Native", "Expo", "Audio API", "AsyncStorage", "Animations"],
+                liveUrl: null,
+                githubUrl: "https://github.com/username/meditation-app"
+            },
+            {
+                id: 19,
+                title: "Event Management API",
+                description: "RESTful API for event management with ticketing, attendee management, and real-time analytics.",
+                category: "api",
+                status: "live",
+                icon: "🎪",
+                technologies: ["FastAPI", "Python", "PostgreSQL", "Redis", "Celery"],
+                liveUrl: "https://events-api.example.com",
+                githubUrl: "https://github.com/username/events-api"
+            },
+            {
+                id: 20,
+                title: "Brand Guidelines Portal",
+                description: "Interactive brand guidelines portal with downloadable assets, usage examples, and brand compliance tools.",
+                category: "design",
+                status: "completed",
+                icon: "📋",
+                technologies: ["Gatsby", "Contentful", "Figma API", "Netlify", "GraphQL"],
+                liveUrl: "https://brand.example.com",
+                githubUrl: "https://github.com/username/brand-portal"
+            }
+        ];
+
+        // Gallery Data
+        const galleryData = [{
+                id: 1,
+                title: "Brand Identity Design",
+                description: "Complete brand identity package including logo, color palette, typography, and brand guidelines for a tech startup.",
+                category: "branding",
+                status: "completed",
+                icon: "🎯",
+                technologies: ["Figma", "Illustrator", "Photoshop"],
+                liveUrl: "https://behance.net/project1",
+                githubUrl: null
+            },
+            {
+                id: 2,
+                title: "Mobile App UI Kit",
+                description: "Comprehensive UI kit for mobile applications with 50+ screens, components, and design patterns.",
+                category: "ui",
+                status: "live",
+                icon: "📱",
+                technologies: ["Figma", "Sketch", "Principle"],
+                liveUrl: "https://figma.com/uikit",
+                githubUrl: null
+            },
+            {
+                id: 3,
+                title: "Digital Illustrations",
+                description: "Collection of digital illustrations for web and print media, featuring modern abstract and geometric styles.",
+                category: "illustration",
+                status: "completed",
+                icon: "🎨",
+                technologies: ["Illustrator", "Procreate", "After Effects"],
+                liveUrl: "https://dribbble.com/illustrations",
+                githubUrl: null
+            },
+            {
+                id: 4,
+                title: "Product Photography",
+                description: "Professional product photography for e-commerce and marketing materials with studio lighting and post-processing.",
+                category: "photography",
+                status: "live",
+                icon: "📸",
+                technologies: ["Lightroom", "Photoshop", "Capture One"],
+                liveUrl: "https://portfolio.photography.com",
+                githubUrl: null
+            },
+            {
+                id: 5,
+                title: "Dashboard Interface",
+                description: "Modern dashboard interface design for analytics platform with data visualization and user experience focus.",
+                category: "ui",
+                status: "completed",
+                icon: "📊",
+                technologies: ["Figma", "Principle", "Framer"],
+                liveUrl: "https://figma.com/dashboard",
+                githubUrl: null
+            },
+            {
+                id: 6,
+                title: "Logo Collection",
+                description: "Collection of logo designs for various clients across different industries, showcasing versatility and creativity.",
+                category: "branding",
+                status: "live",
+                icon: "⭐",
+                technologies: ["Illustrator", "Figma", "Sketch"],
+                liveUrl: "https://behance.net/logos",
+                githubUrl: null
+            },
+            {
+                id: 7,
+                title: "E-commerce Website Design",
+                description: "Modern e-commerce website design with focus on user experience, conversion optimization, and mobile responsiveness.",
+                category: "ui",
+                status: "live",
+                icon: "🛍️",
+                technologies: ["Figma", "Adobe XD", "Protopie"],
+                liveUrl: "https://dribbble.com/ecommerce-design",
+                githubUrl: null
+            },
+            {
+                id: 8,
+                title: "Corporate Branding Package",
+                description: "Complete corporate identity for financial services company including logo, business cards, letterheads, and digital assets.",
+                category: "branding",
+                status: "completed",
+                icon: "🏢",
+                technologies: ["Illustrator", "InDesign", "Photoshop"],
+                liveUrl: "https://behance.net/corporate-branding",
+                githubUrl: null
+            },
+            {
+                id: 9,
+                title: "Character Illustrations",
+                description: "Set of character illustrations for mobile game featuring diverse characters with unique personalities and styles.",
+                category: "illustration",
+                status: "live",
+                icon: "👾",
+                technologies: ["Procreate", "Illustrator", "Photoshop"],
+                liveUrl: "https://artstation.com/characters",
+                githubUrl: null
+            },
+            {
+                id: 10,
+                title: "Architecture Photography",
+                description: "Architectural photography series showcasing modern buildings and urban landscapes with dramatic lighting.",
+                category: "photography",
+                status: "completed",
+                icon: "🏗️",
+                technologies: ["Canon 5D", "Lightroom", "Photoshop"],
+                liveUrl: "https://500px.com/architecture",
+                githubUrl: null
+            },
+            {
+                id: 11,
+                title: "SaaS Dashboard Design",
+                description: "Clean and intuitive dashboard design for SaaS platform with complex data visualization and user management.",
+                category: "ui",
+                status: "live",
+                icon: "💻",
+                technologies: ["Figma", "Framer", "Principle"],
+                liveUrl: "https://figma.com/saas-dashboard",
+                githubUrl: null
+            },
+            {
+                id: 12,
+                title: "Restaurant Brand Identity",
+                description: "Complete brand identity for upscale restaurant including logo, menu design, packaging, and interior graphics.",
+                category: "branding",
+                status: "completed",
+                icon: "🍽️",
+                technologies: ["Illustrator", "InDesign", "Photoshop"],
+                liveUrl: "https://behance.net/restaurant-brand",
+                githubUrl: null
+            },
+            {
+                id: 13,
+                title: "Icon Set Collection",
+                description: "Comprehensive icon set with 200+ icons in multiple styles for web and mobile applications.",
+                category: "illustration",
+                status: "live",
+                icon: "🎭",
+                technologies: ["Illustrator", "Sketch", "Figma"],
+                liveUrl: "https://iconstore.co/iconset",
+                githubUrl: null
+            },
+            {
+                id: 14,
+                title: "Portrait Photography",
+                description: "Professional portrait photography session with creative lighting and post-processing techniques.",
+                category: "photography",
+                status: "completed",
+                icon: "👤",
+                technologies: ["Sony A7R", "Lightroom", "Photoshop"],
+                liveUrl: "https://portfolio.portraits.com",
+                githubUrl: null
+            },
+            {
+                id: 15,
+                title: "Banking App Interface",
+                description: "Secure and user-friendly mobile banking app interface with focus on accessibility and trust.",
+                category: "ui",
+                status: "live",
+                icon: "🏦",
+                technologies: ["Figma", "Principle", "Zeplin"],
+                liveUrl: "https://dribbble.com/banking-app",
+                githubUrl: null
+            },
+            {
+                id: 16,
+                title: "Fashion Brand Identity",
+                description: "Luxury fashion brand identity with elegant typography, sophisticated color palette, and premium packaging design.",
+                category: "branding",
+                status: "completed",
+                icon: "👗",
+                technologies: ["Illustrator", "Photoshop", "InDesign"],
+                liveUrl: "https://behance.net/fashion-brand",
+                githubUrl: null
+            },
+            {
+                id: 17,
+                title: "Infographic Designs",
+                description: "Series of data visualization infographics for annual reports and marketing materials with clear storytelling.",
+                category: "illustration",
+                status: "live",
+                icon: "📈",
+                technologies: ["Illustrator", "After Effects", "D3.js"],
+                liveUrl: "https://dribbble.com/infographics",
+                githubUrl: null
+            },
+            {
+                id: 18,
+                title: "Event Photography",
+                description: "Dynamic event photography capturing key moments, emotions, and atmosphere of corporate and social events.",
+                category: "photography",
+                status: "completed",
+                icon: "🎉",
+                technologies: ["Nikon D850", "Lightroom", "Photoshop"],
+                liveUrl: "https://eventphotos.gallery.com",
+                githubUrl: null
+            },
+            {
+                id: 19,
+                title: "Healthcare App Design",
+                description: "Patient-centered healthcare app design with appointment scheduling, medical records, and telemedicine features.",
+                category: "ui",
+                status: "live",
+                icon: "🏥",
+                technologies: ["Figma", "Adobe XD", "InVision"],
+                liveUrl: "https://figma.com/healthcare-app",
+                githubUrl: null
+            },
+            {
+                id: 20,
+                title: "Tech Startup Branding",
+                description: "Modern and innovative brand identity for AI startup including logo, website design, and marketing materials.",
+                category: "branding",
+                status: "completed",
+                icon: "🚀",
+                technologies: ["Figma", "Illustrator", "After Effects"],
+                liveUrl: "https://behance.net/tech-startup",
+                githubUrl: null
+            },
+            {
+                id: 21,
+                title: "Motion Graphics Pack",
+                description: "Collection of animated icons and micro-interactions for web and mobile applications with smooth transitions.",
+                category: "illustration",
+                status: "live",
+                icon: "🎬",
+                technologies: ["After Effects", "Lottie", "Principle"],
+                liveUrl: "https://lottiefiles.com/motion-pack",
+                githubUrl: null
+            },
+            {
+                id: 22,
+                title: "Nature Photography",
+                description: "Landscape and wildlife photography series capturing the beauty of natural environments and wildlife behavior.",
+                category: "photography",
+                status: "completed",
+                icon: "🌲",
+                technologies: ["Canon R5", "Lightroom", "Photoshop"],
+                liveUrl: "https://naturephotos.gallery.com",
+                githubUrl: null
+            },
+            {
+                id: 23,
+                title: "Travel App Interface",
+                description: "Intuitive travel planning app with booking features, itinerary management, and social sharing capabilities.",
+                category: "ui",
+                status: "live",
+                icon: "✈️",
+                technologies: ["Sketch", "Principle", "Zeplin"],
+                liveUrl: "https://dribbble.com/travel-app",
+                githubUrl: null
+            },
+            {
+                id: 24,
+                title: "Nonprofit Organization Branding",
+                description: "Compassionate and trustworthy brand identity for environmental nonprofit with focus on community engagement.",
+                category: "branding",
+                status: "completed",
+                icon: "🌍",
+                technologies: ["Illustrator", "Photoshop", "InDesign"],
+                liveUrl: "https://behance.net/nonprofit-brand",
+                githubUrl: null
+            }
+        ];
+
+        // State Management
+        let currentProjectsPage = 1;
+        let currentGalleryPage = 1;
+        const itemsPerPage = 6;
+        let filteredProjects = [...projectsData];
+        let filteredGallery = [...galleryData];
+        let currentProjectFilter = 'all';
+        let currentGalleryFilter = 'all';
+        let currentProjectSearch = '';
+        let currentGallerySearch = '';
+
+        // Initialize the application
+        function initializeApp() {
+            // Initialize Element SDK if available
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig,
+                    render: async (config) => {
+                        // Update navigation
+                        document.getElementById('navLogo').textContent = config.nav_logo || defaultConfig
+                            .nav_logo;
+                        document.getElementById('homeLink').textContent = config.home_link || defaultConfig
+                            .home_link;
+                        document.getElementById('aboutLink').textContent = config.about_link ||
+                            defaultConfig.about_link;
+                        document.getElementById('timelineLink').textContent = config.timeline_link ||
+                            defaultConfig.timeline_link;
+                        document.getElementById('projectsLink').textContent = config.projects_link ||
+                            defaultConfig.projects_link;
+                        document.getElementById('galleryLink').textContent = config.gallery_link ||
+                            defaultConfig.gallery_link;
+
+                        // Update hero section
+                        document.getElementById('typing-text').textContent = config.terminal_text ||
+                            defaultConfig.terminal_text;
+                        document.getElementById('execute-btn').innerHTML = config.execute_button ||
+                            defaultConfig.execute_button;
+
+                        // Update about section
+                        document.getElementById('about-title').innerHTML =
+                            `<span class="prompt-symbol">&gt;</span> ${config.about_title || defaultConfig.about_title}`;
+                        document.getElementById('about-subtitle').innerHTML =
+                            `<span class="prompt-symbol">&gt;</span> ${config.about_subtitle || defaultConfig.about_subtitle}`;
+                        document.getElementById('about-description').textContent = config
+                            .about_description || defaultConfig.about_description;
+                        document.querySelector('.profile-name').textContent = config.profile_name ||
+                            defaultConfig.profile_name;
+                        document.querySelector('.profile-role').textContent = config.profile_role ||
+                            defaultConfig.profile_role;
+
+                        // Update timeline section
+                        document.getElementById('timeline-title').innerHTML =
+                            `<span class="prompt-symbol">&gt;</span> ${config.timeline_title || defaultConfig.timeline_title}`;
+                        document.getElementById('timeline-subtitle').innerHTML =
+                            `<span class="prompt-symbol">&gt;</span> ${config.timeline_subtitle || defaultConfig.timeline_subtitle}`;
+                        document.getElementById('professional-title').textContent = config
+                            .professional_title || defaultConfig.professional_title;
+                        document.getElementById('education-title').textContent = config.education_title ||
+                            defaultConfig.education_title;
+
+                        // Update projects section
+                        document.getElementById('projects-title').innerHTML =
+                            `<span class="prompt-symbol">&gt;</span> ${config.projects_title || defaultConfig.projects_title}`;
+                        document.getElementById('projects-description').textContent = config
+                            .projects_description || defaultConfig.projects_description;
+
+                        // Update gallery section
+                        document.getElementById('gallery-title').innerHTML =
+                            `<span class="prompt-symbol">&gt;</span> ${config.gallery_title || defaultConfig.gallery_title}`;
+                        document.getElementById('gallery-description').textContent = config
+                            .gallery_description || defaultConfig.gallery_description;
+                    },
+                    mapToCapabilities: (config) => ({
+                        recolorables: [],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["nav_logo", config.nav_logo || defaultConfig.nav_logo],
+                        ["home_link", config.home_link || defaultConfig.home_link],
+                        ["about_link", config.about_link || defaultConfig.about_link],
+                        ["timeline_link", config.timeline_link || defaultConfig.timeline_link],
+                        ["projects_link", config.projects_link || defaultConfig.projects_link],
+                        ["gallery_link", config.gallery_link || defaultConfig.gallery_link],
+                        ["terminal_text", config.terminal_text || defaultConfig.terminal_text],
+                        ["execute_button", config.execute_button || defaultConfig.execute_button],
+                        ["about_title", config.about_title || defaultConfig.about_title],
+                        ["about_subtitle", config.about_subtitle || defaultConfig.about_subtitle],
+                        ["about_description", config.about_description || defaultConfig
+                            .about_description
+                        ],
+                        ["profile_name", config.profile_name || defaultConfig.profile_name],
+                        ["profile_role", config.profile_role || defaultConfig.profile_role],
+                        ["timeline_title", config.timeline_title || defaultConfig.timeline_title],
+                        ["timeline_subtitle", config.timeline_subtitle || defaultConfig
+                            .timeline_subtitle
+                        ],
+                        ["professional_title", config.professional_title || defaultConfig
+                            .professional_title
+                        ],
+                        ["education_title", config.education_title || defaultConfig.education_title],
+                        ["projects_title", config.projects_title || defaultConfig.projects_title],
+                        ["projects_description", config.projects_description || defaultConfig
+                            .projects_description
+                        ],
+                        ["gallery_title", config.gallery_title || defaultConfig.gallery_title],
+                        ["gallery_description", config.gallery_description || defaultConfig
+                            .gallery_description
+                        ]
+                    ])
+                });
+                config = window.elementSdk.config;
+            } else {
+                config = defaultConfig;
+            }
+
+            // Initialize navigation
+            initializeNavigation();
+
+            // Initialize projects and gallery
+            renderProjects();
+            renderGallery();
+
+            // Initialize event listeners
+            initializeEventListeners();
+
+            // Initialize scroll effects
+            initializeScrollEffects();
+        }
+
+        // Navigation functionality
+        function initializeNavigation() {
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Mobile menu toggle
+            navToggle.addEventListener('click', () => {
+                navToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling and active link management
+            nav
+    </script>
+    <script>
+        (function () {
+            function c() {
+                var b = a.contentDocument || a.contentWindow.document;
+                if (b) {
+                    var d = b.createElement('script');
+                    d.innerHTML =
+                        "window.__CF$cv$params={r:'990c543ed44adf9b',t:'MTc2MDgzNTUyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                    b.getElementsByTagName('head')[0].appendChild(d)
+                }
+            }
+            if (document.body) {
+                var a = document.createElement('iframe');
+                a.height = 1;
+                a.width = 1;
+                a.style.position = 'absolute';
+                a.style.top = 0;
+                a.style.left = 0;
+                a.style.border = 'none';
+                a.style.visibility = 'hidden';
+                document.body.appendChild(a);
+                if ('loading' !== document.readyState) c();
+                else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+                else {
+                    var e = document.onreadystatechange || function () {};
+                    document.onreadystatechange = function (b) {
+                        e(b);
+                        'loading' !== document.readyState && (document.onreadystatechange = e, c())
+                    }
+                }
+            }
+        })();
+    </script>
+</body>
+
+</html>
